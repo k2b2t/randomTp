@@ -1,0 +1,14 @@
+name: Randomtp
+version: ${project.version}
+main: me.jakub.randomtp.Randomtp
+api-version: 1.16
+description: This is a /rtp plugin
+commands:
+  rtp:
+    description: Randomly teleports the player to a random location
+    permission: randomTp.rtp
+    permission-message: §cInsufficient permission.
+  rtpinfo:
+    description: Info about the plugin
+    permission: randomTp.rtpinfo
+    permission-message: §cInsufficient permission.

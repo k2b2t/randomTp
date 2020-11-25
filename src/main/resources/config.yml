@@ -1,0 +1,2 @@
+world-border: true #True if you want to limit how far players teleport; False for default 1000 blocks.
+border: 1000 #If world-border is 'true' this is the distance from 0 0 you want the player to be able to teleport to.
