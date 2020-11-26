@@ -11,7 +11,7 @@ public class rtpinfocommand implements CommandExecutor {
 
         if (sender instanceof Player){
             Player player = (Player) sender;
-
+            //Info about the plugin
                 player.sendMessage("§1-----§6§lRandom TP§1-----");
                 player.sendMessage("§3§lInfo:");
                 player.sendMessage("§6Author: §cKubajsa");

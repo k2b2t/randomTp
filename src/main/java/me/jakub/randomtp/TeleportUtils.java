@@ -29,6 +29,7 @@ public class TeleportUtils {
 
 
     public static Location generateLocation(Player player){
+        //Called upon when /rtp is executed with the target "player"
         Random random = new Random();
 
         int x = 0;
@@ -56,7 +57,7 @@ public class TeleportUtils {
     }
 
     public static boolean isLocationSafe(Location location){
-
+        //Checking if generated random location is safe
         int x = location.getBlockX();
         int y = location.getBlockY();
         int z = location.getBlockZ();
