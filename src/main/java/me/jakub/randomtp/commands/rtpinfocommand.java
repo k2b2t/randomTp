@@ -15,7 +15,7 @@ public class rtpinfocommand implements CommandExecutor {
                 player.sendMessage("§1-----§6§lRandom TP§1-----");
                 player.sendMessage("§3§lInfo:");
                 player.sendMessage("§6Author: §cKubajsa");
-                player.sendMessage("§6Version: §c1.1");
+                player.sendMessage("§6Version: §c1.2");
                 player.sendMessage("§7------------------");
                 player.sendMessage("§3§lCommands:");
                 player.sendMessage("§6/rtp - Teleports you to a random location within the borden set in the config (Default: 1000)");
