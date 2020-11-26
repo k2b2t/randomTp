@@ -17,14 +17,14 @@ public class rtpcommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if(commandSender instanceof Player){
             Player player = (Player) commandSender;
-
+            //If executed by a player
             if (player.hasPermission("randomTp.rtp.others")) {
 
                 if (args.length != 0) {
-
+                    //If player has rtp.others permission and specifies a target
 
                     if (player.getWorld().getEnvironment().equals(World.Environment.NETHER) || player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
-                        player.sendMessage("§cYou can only use /rtp in the overworld");
+                        player.sendMessage("§cYou can only use /rtp in the overworld!");
                     } else {
                         Player target = Bukkit.getServer().getPlayer(args[0]);
                         target.teleport(TeleportUtils.generateLocation(target));
@@ -35,16 +35,18 @@ public class rtpcommand implements CommandExecutor {
                         player.sendMessage("§6Teleported §c" + target.getDisplayName() + " §6to " + x.toString() + " " + y.toString() + " " + z.toString());
                     }
                 }else{
+                    //If player has rtp.others permission but doesn't specify a target
                     if (player.getWorld().getEnvironment().equals(World.Environment.NETHER) || player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
-                        player.sendMessage("§cYou can only use /rtp in the overworld");
+                        player.sendMessage("§cYou can only use /rtp in the overworld!");
                     }else{
                         player.teleport(TeleportUtils.generateLocation(player));
                         player.sendMessage(("§6Teleported " + ChatColor.RED + player.getDisplayName() + " §6to a random location"));
                     }
                 }
             }else{
+                //If player doesn't have rtp.others permission
                 if (player.getWorld().getEnvironment().equals(World.Environment.NETHER) || player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
-                    player.sendMessage("§cYou can only use /rtp in the overworld");
+                    player.sendMessage("§cYou can only use /rtp in the overworld!");
                 }else{
                     player.teleport(TeleportUtils.generateLocation(player));
                     player.sendMessage(("§6Teleported " + ChatColor.RED + player.getDisplayName() + " §6to a random location"));
@@ -52,6 +54,7 @@ public class rtpcommand implements CommandExecutor {
             }
 
         }else{
+            //If executed from console
             System.out.println("Only a player can execute this command!");
         }
 
