@@ -57,7 +57,7 @@ public class TeleportUtils {
     }
 
     public static boolean isLocationSafe(Location location){
-        //Checking if generated random location is safe
+        //Checking if the generated random location is safe
         int x = location.getBlockX();
         int y = location.getBlockY();
         int z = location.getBlockZ();

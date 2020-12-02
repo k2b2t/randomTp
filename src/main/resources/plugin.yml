@@ -12,3 +12,7 @@ commands:
     description: Info about the plugin
     permission: randomTp.rtpinfo
     permission-message: §cInsufficient permission.
+  rtpsetborder:
+    description: Sets the border
+    permission: randomTp.setborder
+    permission-message: §cInsufficient permission.
