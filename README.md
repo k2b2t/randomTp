@@ -4,6 +4,7 @@ Author: Kubajsa (Discord: Kubajsa#3871)
 # Commands
 /rtp - Randomly teleport within the border specified in the config.yml<br>
 /rtp [player] - Randomly teleport someone<br>
+/wild - /rtp alias<br>
 /rtpinfo - Info about the plugin<br>
 # Permissions
 randomTp.rtp - /rtp<br>
