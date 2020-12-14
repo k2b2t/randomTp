@@ -26,11 +26,11 @@ public class rtpsetbordercommand implements CommandExecutor {
                         player.sendMessage("§6Set border to " + args[0] + " blocks"); //Sets the int "blocks" to the number in the config
                     }else{
                         Player player2 = (Player) sender;
-                        player2.sendMessage("§cThe number has to be lower than 30.000.000; or over 10 blocks!"); //Higher than 30mil or lower than 10
+                        player2.sendMessage("§cThe number has to be lower than 30.000.000 and over 10 blocks!"); //Higher than 30mil or lower than 10
                     }
                 }catch (Exception e){
                     Player player1 = (Player) sender;
-                    player1.sendMessage("§cSomething went wrong!"); //Arg is a string instead of an integer
+                    player1.sendMessage("§Usage: /rtpsetborder <10-30000000>"); //Arg is a string instead of an integer
                 }
 
             }else{

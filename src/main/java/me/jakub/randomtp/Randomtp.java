@@ -11,7 +11,7 @@ public final class Randomtp extends JavaPlugin {
     public void onEnable() {
         System.out.println("---------------------------------");
         System.out.println("Starting up Random Teleport...");
-        System.out.println("Version: 1.3");
+        System.out.println("Version: 1.4");
         System.out.println("Author: Kubajsa");
         System.out.println("Use /rtpinfo for more info");
         System.out.println("                                 ");

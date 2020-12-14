@@ -8,6 +8,7 @@ commands:
     description: Randomly teleports the player to a random location
     permission: randomTp.rtp
     permission-message: §cInsufficient permission.
+    aliases: wild
   rtpinfo:
     description: Info about the plugin
     permission: randomTp.rtpinfo

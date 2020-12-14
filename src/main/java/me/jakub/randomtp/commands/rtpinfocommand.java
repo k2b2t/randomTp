@@ -24,13 +24,13 @@ public class rtpinfocommand implements CommandExecutor {
                 player.sendMessage("§1-----§6§lRandom TP§1-----");
                 player.sendMessage("§3§lInfo:");
                 player.sendMessage("§6Author: §cKubajsa");
-                player.sendMessage("§6Version: §c1.3");
+                player.sendMessage("§6Version: §c1.4");
                 player.sendMessage("§7------------------");
                 player.sendMessage("§3§lCommands:");
                 player.sendMessage("§6/rtp - Teleports you to a random location within the borden set in the config (Default: 1000)");
                 player.sendMessage("§6/rtp [player] - /rtp other players");
-                player.sendMessage("§6/rtpinfo - Shows you this window");
-                player.sendMessage("§6/rtp - Shows you this window");
+                player.sendMessage("§6/wild - /rtp alias");
+                player.sendMessage("§6/rtpinfo - Shows you this message");
                 player.sendMessage("§6/rtpsetborder - Allows you to set the border");
                 player.sendMessage("§1--------------------------");
                 player.sendMessage("§3§lPermissions:");
