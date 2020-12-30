@@ -24,7 +24,7 @@ public class rtpinfocommand implements CommandExecutor {
                 player.sendMessage("§1-----§6§lRandom TP§1-----");
                 player.sendMessage("§3§lInfo:");
                 player.sendMessage("§6Author: §cKubajsa");
-                player.sendMessage("§6Version: §c1.4");
+                player.sendMessage("§6Version: §c" + Randomtp.version);
                 player.sendMessage("§7------------------");
                 player.sendMessage("§3§lCommands:");
                 player.sendMessage("§6/rtp - Teleports you to a random location within the borden set in the config (Default: 1000)");
@@ -40,7 +40,6 @@ public class rtpinfocommand implements CommandExecutor {
                 player.sendMessage("§6randomTp.setborder - Allows you to set the rtp border");
                 player.sendMessage("§7------------------");
                 player.sendMessage("§3§lConfig:");
-                player.sendMessage("§6Is border turned on? §b" + plugin.getConfig().getBoolean("world-border"));
                 player.sendMessage("§6Border size: §b" + plugin.getConfig().getInt("border"));
                 player.sendMessage("§1--------------------------");
 

@@ -35,15 +35,11 @@ public class TeleportUtils {
         int x = 0;
         int y = 0;
         int z = 0;
-        if(plugin.getConfig().getBoolean("world-border")){
-             x = random.nextInt(plugin.getConfig().getInt("border"));
-             y = 150;
-             z = random.nextInt(plugin.getConfig().getInt("border"));
-        }else if(!plugin.getConfig().getBoolean("world-border")){
-            x = random.nextInt(1000);
-            y = 150;
-            z = random.nextInt(1000);
-        }
+
+        x = random.nextInt(plugin.getConfig().getInt("border"));
+        y = 150;
+        z = random.nextInt(plugin.getConfig().getInt("border"));
+
 
         Location randomLocation = new Location(player.getWorld(), x, y,z);
 
