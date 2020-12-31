@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Randomtp extends JavaPlugin {
 
-    public static String version = "1.5";
+    public static String version = "1.5.2";
 
     @Override
     public void onEnable() {
