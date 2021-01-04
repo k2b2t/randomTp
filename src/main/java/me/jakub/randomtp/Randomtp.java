@@ -1,13 +1,12 @@
 package me.jakub.randomtp;
 
 import me.jakub.randomtp.commands.rtpcommand;
-import me.jakub.randomtp.commands.rtpinfocommand;
-import me.jakub.randomtp.commands.rtpsetbordercommand;
+import me.jakub.randomtp.commands.rtplugincommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Randomtp extends JavaPlugin {
 
-    public static String version = "1.5.2";
+    public static String version = "1.6";
 
     @Override
     public void onEnable() {
@@ -18,8 +17,7 @@ public final class Randomtp extends JavaPlugin {
         System.out.println("Use /rtpinfo for more info");
         System.out.println("                                 ");
         getCommand("rtp").setExecutor(new rtpcommand());
-        getCommand("rtpinfo").setExecutor(new rtpinfocommand(this));
-        getCommand("rtpsetborder").setExecutor(new rtpsetbordercommand(this));
+        getCommand("rtplugin").setExecutor(new rtplugincommand(this));
 
         TeleportUtils utils = new TeleportUtils(this);
 

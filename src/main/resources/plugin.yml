@@ -9,11 +9,7 @@ commands:
     permission: randomTp.rtp
     permission-message: §cInsufficient permission.
     aliases: wild
-  rtpinfo:
-    description: Info about the plugin
-    permission: randomTp.rtpinfo
-    permission-message: §cInsufficient permission.
-  rtpsetborder:
-    description: Sets the border
-    permission: randomTp.setborder
-    permission-message: §cInsufficient permission.
+    usage: /<command> [player]
+  rtplugin:
+    description: Main plugin command
+    usage: /<command> <help|setborder|reload> [number]
