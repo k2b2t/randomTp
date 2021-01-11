@@ -1,12 +1,4 @@
+[![discord](https://discord.com/api/guilds/793888620079480843/embed.png)](https://discord.gg/M83rMvrG6H)
+
 # Random TP
-This is a simple Spigot 1.16+ Random Teleport plugin.<br>
-Author: Kubajsa (Discord: Kubajsa#3871)
-# Commands
-/rtp - Randomly teleport within the border specified in the config.yml<br>
-/rtp [player] - Randomly teleport someone<br>
-/wild - /rtp alias<br>
-/rtpinfo - Info about the plugin<br>
-# Permissions
-randomTp.rtp - /rtp<br>
-randomTp.rtp.others - /rtp [user]<br>
-randomTp.rtpinfo - /rtpinfo
+Spigotmc page : https://www.spigotmc.org/resources/random-tp.86659/
