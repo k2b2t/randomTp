@@ -1,1 +1,12 @@
 border: 1000 #The distance from 0 0 you want the player to be able to teleport to.
+
+#Messages
+tp-message: "&6You were teleported to a random location"
+unknown-command: "&cUnknown command, try /rtplugin help"
+no-permission: "&cInsufficient permission."
+
+
+#Titles
+title: true
+generating-title: "&bTeleporting you to a random location"
+generating-subtitle: "&6Generating a safe location"

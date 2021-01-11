@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Randomtp extends JavaPlugin {
 
-    public static String version = "1.6";
+    public static String version = "1.7";
 
     @Override
     public void onEnable() {
@@ -16,7 +16,7 @@ public final class Randomtp extends JavaPlugin {
         System.out.println("Author: Kubajsa");
         System.out.println("Use /rtpinfo for more info");
         System.out.println("                                 ");
-        getCommand("rtp").setExecutor(new rtpcommand());
+        getCommand("rtp").setExecutor(new rtpcommand(this));
         getCommand("rtplugin").setExecutor(new rtplugincommand(this));
 
         TeleportUtils utils = new TeleportUtils(this);

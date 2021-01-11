@@ -1,5 +1,6 @@
 package me.jakub.randomtp;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -46,6 +47,15 @@ public class TeleportUtils {
         y = randomLocation.getWorld().getHighestBlockYAt(randomLocation);
         randomLocation.setY(y + 1);
 
+        if (plugin.getConfig().getBoolean("title")) {
+            player.sendTitle(
+                    ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("generating-title")),
+                    ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("generating-subtitle")),
+                    5,
+                    50,
+                    20
+            );
+        }
         while(isLocationSafe(randomLocation) == false){
             randomLocation = generateLocation(player);
         }
@@ -63,6 +73,12 @@ public class TeleportUtils {
         Block above = location.getWorld().getBlockAt(x, y + 1, z);
 
         return !(bad_blocks.contains(below.getType())) || (block.getType().isSolid()) || (above.getType().isSolid());
+    }
+
+
+    public static void tp(Player player, Location location){
+        player.teleport(location);
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("tp-message")));
     }
 
 }
