@@ -2,3 +2,4 @@
 
 # Random TP
 Spigotmc page : https://www.spigotmc.org/resources/random-tp.86659/
+As I don't maintain this GitHub page as much as the spigotmc page, for the newest versions of the plugin please visit the link above, thanks!
