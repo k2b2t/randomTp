@@ -15,7 +15,7 @@ public final class Randomtp extends JavaPlugin {
         System.out.println("Starting up Random Teleport...");
         System.out.println("Version: " + version);
         System.out.println("Author: Kubajsa");
-        System.out.println("Use /rtplugin info for more info");
+        System.out.println("Use /rtplugin help for more info");
         System.out.println("                                 ");
         getCommand("rtp").setExecutor(new rtpcommand(this));
         getCommand("rtplugin").setExecutor(new rtplugincommand(this));
