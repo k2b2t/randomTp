@@ -37,14 +37,28 @@ public class TeleportUtils {
         int y = 0;
         int z = 0;
 
-        x = random.nextInt(plugin.getConfig().getInt("border"));
-        y = 150;
-        z = random.nextInt(plugin.getConfig().getInt("border"));
+        int border = plugin.getConfig().getInt("border");
+        int var1 = random.nextInt(border); //X coordinate
+        int var2 = random.nextInt(border); //Z coordinate
+        int var3 = random.nextInt(2); //basically a boolean
+        if (var3 == 1){
+            var1 = var1 * -1; //50% chance the x coordinate will be negative
+
+        }
+        var3 = random.nextInt(2);
+        if(var3 == 1){
+            var2 = var2 * -1; //50% chance the x coordinate will be negative
+        }
+        //no, don't laugh at this piece of code above me.. thank you
+
+        x = var1;
+        y = 150; //useless line of code :)
+        z = var2;
 
 
-        Location randomLocation = new Location(player.getWorld(), x, y,z);
+        Location randomLocation = new Location(player.getWorld(), x, y,z); //create a new location
 
-        y = randomLocation.getWorld().getHighestBlockYAt(randomLocation);
+        y = randomLocation.getWorld().getHighestBlockYAt(randomLocation); //set the Y coordinate to the highest point
         randomLocation.setY(y + 1);
 
         if (plugin.getConfig().getBoolean("title")) {
