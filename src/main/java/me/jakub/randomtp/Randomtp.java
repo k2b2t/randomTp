@@ -2,11 +2,12 @@ package me.jakub.randomtp;
 
 import me.jakub.randomtp.commands.rtpcommand;
 import me.jakub.randomtp.commands.rtplugincommand;
+import me.jakub.randomtp.commands.rtplugincommandTabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Randomtp extends JavaPlugin {
 
-    public static String version = "1.7";
+    public static String version = "1.8-BETA";
 
     @Override
     public void onEnable() {
@@ -18,6 +19,7 @@ public final class Randomtp extends JavaPlugin {
         System.out.println("                                 ");
         getCommand("rtp").setExecutor(new rtpcommand(this));
         getCommand("rtplugin").setExecutor(new rtplugincommand(this));
+        getCommand("rtplugin").setTabCompleter(new rtplugincommandTabCompleter());
 
         TeleportUtils utils = new TeleportUtils(this);
 
