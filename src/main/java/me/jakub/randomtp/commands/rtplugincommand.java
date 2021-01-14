@@ -26,7 +26,7 @@ public class rtplugincommand implements CommandExecutor {
                 player.sendMessage("§6You are running §bRandom TP§6 Version: §b" + Randomtp.version);
                 player.sendMessage("§6For help type the command §b/rtplugin help");
             }else if (args[0].equalsIgnoreCase("help")){
-
+//TODO Remove Info:
                 player.sendMessage("§1-----§6§lRandom TP§1-----");
                 player.sendMessage("§3§lInfo:");
                 player.sendMessage("§6Author: §cKubajsa");
