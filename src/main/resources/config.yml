@@ -1,12 +1,29 @@
 border: 1000 #The distance from 0 0 you want the player to be able to teleport to.
 
-#Messages
+#--Messages--
+#The message you see when you get teleported
 tp-message: "&6You were teleported to a random location"
+
+#The message you see when you execute the /rtp @everyone command
+tp-everyone-message: "&6Teleporting everyone on the server"
+
+#Unknown command message
 unknown-command: "&cUnknown command, try /rtplugin help"
+
+#Not enough permission
 no-permission: "&cInsufficient permission."
 
+#Canceled teleport because you aren't in the overworld
+player-not-in-overworld: "&cYou couldn't be teleported because you aren't in the overworld"
 
-#Titles
+
+#--Titles--
+
+#Should a title appear when generating a location? Yes = true; No = false
 title: true
+
+#Title message
 generating-title: "&bTeleporting you to a random location"
+
+#Subtitle message
 generating-subtitle: "&6Generating a safe location"

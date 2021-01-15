@@ -3,6 +3,7 @@ package me.jakub.randomtp;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -30,7 +31,7 @@ public class TeleportUtils {
 
 
     public static Location generateLocation(Player player){
-        //Called upon when /rtp is executed with the target "player"
+        //Called upon when generating a location
         Random random = new Random();
 
         int x = 0;
@@ -40,7 +41,7 @@ public class TeleportUtils {
         int border = plugin.getConfig().getInt("border");
         int var1 = random.nextInt(border); //X coordinate
         int var2 = random.nextInt(border); //Z coordinate
-        int var3 = random.nextInt(2); //basically a boolean
+        int var3 = random.nextInt(2); //basically a random boolean
         if (var3 == 1){
             var1 = var1 * -1; //50% chance the x coordinate will be negative
 
@@ -92,8 +93,12 @@ public class TeleportUtils {
 
 
     public static void tp(Player player, Location location){
-        player.teleport(location);
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("tp-message")));
+        if (player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
+            player.teleport(location);
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("tp-message")));
+        }else{
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("player-not-in-overworld")));
+        }
     }
 
 }

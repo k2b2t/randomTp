@@ -26,14 +26,11 @@ public class rtplugincommand implements CommandExecutor {
                 player.sendMessage("§6You are running §bRandom TP§6 Version: §b" + Randomtp.version);
                 player.sendMessage("§6For help type the command §b/rtplugin help");
             }else if (args[0].equalsIgnoreCase("help")){
-//TODO Remove Info:
-                player.sendMessage("§1-----§6§lRandom TP§1-----");
-                player.sendMessage("§3§lInfo:");
-                player.sendMessage("§6Author: §cKubajsa");
                 player.sendMessage("§6Version: §c" + Randomtp.version);
                 player.sendMessage("§3§lCommands:");
                 player.sendMessage("§6/rtp - Teleports you to a random location within the border set in the config (Default: 1000)");
                 player.sendMessage("§6/rtp [player] - /rtp other players");
+                player.sendMessage("§6/rtp @everyone - /rtp everyone on the server");
                 player.sendMessage("§6/wild - /rtp alias");
                 player.sendMessage("§6/rtplugin help - Shows you this message");
                 player.sendMessage("§6/rtplugin setborder - Allows you to set the border");
@@ -41,11 +38,11 @@ public class rtplugincommand implements CommandExecutor {
                 player.sendMessage("§3§lPermissions:");
                 player.sendMessage("§6randomTp.rtp - Allows you to use /rtp");
                 player.sendMessage("§6randomTp.rtp.others - Allows you to /rtp other players");
+                player.sendMessage("§6randomTp.rtp.everyone - Allows you to /rtp @everyone");
                 player.sendMessage("§6randomTp.setborder - Allows you to set the rtp border");
                 player.sendMessage("§6randomTp.reload - Allows you to reload the plugin");
                 player.sendMessage("§3§lConfig:");
                 player.sendMessage("§6Border size: §b" + plugin.getConfig().getInt("border"));
-                player.sendMessage("§1--------------------------");
             }else if (args[0].equalsIgnoreCase("setborder")){
 
 

@@ -6,8 +6,6 @@ description: This is a /rtp plugin
 commands:
   rtp:
     description: Randomly teleports the player to a random location
-    permission: randomTp.rtp
-    permission-message: §cInsufficient permission.
     aliases: wild
     usage: /<command> [player]
   rtplugin:
