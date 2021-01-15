@@ -11,7 +11,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Random;
 
 public class rtpcommand implements CommandExecutor {
 
@@ -29,43 +28,43 @@ public class rtpcommand implements CommandExecutor {
         if(commandSender instanceof Player){
             Player player = (Player) commandSender;
             //If executed by a player
-            if (player.hasPermission("randomTp.rtp.others")) {
+            if (args.length != 0) {
+                if (args[0].equalsIgnoreCase("@everyone")) {
+                    if (player.hasPermission("randomTp.rtp.everyone")) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("tp-everyone-message")));
+                        for (Player target : Bukkit.getOnlinePlayers()) {
+                            Location loc = TeleportUtils.generateLocation(target);
+                            TeleportUtils.tp(target, loc);
+                        }
+                    }else{player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission")));}
+                }
+                if(!args[0].equalsIgnoreCase("@everyone")) {
 
-                if (args.length != 0) {
-                    //If player has rtp.others permission and specifies a target
+                    if (player.hasPermission("randomTp.rtp.others")) {
+
+                        //If player has rtp.others permission and specifies a target
                         Player target = Bukkit.getServer().getPlayer(args[0]);
 
                         if (target != null) {
                             if (target.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
                                 Location loc = TeleportUtils.generateLocation(target);
                                 TeleportUtils.tp(target, loc);
-                                Integer x = target.getLocation().getBlockX();
-                                Integer y = target.getLocation().getBlockY();
-                                Integer z = target.getLocation().getBlockZ();
-                                player.sendMessage("§6Teleported §c" + target.getDisplayName() + " §6to " + x.toString() + " " + y.toString() + " " + z.toString());
-                            }else{
+                                player.sendMessage("§6Teleported §c" + target.getName() + " §6to a random location");
+                            } else {
                                 player.sendMessage("§cThat player is not in the overworld!");
                             }
-                        }else{
+                        } else {
                             player.sendMessage("§cCouldn't find that player!");
                         }
-                }else{
-                    //If player has rtp.others permission but doesn't specify a target
-                    if (player.getWorld().getEnvironment().equals(World.Environment.NETHER) || player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
-                        player.sendMessage("§cYou can only use /rtp in the overworld!");
-                    }else{
-                        Location loc = TeleportUtils.generateLocation(player);
-                        TeleportUtils.tp(player, loc);
-                    }
-                }
+                    }else{player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission")));}
+            }
+
             }else{
-                //If player doesn't have rtp.others permission
-                if (player.getWorld().getEnvironment().equals(World.Environment.NETHER) || player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
-                    player.sendMessage("§cYou can only use /rtp in the overworld!");
-                }else{
+                if (player.hasPermission("randomTp.rtp")) {
+                    //If args length is 0
                     Location loc = TeleportUtils.generateLocation(player);
                     TeleportUtils.tp(player, loc);
-                }
+                }else{player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission")));}
             }
 
         }else{
