@@ -1,9 +1,6 @@
 package me.jakub.randomtp;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -28,6 +25,7 @@ public class TeleportUtils {
 
     }
 
+    public int threshold = 0;
 
 
     public static Location generateLocation(Player player){
@@ -66,7 +64,7 @@ public class TeleportUtils {
             player.sendTitle(
                     ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("generating-title")),
                     ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("generating-subtitle")),
-                    5,
+                    0,
                     50,
                     20
             );

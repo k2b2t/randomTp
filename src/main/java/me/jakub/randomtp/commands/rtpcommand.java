@@ -2,6 +2,7 @@ package me.jakub.randomtp.commands;
 
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.TeleportUtils;
+import me.jakub.randomtp.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -31,12 +32,12 @@ public class rtpcommand implements CommandExecutor {
             if (args.length != 0) {
                 if (args[0].equalsIgnoreCase("@everyone")) {
                     if (player.hasPermission("randomTp.rtp.everyone")) {
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("tp-everyone-message")));
+                        player.sendMessage(Utils.getTpEveryoneMessage());
                         for (Player target : Bukkit.getOnlinePlayers()) {
                             Location loc = TeleportUtils.generateLocation(target);
                             TeleportUtils.tp(target, loc);
                         }
-                    }else{player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission")));}
+                    }else{player.sendMessage(Utils.getNoPermission());}
                 }
                 if(!args[0].equalsIgnoreCase("@everyone")) {
 
@@ -49,27 +50,42 @@ public class rtpcommand implements CommandExecutor {
                             if (target.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
                                 Location loc = TeleportUtils.generateLocation(target);
                                 TeleportUtils.tp(target, loc);
-                                player.sendMessage("§6Teleported §c" + target.getName() + " §6to a random location");
+                                player.sendMessage(Utils.getTpMessageSender(target));
                             } else {
                                 player.sendMessage("§cThat player is not in the overworld!");
                             }
                         } else {
                             player.sendMessage("§cCouldn't find that player!");
                         }
-                    }else{player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission")));}
+                    }else{player.sendMessage(Utils.getNoPermission());}
             }
 
             }else{
                 if (player.hasPermission("randomTp.rtp")) {
                     //If args length is 0
-                    Location loc = TeleportUtils.generateLocation(player);
-                    TeleportUtils.tp(player, loc);
-                }else{player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission")));}
+                        Location loc = TeleportUtils.generateLocation(player);
+                        TeleportUtils.tp(player, loc);
+                }else{player.sendMessage(Utils.getNoPermission());}
             }
 
         }else{
             //If executed from console
-            System.out.println("Only a player can execute this command!");
+            if (args.length == 1){
+                Player target = Bukkit.getPlayer(args[0]);
+                if (target != null){
+                    if (target.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
+                        Location loc = TeleportUtils.generateLocation(target);
+                        TeleportUtils.tp(target, loc);
+                        System.out.println("Successfully teleported " + target.getName() + " to a random location");
+                    } else {
+                        System.out.println("That player is not in the overworld!");
+                    }
+                }else{
+                    System.out.println("Couldn't find that player");
+                }
+            }else{
+                System.out.println("Usage: rtp <player>");
+            }
         }
 
 

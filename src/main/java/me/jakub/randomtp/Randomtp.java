@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Randomtp extends JavaPlugin {
 
-    public static String version = "2.0";
+    public static String version = "2.1";
 
     @Override
     public void onEnable() {
@@ -24,6 +24,7 @@ public final class Randomtp extends JavaPlugin {
         getCommand("rtplugin").setTabCompleter(new rtplugincommandTabCompleter());
 
         TeleportUtils utils = new TeleportUtils(this);
+        Utils utils1 = new Utils(this);
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();

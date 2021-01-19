@@ -1,8 +1,14 @@
-border: 1000 #The distance from 0 0 you want the player to be able to teleport to.
+#The distance from 0 0 you want the player to be able to teleport to.
+border: 1000
 
 #--Messages--
+#At messages that are marked with a "%" you can use '%player%' as a placeholder for the player
+
 #The message you see when you get teleported
 tp-message: "&6You were teleported to a random location"
+
+#Message that the player that performed the command /rtp <player> will receive. %
+tp-message-sender: "&6You teleported &c%player% &6to a random location"
 
 #The message you see when you execute the /rtp @everyone command
 tp-everyone-message: "&6Teleporting everyone on the server"

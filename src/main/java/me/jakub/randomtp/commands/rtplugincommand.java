@@ -1,6 +1,7 @@
 package me.jakub.randomtp.commands;
 
 import me.jakub.randomtp.Randomtp;
+import me.jakub.randomtp.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -67,7 +68,7 @@ public class rtplugincommand implements CommandExecutor {
                         player.sendMessage("§cYou didn't enter a valid number!"); //Either too many or none args were provided
                     }
                 }else{
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission")));
+                    player.sendMessage(Utils.getNoPermission());
                 }
 
 
@@ -75,13 +76,11 @@ public class rtplugincommand implements CommandExecutor {
                 if (player.hasPermission("randomTp.reload")){
                     plugin.reloadConfig();
                     player.sendMessage("§bReloaded the config!");
-                }else{player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission")));}
+                }else{player.sendMessage(Utils.getNoPermission());}
             }
             else{
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("unknown-command")));
+                player.sendMessage(Utils.getUnknownCommand());
             }
-
-
         }
 
         return true;
