@@ -4,13 +4,15 @@ import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.TeleportUtils;
 import me.jakub.randomtp.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class rtpcommand implements CommandExecutor {
@@ -22,6 +24,7 @@ public class rtpcommand implements CommandExecutor {
         this.plugin = plugin;
     }
 
+    Map<String, Long> cooldowns = new HashMap<String, Long>();
 
 
     @Override
@@ -62,9 +65,29 @@ public class rtpcommand implements CommandExecutor {
 
             }else{
                 if (player.hasPermission("randomTp.rtp")) {
-                    //If args length is 0
+
+                    if (!player.hasPermission("randomTp.cooldown.bypass")) {
+
+                        if (cooldowns.containsKey(player.getName())) {
+                            // player is inside hashmap
+                            if (cooldowns.get(player.getName()) > System.currentTimeMillis()) {
+                                // they still have time left in the cooldown
+                                long timeLeft = (cooldowns.get(player.getName()) - System.currentTimeMillis()) / 1000;
+                                player.sendMessage("§6You have a cooldown of §b" + timeLeft + " §6seconds");
+                                return true;
+                            }
+                        }
+
+                        cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("cooldown") * 1000));
+
+                        // player doesn't have a cooldown
                         Location loc = TeleportUtils.generateLocation(player);
                         TeleportUtils.tp(player, loc);
+                    }else {
+                        //If args length is 0
+                        Location loc = TeleportUtils.generateLocation(player);
+                        TeleportUtils.tp(player, loc);
+                    }
                 }else{player.sendMessage(Utils.getNoPermission());}
             }
 

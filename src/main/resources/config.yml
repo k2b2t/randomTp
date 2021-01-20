@@ -1,6 +1,9 @@
 #The distance from 0 0 you want the player to be able to teleport to.
 border: 1000
 
+#Cooldown for the /rtp command; set to 0 for no cooldown
+cooldown: 15
+
 #--Messages--
 #At messages that are marked with a "%" you can use '%player%' as a placeholder for the player
 

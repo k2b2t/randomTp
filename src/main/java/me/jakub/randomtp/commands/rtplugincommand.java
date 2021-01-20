@@ -2,7 +2,6 @@ package me.jakub.randomtp.commands;
 
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.Utils;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -42,6 +41,7 @@ public class rtplugincommand implements CommandExecutor {
                 player.sendMessage("§6randomTp.rtp.everyone - Allows you to /rtp @everyone");
                 player.sendMessage("§6randomTp.setborder - Allows you to set the rtp border");
                 player.sendMessage("§6randomTp.reload - Allows you to reload the plugin");
+                player.sendMessage("§6randomTp.cooldown.bypass - Allows you to bypass the cooldown");
                 player.sendMessage("§3§lConfig:");
                 player.sendMessage("§6Border size: §b" + plugin.getConfig().getInt("border"));
             }else if (args[0].equalsIgnoreCase("setborder")){
