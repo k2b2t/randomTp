@@ -1,5 +1,6 @@
-package me.jakub.randomtp;
+package me.jakub.randomtp.utils;
 
+import me.jakub.randomtp.Randomtp;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;

@@ -4,6 +4,8 @@ import me.jakub.randomtp.commands.rtpcommand;
 import me.jakub.randomtp.commands.rtpcommandTabCompleter;
 import me.jakub.randomtp.commands.rtplugincommand;
 import me.jakub.randomtp.commands.rtplugincommandTabCompleter;
+import me.jakub.randomtp.utils.TeleportUtils;
+import me.jakub.randomtp.utils.Utils;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Randomtp extends JavaPlugin {

@@ -1,8 +1,8 @@
 package me.jakub.randomtp.commands;
 
 import me.jakub.randomtp.Randomtp;
-import me.jakub.randomtp.TeleportUtils;
-import me.jakub.randomtp.Utils;
+import me.jakub.randomtp.utils.TeleportUtils;
+import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
