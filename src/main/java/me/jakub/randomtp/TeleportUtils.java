@@ -1,6 +1,9 @@
 package me.jakub.randomtp;
 
-import org.bukkit.*;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -48,7 +51,6 @@ public class TeleportUtils {
         if(var3 == 1){
             var2 = var2 * -1; //50% chance the x coordinate will be negative
         }
-        //no, don't laugh at this piece of code above me.. thank you
 
         x = var1;
         y = 150; //useless line of code :)
@@ -72,7 +74,7 @@ public class TeleportUtils {
         while(isLocationSafe(randomLocation) == false){
             randomLocation = generateLocation(player);
         }
-        randomLocation.add(0.5, 0.1, 0.5);
+        //randomLocation.add(0.5, 0.1, 0.5);
         return randomLocation;
     }
 
