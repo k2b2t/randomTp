@@ -75,7 +75,6 @@ public class TeleportUtils {
         while(isLocationSafe(randomLocation) == false){
             randomLocation = generateLocation(player);
         }
-        //randomLocation.add(0.5, 0.1, 0.5);
         return randomLocation;
     }
 
