@@ -4,13 +4,14 @@ import me.jakub.randomtp.commands.rtpcommand;
 import me.jakub.randomtp.commands.rtpcommandTabCompleter;
 import me.jakub.randomtp.commands.rtplugincommand;
 import me.jakub.randomtp.commands.rtplugincommandTabCompleter;
+import me.jakub.randomtp.metrics.MetricsLite;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Randomtp extends JavaPlugin {
 
-    public static String version = "2.2";
+    public static String version = "2.3";
 
     @Override
     public void onEnable() {
@@ -27,6 +28,7 @@ public final class Randomtp extends JavaPlugin {
 
         TeleportUtils utils = new TeleportUtils(this);
         Utils utils1 = new Utils(this);
+        MetricsLite metricsLite = new MetricsLite(this, 10130);
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();

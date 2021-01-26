@@ -9,6 +9,7 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -92,22 +93,24 @@ public class rtpcommand implements CommandExecutor {
             }
 
         }else{
-            //If executed from console
-            if (args.length == 1){
-                Player target = Bukkit.getPlayer(args[0]);
-                if (target != null){
-                    if (target.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
-                        Location loc = TeleportUtils.generateLocation(target);
-                        TeleportUtils.tp(target, loc);
-                        System.out.println("Successfully teleported " + target.getName() + " to a random location");
+            if(commandSender instanceof ConsoleCommandSender) {
+                //If executed from console
+                if (args.length == 1) {
+                    Player target = Bukkit.getPlayer(args[0]);
+                    if (target != null) {
+                        if (target.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
+                            Location loc = TeleportUtils.generateLocation(target);
+                            TeleportUtils.tp(target, loc);
+                            System.out.println("Successfully teleported " + target.getName() + " to a random location");
+                        } else {
+                            System.out.println("That player is not in the overworld!");
+                        }
                     } else {
-                        System.out.println("That player is not in the overworld!");
+                        System.out.println("Couldn't find that player");
                     }
-                }else{
-                    System.out.println("Couldn't find that player");
+                } else {
+                    System.out.println("Usage: rtp <player>");
                 }
-            }else{
-                System.out.println("Usage: rtp <player>");
             }
         }
 

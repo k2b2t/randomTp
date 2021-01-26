@@ -23,7 +23,7 @@ unknown-command: "&cUnknown command, try /rtplugin help"
 no-permission: "&cInsufficient permission."
 
 #Canceled teleport because you aren't in the overworld
-player-not-in-overworld: "&cYou couldn't be teleported because you aren't in the overworld"
+player-not-in-overworld: "&cYou couldn't be teleported because you are not in the overworld"
 
 
 #--Titles--
