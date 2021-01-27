@@ -2,10 +2,12 @@ package me.jakub.randomtp.commands;
 
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.utils.Utils;
+import org.bukkit.WorldBorder;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
 
 public class rtplugincommand implements CommandExecutor {
 
@@ -51,7 +53,12 @@ public class rtplugincommand implements CommandExecutor {
                     if (args.length == 2) { //If player provided a number
                         try { //Checks if the arg is a number
                             Integer num = Integer.parseInt(args[1]);
-                            if (num <= 30000000 && num >= 10) { //Checks if it is lower than 30mil and higher than 10
+                            WorldBorder worldBorder = player.getWorld().getWorldBorder();
+                            int size = ((int) worldBorder.getSize() / 2);
+                            if (num > size){
+                                player.sendMessage("§cThat number is larger than the World Border (" + size + ")");
+                            }
+                            else if (num <= 30000000 && num >= 10) { //Checks if it is lower than 30mil and higher than 10
                                 plugin.getConfig().set("border", num);
                                 plugin.saveConfig();
                                 player.sendMessage("§6Set border to §b" + args[1] + "§6 blocks"); //Sets the int "blocks" to the number in the config

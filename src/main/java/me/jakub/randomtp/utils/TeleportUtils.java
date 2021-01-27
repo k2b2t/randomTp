@@ -1,12 +1,12 @@
 package me.jakub.randomtp.utils;
 
+import javafx.print.PageOrientation;
 import me.jakub.randomtp.Randomtp;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -17,10 +17,10 @@ public class TeleportUtils {
 
     public TeleportUtils(Randomtp plugin) {
         this.plugin = plugin;
+
     }
 
     public static HashSet<Material> bad_blocks = new HashSet<>();
-
     static{
         bad_blocks.add(Material.LAVA);
         bad_blocks.add(Material.FIRE);
@@ -28,8 +28,6 @@ public class TeleportUtils {
         bad_blocks.add(Material.WATER);
 
     }
-
-    public int threshold = 0;
 
 
     public static Location generateLocation(Player player){
@@ -63,10 +61,10 @@ public class TeleportUtils {
         y = randomLocation.getWorld().getHighestBlockYAt(randomLocation); //set the Y coordinate to the highest point
         randomLocation.setY(y + 1);
 
-        if (plugin.getConfig().getBoolean("title")) {
+        if (plugin.getConfig().getBoolean("Titles.enabled")) {
             player.sendTitle(
-                    ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("generating-title")),
-                    ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("generating-subtitle")),
+                    ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Titles.generating-title")),
+                    ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Titles.generating-subtitle")),
                     0,
                     50,
                     20
@@ -90,14 +88,21 @@ public class TeleportUtils {
 
         return !(bad_blocks.contains(below.getType())) || (block.getType().isSolid()) || (above.getType().isSolid());
     }
-
-
     public static void tp(Player player, Location location){
         if (player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
             player.teleport(location);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("tp-message")));
+            if (plugin.getConfig().getBoolean("Sounds.enabled")){
+                PlayerUtils.playSound(player);
+            }
+            if (plugin.getConfig().getBoolean("Invincibility.enabled")) {
+                PlayerUtils.addInvincibility(player, plugin.getConfig().getInt("Invincibility.potion-seconds"), plugin.getConfig().getInt("Invincibility.potion-amplifier"));
+            }
+            if (plugin.getConfig().getBoolean("Particles.enabled")){
+                PlayerUtils.spawnParticle(player);
+            }
+            player.sendMessage(Utils.getTpMessage());
         }else{
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("player-not-in-overworld")));
+            player.sendMessage(Utils.getPlayerNotInOverMessage());
         }
     }
 
