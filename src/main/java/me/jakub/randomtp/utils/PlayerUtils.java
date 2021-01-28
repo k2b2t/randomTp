@@ -15,18 +15,26 @@ public class PlayerUtils {
     }
 
     public static void addInvincibility(Player player, int sec, int amp){
-        PotionEffect potionEffect = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, sec * 20, amp);
-        player.addPotionEffect(potionEffect);
+            PotionEffect potionEffect = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, sec * 20, amp);
+            player.addPotionEffect(potionEffect);
     }
 
     public static void playSound(Player player){
-        String var1 = plugin.getConfig().getString("Sounds.sound");
-        player.playSound(player.getLocation(), Sound.valueOf(var1), 1, 1);
+        try {
+            String var1 = plugin.getConfig().getString("Sounds.sound");
+            player.playSound(player.getLocation(), Sound.valueOf(var1), 1, 1);
+        }catch (Exception e){
+            Log.log(Log.LogLevel.ERROR, "Couldn't play sound, wrong sound name was used");
+        }
     }
 
     public static void spawnParticle(Player player){
         String var100 = plugin.getConfig().getString("Particles.particle");
         int var10 = plugin.getConfig().getInt("Particles.count");
-        player.getWorld().spawnParticle(Particle.valueOf(var100), player.getLocation(), var10);
+        try {
+            player.getWorld().spawnParticle(Particle.valueOf(var100), player.getLocation(), var10);
+        }catch (Exception e){
+            Log.log(Log.LogLevel.ERROR, "Couldn't spawn particle, wrong particle name was used");
+        }
     }
 }
