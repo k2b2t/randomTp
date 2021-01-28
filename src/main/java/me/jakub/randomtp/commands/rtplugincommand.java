@@ -88,6 +88,8 @@ public class rtplugincommand implements CommandExecutor {
             else{
                 player.sendMessage(Utils.getUnknownCommand());
             }
+        }else{
+            System.out.println("Only players can execute this command");
         }
 
         return true;

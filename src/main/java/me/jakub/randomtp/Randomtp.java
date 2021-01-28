@@ -6,9 +6,7 @@ import me.jakub.randomtp.commands.rtplugincommand;
 import me.jakub.randomtp.commands.rtplugincommandTabCompleter;
 import me.jakub.randomtp.listeners.JoinEvent;
 import me.jakub.randomtp.metrics.MetricsLite;
-import me.jakub.randomtp.utils.PlayerUtils;
-import me.jakub.randomtp.utils.TeleportUtils;
-import me.jakub.randomtp.utils.Utils;
+import me.jakub.randomtp.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -19,13 +17,15 @@ public final class Randomtp extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        System.out.println("---------------------------------");
-        System.out.println("Starting up Random Teleport...");
-        System.out.println("Version: " + version);
-        System.out.println("Author: Kubajsa");
-        System.out.println("Use /rtplugin help for more info");
-        System.out.println("                                 ");
+
+        Log.log(Log.LogLevel.OUTLINE, "---------------------------------");
+        Log.log(Log.LogLevel.INFO, "Starting up Random Teleport...");
+        Log.log(Log.LogLevel.INFO, "Version: " + version);
+        Log.log(Log.LogLevel.INFO, "Author: Kubajsa");
+        Log.log(Log.LogLevel.INFO, "Use /rtplugin help for more info");
+
         getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
+
         getCommand("rtp").setExecutor(new rtpcommand(this));
         getCommand("rtp").setTabCompleter(new rtpcommandTabCompleter());
         getCommand("rtplugin").setExecutor(new rtplugincommand(this));
@@ -38,7 +38,24 @@ public final class Randomtp extends JavaPlugin {
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
-        System.out.println("Finished loading!");
-        System.out.println("---------------------------------");
+
+        Log.log(Log.LogLevel.SUCCESS, "Finished loading!");
+        Log.log(Log.LogLevel.INFO, "Checking for updates..");
+
+
+
+        new UpdateChecker(this, 86659).getLatestVersion(version -> {
+            if(this.version.equalsIgnoreCase(version)) {
+                Log.log(Log.LogLevel.INFO, "RandomTP is up to date");
+            } else {
+                Log.log(Log.LogLevel.WARNING, "RandomTP has a newer version available: spigotmc.org/resources/random-tp.86659/");
+                Bukkit.broadcastMessage("§6RandomTP has a newer version available");
+            }
+
+        });
+
+
+        Log.log(Log.LogLevel.OUTLINE, "---------------------------------");
+
     }
 }
