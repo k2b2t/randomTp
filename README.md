@@ -3,3 +3,6 @@
 
 # Random TP<br>
 Spigotmc page : https://www.spigotmc.org/resources/random-tp.86659/
+
+## bStats<br>
+![bStats](https://bstats.org/signatures/bukkit/RandTp.svg)
