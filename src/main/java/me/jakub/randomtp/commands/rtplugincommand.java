@@ -1,11 +1,13 @@
 package me.jakub.randomtp.commands;
 
 import me.jakub.randomtp.Randomtp;
+import me.jakub.randomtp.utils.Log;
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.WorldBorder;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 
@@ -25,7 +27,7 @@ public class rtplugincommand implements CommandExecutor {
             Player player = (Player) commandSender;
 
             if (args.length == 0){
-                player.sendMessage("§6You are running §bRandom TP§6 Version: §b" + Randomtp.version);
+                player.sendMessage("§6You are running §bRandomTP§6 Version: §b" + Randomtp.version);
                 player.sendMessage("§6For help type the command §b/rtplugin help");
             }else if (args[0].equalsIgnoreCase("help")){
                 player.sendMessage("§6Version: §c" + Randomtp.version);
@@ -88,8 +90,32 @@ public class rtplugincommand implements CommandExecutor {
             else{
                 player.sendMessage(Utils.getUnknownCommand());
             }
-        }else{
-            System.out.println("Only players can execute this command");
+        }else if(commandSender instanceof ConsoleCommandSender){
+            if (args.length == 0){
+                Log.log(Log.LogLevel.PLAIN, "§6You are running §bRandomTP§6 Version: §b" + Randomtp.version);
+                Log.log(Log.LogLevel.PLAIN, "§6For help type the command §brtplugin help");
+            }else if (args[0].equalsIgnoreCase("help")){
+                Log.log(Log.LogLevel.PLAIN, "§6Version: §c" + Randomtp.version);
+                Log.log(Log.LogLevel.PLAIN, "§3§lCommands:");
+                Log.log(Log.LogLevel.PLAIN, "§6/rtp - Teleports you to a random location within the border set in the config (Default: 1000)");
+                Log.log(Log.LogLevel.PLAIN, "§6/rtp [player] - /rtp other players");
+                Log.log(Log.LogLevel.PLAIN, "§6/rtp @everyone - /rtp everyone on the server");
+                Log.log(Log.LogLevel.PLAIN, "§6/wild - /rtp alias");
+                Log.log(Log.LogLevel.PLAIN, "§6/rtplugin help - Shows you this message");
+                Log.log(Log.LogLevel.PLAIN, "§6/rtplugin setborder - Allows you to set the border");
+                Log.log(Log.LogLevel.PLAIN, "§6/rtplugin reload - Reloads the config");
+                Log.log(Log.LogLevel.PLAIN, "§3§lPermissions:");
+                Log.log(Log.LogLevel.PLAIN, "§6randomTp.rtp - Allows you to use /rtp");
+                Log.log(Log.LogLevel.PLAIN, "§6randomTp.rtp.others - Allows you to /rtp other players");
+                Log.log(Log.LogLevel.PLAIN, "§6randomTp.rtp.everyone - Allows you to /rtp @everyone");
+                Log.log(Log.LogLevel.PLAIN, "§6randomTp.setborder - Allows you to set the rtp border");
+                Log.log(Log.LogLevel.PLAIN, "§6randomTp.reload - Allows you to reload the plugin");
+                Log.log(Log.LogLevel.PLAIN, "§6randomTp.cooldown.bypass - Allows you to bypass the cooldown");
+                Log.log(Log.LogLevel.PLAIN, "§3§lConfig:");
+                Log.log(Log.LogLevel.PLAIN, "§6Border size: §b" + plugin.getConfig().getInt("border"));
+            }else{
+                Log.log(Log.LogLevel.DEFAULT, "That command either does not exist or is player only");
+            }
         }
 
         return true;
