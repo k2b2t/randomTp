@@ -19,8 +19,7 @@ public final class Randomtp extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        Log.log(Log.LogLevel.INFO, "Starting up Random Teleport...");
-        Log.log(Log.LogLevel.INFO, "Version: " + version);
+        Log.log(Log.LogLevel.INFO, "Enabling RandomTP v" + version);
         Log.log(Log.LogLevel.INFO, "Author: Kubajsa");
         Log.log(Log.LogLevel.INFO, "Use /rtplugin help for more info");
 
