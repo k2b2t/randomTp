@@ -14,12 +14,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Randomtp extends JavaPlugin {
 
     public static String version = "2.4";
-    
+
 
     @Override
     public void onEnable() {
 
-        Log.log(Log.LogLevel.OUTLINE, "---------------------------------");
         Log.log(Log.LogLevel.INFO, "Starting up Random Teleport...");
         Log.log(Log.LogLevel.INFO, "Version: " + version);
         Log.log(Log.LogLevel.INFO, "Author: Kubajsa");
@@ -53,9 +52,6 @@ public final class Randomtp extends JavaPlugin {
             }
 
         });
-
-
-        Log.log(Log.LogLevel.OUTLINE, "---------------------------------");
 
     }
 }
