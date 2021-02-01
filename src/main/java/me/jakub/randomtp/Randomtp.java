@@ -43,13 +43,12 @@ public final class Randomtp extends JavaPlugin {
         Log.log(Log.LogLevel.INFO, "Checking for updates..");
 
 
-
         new UpdateChecker(this, 86659).getLatestVersion(version -> {
             if(this.version.equalsIgnoreCase(version)) {
                 Log.log(Log.LogLevel.INFO, "RandomTP is up to date");
             } else {
-                Log.log(Log.LogLevel.WARNING, "RandomTP has a newer version available: spigotmc.org/resources/random-tp.86659/");
-                Bukkit.broadcastMessage("§6RandomTP has a newer version available");
+                Log.log(Log.LogLevel.WARNING, "A new version is available: spigotmc.org/resources/random-tp.86659/");
+                Bukkit.broadcastMessage("§c[RandomTP] §6A new version is available on SpigotMC");
             }
 
         });
