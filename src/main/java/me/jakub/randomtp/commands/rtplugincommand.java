@@ -46,6 +46,7 @@ public class rtplugincommand implements CommandExecutor {
                 player.sendMessage("§6randomTp.setborder - Allows you to set the rtp border");
                 player.sendMessage("§6randomTp.reload - Allows you to reload the plugin");
                 player.sendMessage("§6randomTp.cooldown.bypass - Allows you to bypass the cooldown");
+                player.sendMessage("§6randomTp.price.bypass - Bypass rtp price");
                 player.sendMessage("§3§lConfig:");
                 player.sendMessage("§6Border size: §b" + plugin.getConfig().getInt("border"));
             }else if (args[0].equalsIgnoreCase("setborder")){
@@ -111,6 +112,7 @@ public class rtplugincommand implements CommandExecutor {
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.setborder - Allows you to set the rtp border");
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.reload - Allows you to reload the plugin");
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.cooldown.bypass - Allows you to bypass the cooldown");
+                Log.log(Log.LogLevel.PLAIN, "§6randomTp.price.bypass - Bypass rtp price");
                 Log.log(Log.LogLevel.PLAIN, "§3§lConfig:");
                 Log.log(Log.LogLevel.PLAIN, "§6Border size: §b" + plugin.getConfig().getInt("border"));
             }else{

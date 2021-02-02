@@ -18,6 +18,13 @@ rtp-on-first-join: false
 #If the plugin should check for updates on startup, this is recommended to be enabled
 update-checker: true
 
+
+#Vault settings
+Vault:
+  enabled: false
+  rtp-price: 100
+
+
 #--Messages--
 #At messages that are marked with a "%" you can use '%player%' as a placeholder for the player
 Messages:
@@ -33,6 +40,10 @@ Messages:
   no-permission: "&cInsufficient permission."
   #Canceled teleport because you aren't in the overworld
   player-not-in-overworld: "&cYou couldn't be teleported because you are not in the overworld"
+  #If player doesn't have enough money
+  not-enough-money: "&cYou do not have enough money to do that!"
+  #Successful transaction message
+  took-money-message: "&a$%amount% has been taken from your account"
 
 
 #--Titles--

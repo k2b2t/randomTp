@@ -1,9 +1,11 @@
 package me.jakub.randomtp.commands;
 
 import me.jakub.randomtp.Randomtp;
+import me.jakub.randomtp.hooks.VaultHook;
 import me.jakub.randomtp.utils.Log;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -83,12 +85,26 @@ public class rtpcommand implements CommandExecutor {
                         cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("cooldown") * 1000));
 
                         // player doesn't have a cooldown
-                        Location loc = TeleportUtils.generateLocation(player);
-                        TeleportUtils.tp(player, loc);
+                        if (Randomtp.vaultHooked) {
+                            if (VaultHook.takeMoney(player, Utils.getAmount())) {
+                                Location loc = TeleportUtils.generateLocation(player);
+                                TeleportUtils.tp(player, loc);
+                            }
+                        }else{
+                            Location loc = TeleportUtils.generateLocation(player);
+                            TeleportUtils.tp(player, loc);
+                        }
                     }else {
-                        //If args length is 0
-                        Location loc = TeleportUtils.generateLocation(player);
-                        TeleportUtils.tp(player, loc);
+                        //Has bypass perms
+                        if (Randomtp.vaultHooked) {
+                            if (VaultHook.takeMoney(player, Utils.getAmount())) {
+                                Location loc = TeleportUtils.generateLocation(player);
+                                TeleportUtils.tp(player, loc);
+                            }
+                        }else{
+                            Location loc = TeleportUtils.generateLocation(player);
+                            TeleportUtils.tp(player, loc);
+                        }
                     }
                 }else{player.sendMessage(Utils.getNoPermission());}
             }

@@ -7,13 +7,19 @@ import me.jakub.randomtp.commands.rtplugincommandTabCompleter;
 import me.jakub.randomtp.listeners.JoinEvent;
 import me.jakub.randomtp.metrics.MetricsLite;
 import me.jakub.randomtp.utils.*;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
 public final class Randomtp extends JavaPlugin {
 
-    public static String version = "2.5";
+    public static String version = "2.6";
+
+    private static Economy econ = null;
+
+    public static boolean vaultHooked = false;
 
 
     @Override
@@ -38,6 +44,19 @@ public final class Randomtp extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
+
+        if (this.getConfig().getBoolean("Vault.enabled")) {
+            if (!setupEconomy()) {
+                Log.log(Log.LogLevel.ERROR, "No Vault plugin found!");
+                vaultHooked = false;
+            }else{
+                Log.log(Log.LogLevel.SUCCESS, "Successfully hooked into Vault");
+                vaultHooked = true;
+            }
+        }else{
+            vaultHooked = false;
+        }
+
         Log.log(Log.LogLevel.SUCCESS, "Finished loading!");
         if (Utils.getUpdateCheckerEnabled()) {
             Log.log(Log.LogLevel.INFO, "Checking for updates..");
@@ -57,4 +76,28 @@ public final class Randomtp extends JavaPlugin {
         }
 
     }
+
+
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        econ = rsp.getProvider();
+        return econ != null;
+    }
+
+    public static Economy getEconomy() {
+        if (vaultHooked) {
+            return econ;
+        }else{
+            return null;
+        }
+    }
+
+
+
 }

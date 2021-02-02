@@ -36,8 +36,20 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.player-not-in-overworld"));
     }
 
+    public static String getNotEnoughMoneyMessage(){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.not-enough-money"));
+    }
+
+    public static String getTookMoneyMessage(double amount){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.took-money-message")).replace("%amount%", String.valueOf(amount));
+    }
+
     public static boolean getUpdateCheckerEnabled(){
         return plugin.getConfig().getBoolean("update-checker");
+    }
+
+    public static double getAmount(){
+        return plugin.getConfig().getDouble("Vault.rtp-price");
     }
 
 

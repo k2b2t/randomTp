@@ -4,6 +4,7 @@ main: me.jakub.randomtp.Randomtp
 author: Kubajsa
 api-version: 1.16
 description: This is a /rtp plugin
+softdepend: [Vault]
 commands:
   rtp:
     description: Randomly teleports the player to a random location
