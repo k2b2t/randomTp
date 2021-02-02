@@ -36,5 +36,9 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.player-not-in-overworld"));
     }
 
+    public static boolean getUpdateCheckerEnabled(){
+        return plugin.getConfig().getBoolean("update-checker");
+    }
+
 
 }

@@ -39,18 +39,22 @@ public final class Randomtp extends JavaPlugin {
         saveDefaultConfig();
 
         Log.log(Log.LogLevel.SUCCESS, "Finished loading!");
-        Log.log(Log.LogLevel.INFO, "Checking for updates..");
+        if (Utils.getUpdateCheckerEnabled()) {
+            Log.log(Log.LogLevel.INFO, "Checking for updates..");
+        }
 
 
-        new UpdateChecker(this, 86659).getLatestVersion(version -> {
-            if(this.version.equalsIgnoreCase(version)) {
-                Log.log(Log.LogLevel.INFO, "RandomTP is up to date");
-            } else {
-                Log.log(Log.LogLevel.WARNING, "A new version is available: spigotmc.org/resources/random-tp.86659/");
-                Bukkit.broadcastMessage("§c[RandomTP] §6A new version is available on SpigotMC");
-            }
+        if (Utils.getUpdateCheckerEnabled()) {
+            new UpdateChecker(this, 86659).getLatestVersion(version -> {
+                if (this.version.equalsIgnoreCase(version)) {
+                    Log.log(Log.LogLevel.INFO, "RandomTP is up to date");
+                } else {
+                    Log.log(Log.LogLevel.WARNING, "A new version is available: spigotmc.org/resources/random-tp.86659/");
+                    Bukkit.broadcastMessage("§c[RandomTP] §6A new version is available on SpigotMC");
+                }
 
-        });
+            });
+        }
 
     }
 }

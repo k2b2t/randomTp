@@ -1,6 +1,7 @@
 name: Randomtp
 version: ${project.version}
 main: me.jakub.randomtp.Randomtp
+author: Kubajsa
 api-version: 1.16
 description: This is a /rtp plugin
 commands:

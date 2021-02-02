@@ -15,6 +15,9 @@ cooldown: 15
 #Should the plugin rtp players that joined for their first time
 rtp-on-first-join: false
 
+#If the plugin should check for updates on startup, this is recommended to be enabled
+update-checker: true
+
 #--Messages--
 #At messages that are marked with a "%" you can use '%player%' as a placeholder for the player
 Messages:
