@@ -52,6 +52,10 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.sign-break"));
     }
 
+    public static String getCooldownMessage(String timeLeft){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.cooldown-message")).replace("%left%", String.valueOf(timeLeft));
+    }
+
     public static boolean getUpdateCheckerEnabled(){
         return plugin.getConfig().getBoolean("update-checker");
     }

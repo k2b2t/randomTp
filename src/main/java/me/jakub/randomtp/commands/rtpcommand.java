@@ -2,6 +2,7 @@ package me.jakub.randomtp.commands;
 
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.hooks.VaultHook;
+import me.jakub.randomtp.utils.Cooldown;
 import me.jakub.randomtp.utils.Log;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
@@ -72,21 +73,26 @@ public class rtpcommand implements CommandExecutor {
                 if (player.hasPermission("randomTp.rtp")) {
 
                     if (!player.hasPermission("randomTp.cooldown.bypass")) {
-
+//START Cooldown
                         if (cooldowns.containsKey(player.getName())) {
                             // player is inside hashmap
                             if (cooldowns.get(player.getName()) > System.currentTimeMillis()) {
                                 // they still have time left in the cooldown
                                 long timeLeft = (cooldowns.get(player.getName()) - System.currentTimeMillis()) / 1000;
-                                player.sendMessage("§6You have a cooldown of §b" + timeLeft + " §6seconds");
+                                try {
+                                    String formatted = Cooldown.getStr(timeLeft, Cooldown.FormatType.valueOf(plugin.getConfig().getString("Cooldown.msg-format-type")));
+                                    player.sendMessage(Utils.getCooldownMessage(formatted));
+                                }catch (Exception e){
+                                    Log.log(Log.LogLevel.ERROR, "Wrong message cooldown type was used in the config, use either SECONDS, MINUTES, HOURS or AUTO");
+                                }
                                 return true;
                             }
                         }
 
-                        cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("cooldown") * 1000));
+                        cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("Cooldown.seconds") * 1000));
 
                         // player doesn't have a cooldown
-                        if (Randomtp.vaultHooked) {
+                        if (Randomtp.vaultHooked) {//Vault things
                             if (VaultHook.takeMoney(player, Utils.getAmount())) {
                                 Location loc = TeleportUtils.generateLocation(player);
                                 TeleportUtils.tp(player, loc);
@@ -94,9 +100,9 @@ public class rtpcommand implements CommandExecutor {
                         }else{
                             Location loc = TeleportUtils.generateLocation(player);
                             TeleportUtils.tp(player, loc);
-                        }
+                        }//END Cooldown
                     }else {
-                        //Has bypass perms
+                        //Has cooldown bypass perms
                         if (Randomtp.vaultHooked) {
                             if (VaultHook.takeMoney(player, Utils.getAmount())) {
                                 Location loc = TeleportUtils.generateLocation(player);
