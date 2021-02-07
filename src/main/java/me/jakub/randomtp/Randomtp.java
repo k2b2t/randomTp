@@ -47,7 +47,8 @@ public final class Randomtp extends JavaPlugin {
 
         if (this.getConfig().getBoolean("Vault.enabled")) {
             if (!setupEconomy()) {
-                Log.log(Log.LogLevel.ERROR, "No Vault plugin found!");
+                Log.log(Log.LogLevel.ERROR, "No Vault or Essentials plugin found!");
+                Log.log(Log.LogLevel.ERROR, "Check if you have both Vault and Essentials installed");
                 vaultHooked = false;
             }else{
                 Log.log(Log.LogLevel.SUCCESS, "Successfully hooked into Vault");
@@ -62,7 +63,6 @@ public final class Randomtp extends JavaPlugin {
             Log.log(Log.LogLevel.INFO, "Checking for updates..");
         }
 
-
         if (Utils.getUpdateCheckerEnabled()) {
             new UpdateChecker(this, 86659).getLatestVersion(version -> {
                 if (this.version.equalsIgnoreCase(version)) {
@@ -76,7 +76,6 @@ public final class Randomtp extends JavaPlugin {
         }
 
     }
-
 
     private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {

@@ -9,7 +9,6 @@ public class VaultHook {
 
         static Economy economy = Randomtp.getEconomy();
 
-
         public static boolean takeMoney(Player player, double amount){
                 if(player.hasPermission("randomTp.price.bypass")){
                         return true;
