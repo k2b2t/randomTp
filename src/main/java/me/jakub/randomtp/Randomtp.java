@@ -17,7 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Randomtp extends JavaPlugin {
 
-    public static String version = "2.7";
+    public static String version = "2.8";
 
     private static Economy econ = null;
 
