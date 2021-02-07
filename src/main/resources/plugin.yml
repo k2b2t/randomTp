@@ -13,3 +13,8 @@ commands:
   rtplugin:
     description: Main RandomTP plugin command
     usage: /<command> <help|setborder|reload> [number]
+permissions:
+  randomTp.sign.use:
+    default: true
+  randomTp.rtp:
+    default: true

@@ -5,6 +5,7 @@ import me.jakub.randomtp.commands.rtpcommandTabCompleter;
 import me.jakub.randomtp.commands.rtplugincommand;
 import me.jakub.randomtp.commands.rtplugincommandTabCompleter;
 import me.jakub.randomtp.listeners.JoinEvent;
+import me.jakub.randomtp.listeners.SignEvents;
 import me.jakub.randomtp.metrics.MetricsLite;
 import me.jakub.randomtp.utils.*;
 import net.milkbowl.vault.economy.Economy;
@@ -15,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Randomtp extends JavaPlugin {
 
-    public static String version = "2.6";
+    public static String version = "2.7";
 
     private static Economy econ = null;
 
@@ -30,6 +31,7 @@ public final class Randomtp extends JavaPlugin {
         Log.log(Log.LogLevel.INFO, "Use /rtplugin help for more info");
 
         getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
+        getServer().getPluginManager().registerEvents(new SignEvents(), this);
 
         getCommand("rtp").setExecutor(new rtpcommand(this));
         getCommand("rtp").setTabCompleter(new rtpcommandTabCompleter());

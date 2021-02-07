@@ -44,6 +44,14 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.took-money-message")).replace("%amount%", String.valueOf(amount));
     }
 
+    public static String getSignCreateMessage(){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.sign-create"));
+    }
+
+    public static String getSignRemoveMessage(){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.sign-break"));
+    }
+
     public static boolean getUpdateCheckerEnabled(){
         return plugin.getConfig().getBoolean("update-checker");
     }
@@ -51,6 +59,8 @@ public class Utils {
     public static double getAmount(){
         return plugin.getConfig().getDouble("Vault.rtp-price");
     }
+
+    public static boolean getEnabledSigns(){return plugin.getConfig().getBoolean("Signs.enabled");}
 
 
 }

@@ -44,6 +44,14 @@ Messages:
   not-enough-money: "&cYou do not have enough money to do that!"
   #Successful transaction message
   took-money-message: "&a$%amount% has been taken from your account"
+  #RTP Sign creation message
+  sign-create: "&6Successfully created an RTP sign"
+  #When RTP sign is broken
+  sign-break: "&6Successfully removed an RTP sign"
+
+#--Signs--
+Signs:
+  enabled: true
 
 
 #--Titles--
