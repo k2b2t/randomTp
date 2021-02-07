@@ -11,13 +11,16 @@ border: 1000
 
 #Cooldown for the /rtp command; set to 0 for no cooldown
 Cooldown:
-  seconds: 180
+  seconds: 600
   #In what format should be the remaining cooldown displayed
   #HOURS - Shows in hours if possible
   #MINUTES - Shows in minutes if possible
   #SECONDS - Always shows in seconds
   #AUTO - Automatically decides the best type to use (recommended)
   msg-format-type: AUTO
+
+Countdown:
+  enabled: true
 
 #Should the plugin rtp players that joined for their first time
 rtp-on-first-join: false
@@ -59,6 +62,7 @@ Messages:
   cooldown-message: "&6You have a cooldown of &b%left%!"
 
 #--Signs--
+#If you want to enable RTP signs
 Signs:
   enabled: true
 

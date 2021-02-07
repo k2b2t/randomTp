@@ -32,7 +32,7 @@ public class rtplugincommand implements CommandExecutor {
             }else if (args[0].equalsIgnoreCase("help")){
                 player.sendMessage("§6Version: §c" + Randomtp.version);
                 player.sendMessage("§3§lCommands:");
-                player.sendMessage("§6/rtp - Teleports you to a random location within the border set in the config (Default: 1000)");
+                player.sendMessage("§6/rtp - Teleports you to a random location within the border set in the config");
                 player.sendMessage("§6/rtp [player] - /rtp other players");
                 player.sendMessage("§6/rtp @everyone - /rtp everyone on the server");
                 player.sendMessage("§6/wild - /rtp alias");
@@ -50,6 +50,7 @@ public class rtplugincommand implements CommandExecutor {
                 player.sendMessage("§6randomTp.sign.create - Create RTP signs");
                 player.sendMessage("§6randomTp.sign.use - Use RTP signs");
                 player.sendMessage("§6randomTp.sign.break - Break RTP signs");
+                player.sendMessage("§6randomTp.countdown.bypass - Bypass countdown");
                 player.sendMessage("§3§lConfig:");
                 player.sendMessage("§6Border size: §b" + plugin.getConfig().getInt("border"));
             }else if (args[0].equalsIgnoreCase("setborder")){
@@ -119,6 +120,7 @@ public class rtplugincommand implements CommandExecutor {
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.sign.create - Create RTP signs");
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.sign.use - Use RTP signs");
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.sign.break - Break RTP signs");
+                Log.log(Log.LogLevel.PLAIN, "§6randomTp.countdown.bypass - Bypass countdown");
                 Log.log(Log.LogLevel.PLAIN, "§3§lConfig:");
                 Log.log(Log.LogLevel.PLAIN, "§6Border size: §b" + plugin.getConfig().getInt("border"));
             }else{

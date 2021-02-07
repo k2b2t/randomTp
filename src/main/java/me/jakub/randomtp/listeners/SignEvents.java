@@ -48,7 +48,7 @@ public class SignEvents implements Listener {
                         Player player = e.getPlayer();
                         if (player.hasPermission("randomTp.sign.use")) {
                             Location loc = TeleportUtils.generateLocation(player);
-                            TeleportUtils.tp(player, loc);
+                            TeleportUtils.tp(player, loc, true);
                         } else {
                             player.sendMessage(Utils.getNoPermission());
                         }

@@ -4,6 +4,7 @@ import me.jakub.randomtp.commands.rtpcommand;
 import me.jakub.randomtp.commands.rtpcommandTabCompleter;
 import me.jakub.randomtp.commands.rtplugincommand;
 import me.jakub.randomtp.commands.rtplugincommandTabCompleter;
+import me.jakub.randomtp.listeners.CountdownEvents;
 import me.jakub.randomtp.listeners.JoinEvent;
 import me.jakub.randomtp.listeners.SignEvents;
 import me.jakub.randomtp.metrics.MetricsLite;
@@ -32,6 +33,7 @@ public final class Randomtp extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
         getServer().getPluginManager().registerEvents(new SignEvents(), this);
+        getServer().getPluginManager().registerEvents(new CountdownEvents(), this);
 
         getCommand("rtp").setExecutor(new rtpcommand(this));
         getCommand("rtp").setTabCompleter(new rtpcommandTabCompleter());
