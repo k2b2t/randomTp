@@ -14,7 +14,27 @@ commands:
     description: Main RandomTP plugin command
     usage: /<command> <help|setborder|reload> [number]
 permissions:
-  randomTp.sign.use:
-    default: true
   randomTp.rtp:
+    description: Allows you to /rtp
     default: true
+  randomTp.rtp.others:
+    description: Allows you to /rtp other players
+  randomTp.rtp.everyone:
+    description: Allows you to /rtp @everyone
+  randomTp.setborder:
+    description: Allows you to set the rtp border
+  randomTp.reload:
+    description: Allows you to reload the plugin
+  randomTp.cooldown.bypass:
+    description: Allows you to bypass the cooldown
+  randomTp.price.bypass:
+    description: Bypass rtp price
+  randomTp.countdown.bypass:
+    description: Bypass countdown
+  randomTp.sign.use:
+    description: Use RTP signs
+    default: true
+  randomTp.sign.create:
+    description: Create RTP signs
+  randomTp.sign.break:
+    description: Break RTP signs
