@@ -1,6 +1,7 @@
 package me.jakub.randomtp.utils;
 
 import me.jakub.randomtp.Randomtp;
+import me.jakub.randomtp.hooks.VaultHook;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
@@ -104,11 +105,16 @@ public class TeleportUtils {
         return !(bad_blocks.contains(below.getType())) || (block.getType().isSolid()) || (above.getType().isSolid());
     }
 
-    public static void afterTp(Player player, Location location){
+    public static void afterTp(Player player, Location location, boolean bypassPrice){
+
+        if(Randomtp.vaultHooked && !bypassPrice){
+            if (!VaultHook.takeMoney(player, Utils.getAmount())) {
+                return;
+            }
+        }
+
         if (player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
-            /*player.sendMessage("§cGenerating" + System.currentTimeMillis());
             location.getWorld().getChunkAt(location.getBlock()).load(true);
-            player.sendMessage("§aDone" + System.currentTimeMillis());*/
             player.teleport(location);
             if (plugin.getConfig().getBoolean("Sounds.enabled")){
                 PlayerUtils.playSound(player);
@@ -125,14 +131,14 @@ public class TeleportUtils {
         }
     }
 
-    public static void tp(Player player, Location location, boolean bypass){
+    public static void tp(Player player, Location location, boolean bypass, boolean bypassPrice){
 
         boolean countdownEnabled = plugin.getConfig().getBoolean("Countdown.enabled");
 
 
         if (!player.hasPermission("randomTp.countdown.bypass") && countdownEnabled) {
             if (bypass){
-                afterTp(player, location);
+                afterTp(player, location, bypassPrice);
             }else {
                 count = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
                     @Override
@@ -149,7 +155,7 @@ public class TeleportUtils {
                             startCount = 5;
                             hasCountdown.remove(player);
                             if (willTp.contains(player)) {
-                                afterTp(player, location);
+                                afterTp(player, location, bypassPrice);
                             }
                             willTp.remove(player);
                         }
@@ -158,7 +164,7 @@ public class TeleportUtils {
             }
         }else{
             //Has countdown bypass perm or countdown is disabled
-            afterTp(player, location);
+            afterTp(player, location, bypassPrice);
         }
 
     }

@@ -23,7 +23,7 @@ public class JoinEvent implements Listener {
         if (!player.hasPlayedBefore()){
             if (plugin.getConfig().getBoolean("rtp-on-first-join")){
                 Location loc = TeleportUtils.generateLocation(player);
-                TeleportUtils.tp(player, loc, true);
+                TeleportUtils.tp(player, loc, true, true);
             }
         }
     }
