@@ -90,6 +90,25 @@ public class TeleportUtils {
 
         return !(bad_blocks.contains(below.getType())) || (block.getType().isSolid()) || (above.getType().isSolid());
     }
+
+    public static void afterTp(Player player, Location location){
+        if (player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
+            player.teleport(location);
+            if (plugin.getConfig().getBoolean("Sounds.enabled")){
+                PlayerUtils.playSound(player);
+            }
+            if (plugin.getConfig().getBoolean("Invincibility.enabled")) {
+                PlayerUtils.addInvincibility(player, plugin.getConfig().getInt("Invincibility.potion-seconds"), plugin.getConfig().getInt("Invincibility.potion-amplifier"));
+            }
+            if (plugin.getConfig().getBoolean("Particles.enabled")){
+                PlayerUtils.spawnParticle(player);
+            }
+            player.sendMessage(Utils.getTpMessage());
+        }else{
+            player.sendMessage(Utils.getPlayerNotInOverMessage());
+        }
+    }
+
     public static void tp(Player player, Location location, boolean bypass){
 
         boolean countdownEnabled = plugin.getConfig().getBoolean("Countdown.enabled");
@@ -97,21 +116,7 @@ public class TeleportUtils {
 
         if (!player.hasPermission("randomTp.countdown.bypass") && countdownEnabled) {
             if (bypass){
-                if (player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
-                    player.teleport(location);
-                    if (plugin.getConfig().getBoolean("Sounds.enabled")){
-                        PlayerUtils.playSound(player);
-                    }
-                    if (plugin.getConfig().getBoolean("Invincibility.enabled")) {
-                        PlayerUtils.addInvincibility(player, plugin.getConfig().getInt("Invincibility.potion-seconds"), plugin.getConfig().getInt("Invincibility.potion-amplifier"));
-                    }
-                    if (plugin.getConfig().getBoolean("Particles.enabled")){
-                        PlayerUtils.spawnParticle(player);
-                    }
-                    player.sendMessage(Utils.getTpMessage());
-                }else{
-                    player.sendMessage(Utils.getPlayerNotInOverMessage());
-                }
+                afterTp(player, location);
             }else {
                 count = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
                     @Override
@@ -129,21 +134,7 @@ public class TeleportUtils {
                             hasCountdown.remove(player);
                             if (willTp.contains(player)) {
                                 //START RTP Logic
-                                if (player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
-                                    player.teleport(location);
-                                    if (plugin.getConfig().getBoolean("Sounds.enabled")) {
-                                        PlayerUtils.playSound(player);
-                                    }
-                                    if (plugin.getConfig().getBoolean("Invincibility.enabled")) {
-                                        PlayerUtils.addInvincibility(player, plugin.getConfig().getInt("Invincibility.potion-seconds"), plugin.getConfig().getInt("Invincibility.potion-amplifier"));
-                                    }
-                                    if (plugin.getConfig().getBoolean("Particles.enabled")) {
-                                        PlayerUtils.spawnParticle(player);
-                                    }
-                                    player.sendMessage(Utils.getTpMessage());
-                                } else {
-                                    player.sendMessage(Utils.getPlayerNotInOverMessage());
-                                }
+                                afterTp(player, location);
                                 //END RTP Logic
                             }
                             willTp.remove(player);
@@ -152,22 +143,8 @@ public class TeleportUtils {
                 }, 0, 20);
             }
         }else{
-            //Has countdown bypass perm
-            if (player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
-                player.teleport(location);
-                if (plugin.getConfig().getBoolean("Sounds.enabled")){
-                    PlayerUtils.playSound(player);
-                }
-                if (plugin.getConfig().getBoolean("Invincibility.enabled")) {
-                    PlayerUtils.addInvincibility(player, plugin.getConfig().getInt("Invincibility.potion-seconds"), plugin.getConfig().getInt("Invincibility.potion-amplifier"));
-                }
-                if (plugin.getConfig().getBoolean("Particles.enabled")){
-                    PlayerUtils.spawnParticle(player);
-                }
-                player.sendMessage(Utils.getTpMessage());
-            }else{
-                player.sendMessage(Utils.getPlayerNotInOverMessage());
-            }
+            //Has countdown bypass perm or countdown is disabled
+            afterTp(player, location);
         }
 
     }
