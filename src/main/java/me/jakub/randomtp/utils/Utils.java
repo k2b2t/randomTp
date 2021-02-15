@@ -4,6 +4,8 @@ import me.jakub.randomtp.Randomtp;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class Utils {
 
     static Randomtp plugin;
@@ -54,6 +56,14 @@ public class Utils {
 
     public static String getCooldownMessage(String timeLeft){
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.cooldown-message")).replace("%left%", String.valueOf(timeLeft));
+    }
+
+    public static boolean getBiomeBlacklistEnabled(){
+        return plugin.getConfig().getBoolean("Biome-blacklist.enabled");
+    }
+
+    public static List<String> getBiomes(){
+        return (List<String>) plugin.getConfig().getList("Biome-blacklist.biomes");
     }
 
     public static boolean getUpdateCheckerEnabled(){

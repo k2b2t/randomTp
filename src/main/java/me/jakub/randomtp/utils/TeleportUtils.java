@@ -2,6 +2,7 @@ package me.jakub.randomtp.utils;
 
 import me.jakub.randomtp.Randomtp;
 import org.bukkit.*;
+import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -72,9 +73,9 @@ public class TeleportUtils {
                     20
             );
         }
-        while(isLocationSafe(randomLocation) == false){
-            randomLocation = generateLocation(player);
-        }
+            while (isLocationSafe(randomLocation) == false) {
+                randomLocation = generateLocation(player);
+            }
         return randomLocation;
     }
 
@@ -88,11 +89,26 @@ public class TeleportUtils {
         Block below = location.getWorld().getBlockAt(x, y - 1, z);
         Block above = location.getWorld().getBlockAt(x, y + 1, z);
 
+        if (Utils.getBiomeBlacklistEnabled()) {
+            for (String b : Utils.getBiomes()) {
+                try {
+                    if (Biome.valueOf(b).equals(location.getBlock().getBiome())) {
+                        return false;
+                    }
+                } catch (Exception e) {
+                    Log.log(Log.LogLevel.ERROR, "Wrong biome name was used in the config!");
+                }
+            }
+        }
+
         return !(bad_blocks.contains(below.getType())) || (block.getType().isSolid()) || (above.getType().isSolid());
     }
 
     public static void afterTp(Player player, Location location){
         if (player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
+            /*player.sendMessage("§cGenerating" + System.currentTimeMillis());
+            location.getWorld().getChunkAt(location.getBlock()).load(true);
+            player.sendMessage("§aDone" + System.currentTimeMillis());*/
             player.teleport(location);
             if (plugin.getConfig().getBoolean("Sounds.enabled")){
                 PlayerUtils.playSound(player);
@@ -133,9 +149,7 @@ public class TeleportUtils {
                             startCount = 5;
                             hasCountdown.remove(player);
                             if (willTp.contains(player)) {
-                                //START RTP Logic
                                 afterTp(player, location);
-                                //END RTP Logic
                             }
                             willTp.remove(player);
                         }

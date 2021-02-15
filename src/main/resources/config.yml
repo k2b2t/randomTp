@@ -35,34 +35,12 @@ Vault:
   rtp-price: 100
 
 
-#--Messages--
-#Placeholders:
-# %player% - Player's name
-# %left% - Time left
-#You can only use placeholders in some messages
-Messages:
-  #The message you see when you get teleported
-  tp-message: "&6You were teleported to a random location"
-  #Message that the player that executed the command /rtp <player> will receive.
-  tp-message-sender: "&6You teleported &c%player% &6to a random location"
-  #The message you see when you execute the /rtp @everyone command
-  tp-everyone-message: "&6Teleporting everyone on the server"
-  #Unknown command message
-  unknown-command: "&cUnknown command, try /rtplugin help"
-  #Not enough permission
-  no-permission: "&cInsufficient permission."
-  #Canceled teleport because you aren't in the overworld
-  player-not-in-overworld: "&cYou couldn't be teleported because you are not in the overworld"
-  #If player doesn't have enough money to /rtp
-  not-enough-money: "&cYou do not have enough money to do that!"
-  #Successful transaction message
-  took-money-message: "&a$%amount% has been taken from your account"
-  #RTP Sign creation message
-  sign-create: "&6Successfully created an RTP sign"
-  #When an RTP sign is broken
-  sign-break: "&6Successfully removed an RTP sign"
-  #Cooldown message, %left% is for example 8 hour(s), 13 second(s), 1 minute(s) etc.
-  cooldown-message: "&6You have a cooldown of &b%left%!"
+#Biome blacklist settings
+Biome-blacklist:
+  enabled: true
+  #Full list of biomes https://hub.spigotmc.org/javadocs/spigot/org/bukkit/block/Biome.html (1.16.5)
+  biomes:
+    - OCEAN
 
 #--Signs--
 Signs:
@@ -97,3 +75,33 @@ Particles:
   #Full list of particles: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Particle.html (1.16.5)
   particle: FIREWORKS_SPARK
   count: 1
+
+
+#--Messages--
+#Placeholders:
+# %player% - Player's name
+# %left% - Time left
+#You can only use placeholders in some messages
+Messages:
+  #The message you see when you get teleported
+  tp-message: "&6You were teleported to a random location"
+  #Message that the player that executed the command /rtp <player> will receive.
+  tp-message-sender: "&6You teleported &c%player% &6to a random location"
+  #The message you see when you execute the /rtp @everyone command
+  tp-everyone-message: "&6Teleporting everyone on the server"
+  #Unknown command message
+  unknown-command: "&cUnknown command, try /rtplugin help"
+  #Not enough permission
+  no-permission: "&cInsufficient permission."
+  #Canceled teleport because you aren't in the overworld
+  player-not-in-overworld: "&cYou couldn't be teleported because you are not in the overworld"
+  #If player doesn't have enough money to /rtp
+  not-enough-money: "&cYou do not have enough money to do that!"
+  #Successful transaction message
+  took-money-message: "&a$%amount% has been taken from your account"
+  #RTP Sign creation message
+  sign-create: "&6Successfully created an RTP sign"
+  #When an RTP sign is broken
+  sign-break: "&6Successfully removed an RTP sign"
+  #Cooldown message, %left% is for example 8 hour(s), 13 second(s), 1 minute(s) etc.
+  cooldown-message: "&6You have a cooldown of &b%left%!"
