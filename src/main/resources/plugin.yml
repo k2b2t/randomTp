@@ -21,6 +21,8 @@ permissions:
     description: Allows you to /rtp other players
   randomTp.rtp.everyone:
     description: Allows you to /rtp @everyone
+  randomTp.rtp.onDeath:
+    description: Allows you rtp on death
   randomTp.setborder:
     description: Allows you to set the rtp border
   randomTp.reload:

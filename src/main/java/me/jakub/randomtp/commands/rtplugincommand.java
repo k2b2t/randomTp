@@ -43,6 +43,7 @@ public class rtplugincommand implements CommandExecutor {
                 player.sendMessage("§6randomTp.rtp - Allows you to use /rtp");
                 player.sendMessage("§6randomTp.rtp.others - Allows you to /rtp other players");
                 player.sendMessage("§6randomTp.rtp.everyone - Allows you to /rtp @everyone");
+                player.sendMessage("§6randomTp.rtp.onDeath - RTP on death");
                 player.sendMessage("§6randomTp.setborder - Allows you to set the rtp border");
                 player.sendMessage("§6randomTp.reload - Allows you to reload the plugin");
                 player.sendMessage("§6randomTp.cooldown.bypass - Allows you to bypass the cooldown");
@@ -113,6 +114,7 @@ public class rtplugincommand implements CommandExecutor {
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.rtp - Allows you to use /rtp");
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.rtp.others - Allows you to /rtp other players");
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.rtp.everyone - Allows you to /rtp @everyone");
+                Log.log(Log.LogLevel.PLAIN, "§6randomTp.rtp.onDeath - RTP on death");
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.setborder - Allows you to set the rtp border");
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.reload - Allows you to reload the plugin");
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.cooldown.bypass - Allows you to bypass the cooldown");

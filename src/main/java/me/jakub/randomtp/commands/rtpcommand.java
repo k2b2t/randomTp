@@ -1,7 +1,6 @@
 package me.jakub.randomtp.commands;
 
 import me.jakub.randomtp.Randomtp;
-import me.jakub.randomtp.hooks.VaultHook;
 import me.jakub.randomtp.utils.Cooldown;
 import me.jakub.randomtp.utils.Log;
 import me.jakub.randomtp.utils.TeleportUtils;
@@ -105,7 +104,7 @@ public class rtpcommand implements CommandExecutor {
                         }//END Cooldown
                     }else {
                         //Has cooldown bypass perms
-                        if (Randomtp.vaultHooked) {
+                        if(Randomtp.vaultHooked) {
                                 Location loc = TeleportUtils.generateLocation(player);
                                 TeleportUtils.tp(player, loc, false, false);
 

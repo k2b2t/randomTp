@@ -45,6 +45,14 @@ public class TeleportUtils {
         int border = plugin.getConfig().getInt("border");
         int var1 = random.nextInt(border); //X coordinate
         int var2 = random.nextInt(border); //Z coordinate
+
+        if (Utils.isWorldSet(player)){
+            var1 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
+            var2 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
+        }
+
+
+
         int var3 = random.nextInt(2); //basically a random boolean
         if (var3 == 1){
             var1 = var1 * -1; //50% chance the x coordinate will be negative
@@ -65,15 +73,6 @@ public class TeleportUtils {
         y = randomLocation.getWorld().getHighestBlockYAt(randomLocation); //set the Y coordinate to the highest point
         randomLocation.setY(y + 1);
 
-        if (plugin.getConfig().getBoolean("Titles.enabled")) {
-            player.sendTitle(
-                    ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Titles.generating-title")),
-                    ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Titles.generating-subtitle")),
-                    0,
-                    50,
-                    20
-            );
-        }
             while (isLocationSafe(randomLocation) == false) {
                 randomLocation = generateLocation(player);
             }
@@ -107,13 +106,28 @@ public class TeleportUtils {
 
     public static void afterTp(Player player, Location location, boolean bypassPrice){
 
+        if (player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
+            if (Utils.isWorldDisabled(location.getWorld().getName())){
+                player.sendMessage(Utils.getWorldDisabledMessage());
+                return;
+            }
+
         if(Randomtp.vaultHooked && !bypassPrice){
             if (!VaultHook.takeMoney(player, Utils.getAmount())) {
                 return;
             }
         }
 
-        if (player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
+
+            if (plugin.getConfig().getBoolean("Titles.enabled")) {
+                player.sendTitle(
+                        ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Titles.generating-title")),
+                        ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Titles.generating-subtitle")),
+                        0,
+                        50,
+                        20
+                );
+            }
             location.getWorld().getChunkAt(location.getBlock()).load(true);
             player.teleport(location);
             if (plugin.getConfig().getBoolean("Sounds.enabled")){
@@ -131,13 +145,13 @@ public class TeleportUtils {
         }
     }
 
-    public static void tp(Player player, Location location, boolean bypass, boolean bypassPrice){
+    public static void tp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice){
 
         boolean countdownEnabled = plugin.getConfig().getBoolean("Countdown.enabled");
 
 
         if (!player.hasPermission("randomTp.countdown.bypass") && countdownEnabled) {
-            if (bypass){
+            if (bypassCountdown){
                 afterTp(player, location, bypassPrice);
             }else {
                 count = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {

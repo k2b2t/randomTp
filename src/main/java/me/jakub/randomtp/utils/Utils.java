@@ -58,12 +58,32 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.cooldown-message")).replace("%left%", String.valueOf(timeLeft));
     }
 
+    public static String getWorldDisabledMessage(){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.world-disabled-message"));
+    }
+
     public static boolean getBiomeBlacklistEnabled(){
         return plugin.getConfig().getBoolean("Biome-blacklist.enabled");
     }
 
     public static List<String> getBiomes(){
         return (List<String>) plugin.getConfig().getList("Biome-blacklist.biomes");
+    }
+
+    public static boolean isWorldSet(Player player){
+        return (plugin.getConfig().isSet("Worlds." + player.getWorld().getName() + ".border"));
+    }
+
+    public static int getBorderForWorld(String worldName){
+        return plugin.getConfig().getInt("Worlds." + worldName + ".border");
+    }
+
+    public static boolean isWorldDisabled(String worldName){
+        return plugin.getConfig().getBoolean("Worlds." + worldName + ".disabled");
+    }
+
+    public static boolean getRtpOnDeath(){
+        return plugin.getConfig().getBoolean("rtp-on-death");
     }
 
     public static boolean getUpdateCheckerEnabled(){
