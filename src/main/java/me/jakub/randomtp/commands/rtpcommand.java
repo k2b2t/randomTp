@@ -45,8 +45,8 @@ public class rtpcommand implements CommandExecutor {
                     if (player.hasPermission("randomTp.rtp.everyone")) {
                         player.sendMessage(Utils.getTpEveryoneMessage());
                         for (Player target : Bukkit.getOnlinePlayers()) {
-                            Location loc = TeleportUtils.generateLocation(target);
-                            TeleportUtils.tp(target, loc, true, true);
+                            Location loc = TeleportUtils.startGenerateLocation(target);
+                            TeleportUtils.startTp(target, loc, true, true);
                         }
                     }else{player.sendMessage(Utils.getNoPermission());}
                 }
@@ -59,8 +59,8 @@ public class rtpcommand implements CommandExecutor {
 
                         if (target != null) {
                             if (target.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
-                                Location loc = TeleportUtils.generateLocation(target);
-                                TeleportUtils.tp(target, loc, true, true);
+                                Location loc = TeleportUtils.startGenerateLocation(target);
+                                TeleportUtils.startTp(target, loc, true, true);
                                 player.sendMessage(Utils.getTpMessageSender(target));
                             } else {
                                 player.sendMessage("§cThat player is not in the overworld!");
@@ -95,22 +95,22 @@ public class rtpcommand implements CommandExecutor {
 
                         // player doesn't have a cooldown
                         if (Randomtp.vaultHooked) {//Vault things
-                                Location loc = TeleportUtils.generateLocation(player);
-                                TeleportUtils.tp(player, loc, false, false);
+                                Location loc = TeleportUtils.startGenerateLocation(player);
+                                TeleportUtils.startTp(player, loc, false, false);
 
                         }else{
-                            Location loc = TeleportUtils.generateLocation(player);
-                            TeleportUtils.tp(player, loc, false, true);
+                            Location loc = TeleportUtils.startGenerateLocation(player);
+                            TeleportUtils.startTp(player, loc, false, true);
                         }//END Cooldown
                     }else {
                         //Has cooldown bypass perms
                         if(Randomtp.vaultHooked) {
-                                Location loc = TeleportUtils.generateLocation(player);
-                                TeleportUtils.tp(player, loc, false, false);
+                                Location loc = TeleportUtils.startGenerateLocation(player);
+                                TeleportUtils.startTp(player, loc, false, false);
 
                         }else{
-                            Location loc = TeleportUtils.generateLocation(player);
-                            TeleportUtils.tp(player, loc, false, true);
+                            Location loc = TeleportUtils.startGenerateLocation(player);
+                            TeleportUtils.startTp(player, loc, false, true);
                         }
                     }
                 }else{player.sendMessage(Utils.getNoPermission());}
@@ -123,8 +123,8 @@ public class rtpcommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
                         if (target.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
-                            Location loc = TeleportUtils.generateLocation(target);
-                            TeleportUtils.tp(target, loc, true, true);
+                            Location loc = TeleportUtils.startGenerateLocation(target);
+                            TeleportUtils.startTp(target, loc, true, true);
                             Log.log(Log.LogLevel.SUCCESS,"Successfully teleported " + target.getName() + " to a random location");
                         } else {
                             Log.log(Log.LogLevel.ERROR,"That player is not in the overworld!");

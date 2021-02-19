@@ -73,11 +73,35 @@ public class TeleportUtils {
         y = randomLocation.getWorld().getHighestBlockYAt(randomLocation); //set the Y coordinate to the highest point
         randomLocation.setY(y + 1);
 
-            while (isLocationSafe(randomLocation) == false) {
-                randomLocation = generateLocation(player);
-            }
         return randomLocation;
     }
+
+    public static Location startGenerateLocation(Player player){
+        int maxAttempts = Utils.getMaxAttempts();
+        int attempts = 0;
+        while(attempts < maxAttempts){
+            Location loc = generateLocation(player);
+            if (!isLocationSafe(loc)){
+                attempts++;
+            }else{
+                attempts = 0;
+                return loc;
+            }
+        }
+        attempts = 0;
+        return null;
+    }
+
+
+    public static boolean checkGeneratedLocation(Location loc){
+        if (loc != null && isLocationSafe(loc)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
 
     public static boolean isLocationSafe(Location location){
         //Checking if the generated random location is safe
@@ -104,55 +128,29 @@ public class TeleportUtils {
         return !(bad_blocks.contains(below.getType())) || (block.getType().isSolid()) || (above.getType().isSolid());
     }
 
-    public static void afterTp(Player player, Location location, boolean bypassPrice){
-
-        if (player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
-            if (Utils.isWorldDisabled(location.getWorld().getName())){
-                player.sendMessage(Utils.getWorldDisabledMessage());
-                return;
-            }
-
-        if(Randomtp.vaultHooked && !bypassPrice){
-            if (!VaultHook.takeMoney(player, Utils.getAmount())) {
-                return;
-            }
-        }
-
-
-            if (plugin.getConfig().getBoolean("Titles.enabled")) {
-                player.sendTitle(
-                        ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Titles.generating-title")),
-                        ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Titles.generating-subtitle")),
-                        0,
-                        50,
-                        20
-                );
-            }
-            location.getWorld().getChunkAt(location.getBlock()).load(true);
-            player.teleport(location);
-            if (plugin.getConfig().getBoolean("Sounds.enabled")){
-                PlayerUtils.playSound(player);
-            }
-            if (plugin.getConfig().getBoolean("Invincibility.enabled")) {
-                PlayerUtils.addInvincibility(player, plugin.getConfig().getInt("Invincibility.potion-seconds"), plugin.getConfig().getInt("Invincibility.potion-amplifier"));
-            }
-            if (plugin.getConfig().getBoolean("Particles.enabled")){
-                PlayerUtils.spawnParticle(player);
-            }
-            player.sendMessage(Utils.getTpMessage());
-        }else{
-            player.sendMessage(Utils.getPlayerNotInOverMessage());
-        }
-    }
-
-    public static void tp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice){
+    public static void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice){
 
         boolean countdownEnabled = plugin.getConfig().getBoolean("Countdown.enabled");
+
+        if (!checkGeneratedLocation(location)){
+            player.sendMessage(Utils.getCouldntGenerateMessage());
+            return;
+        }
+
+        if (!player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
+            player.sendMessage(Utils.getPlayerNotInOverMessage());
+            return;
+        }
+
+        if (Utils.isWorldDisabled(location.getWorld().getName())){
+            player.sendMessage(Utils.getWorldDisabledMessage());
+            return;
+        }
 
 
         if (!player.hasPermission("randomTp.countdown.bypass") && countdownEnabled) {
             if (bypassCountdown){
-                afterTp(player, location, bypassPrice);
+                tp(player, location, bypassPrice);
             }else {
                 count = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
                     @Override
@@ -169,7 +167,7 @@ public class TeleportUtils {
                             startCount = 5;
                             hasCountdown.remove(player);
                             if (willTp.contains(player)) {
-                                afterTp(player, location, bypassPrice);
+                                tp(player, location, bypassPrice);
                             }
                             willTp.remove(player);
                         }
@@ -178,9 +176,48 @@ public class TeleportUtils {
             }
         }else{
             //Has countdown bypass perm or countdown is disabled
-            afterTp(player, location, bypassPrice);
+            tp(player, location, bypassPrice);
         }
 
     }
+
+    public static void tp(Player player, Location location, boolean bypassPrice){
+
+        if(Randomtp.vaultHooked && !bypassPrice) {
+            if (!VaultHook.takeMoney(player, Utils.getAmount())) {
+                return;
+            }
+        }
+            location.getWorld().getChunkAt(location.getBlock()).load(true);
+            player.teleport(location);
+            afterTp(player);
+
+    }
+
+
+    public static void afterTp(Player player){
+        if (plugin.getConfig().getBoolean("Titles.enabled")) {
+            player.sendTitle(
+                    ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Titles.generating-title")),
+                    ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Titles.generating-subtitle")),
+                    0,
+                    50,
+                    20
+            );
+        }
+
+        if (plugin.getConfig().getBoolean("Sounds.enabled")){
+            PlayerUtils.playSound(player);
+        }
+        if (plugin.getConfig().getBoolean("Invincibility.enabled")) {
+            PlayerUtils.addInvincibility(player, plugin.getConfig().getInt("Invincibility.potion-seconds"), plugin.getConfig().getInt("Invincibility.potion-amplifier"));
+        }
+        if (plugin.getConfig().getBoolean("Particles.enabled")){
+            PlayerUtils.spawnParticle(player);
+        }
+        player.sendMessage(Utils.getTpMessage());
+    }
+
+
 
 }

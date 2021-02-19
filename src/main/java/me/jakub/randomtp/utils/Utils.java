@@ -62,6 +62,10 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.world-disabled-message"));
     }
 
+    public static String getCouldntGenerateMessage(){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.couldnt-generate-message"));
+    }
+
     public static boolean getBiomeBlacklistEnabled(){
         return plugin.getConfig().getBoolean("Biome-blacklist.enabled");
     }
@@ -80,6 +84,10 @@ public class Utils {
 
     public static boolean isWorldDisabled(String worldName){
         return plugin.getConfig().getBoolean("Worlds." + worldName + ".disabled");
+    }
+
+    public static int getMaxAttempts(){
+        return plugin.getConfig().getInt("Rtp-settings.max-attempts");
     }
 
     public static boolean getRtpOnDeath(){

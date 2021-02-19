@@ -25,6 +25,9 @@ Cooldown:
 Countdown:
   enabled: true
 
+Rtp-settings:
+  #Max attempts to generate location
+  max-attempts: 30
 
 #RTP Settings for specific worlds
 
@@ -144,3 +147,5 @@ Messages:
   sign-break: "&6Successfully removed an RTP sign"
   #Cooldown message, %left% is for example 8 hour(s), 13 second(s), 1 minute(s) etc.
   cooldown-message: "&6You have a cooldown of &b%left%!"
+  #Message when the plugin couldn't generate a location
+  couldnt-generate-message: "&cCouldn't generate a safe location!"
