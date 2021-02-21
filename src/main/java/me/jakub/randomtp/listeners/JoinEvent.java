@@ -3,7 +3,6 @@ package me.jakub.randomtp.listeners;
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.utils.TeleportUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,8 +25,7 @@ public class JoinEvent implements Listener {
                 Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                     @Override
                     public void run() {
-                        Location loc = TeleportUtils.startGenerateLocation(player);
-                        TeleportUtils.startTp(player, loc, true, true);
+                        TeleportUtils.rtpPlayer(player, true, true);
                     }
                 }, 15);
             }

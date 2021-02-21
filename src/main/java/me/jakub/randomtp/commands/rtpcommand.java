@@ -6,7 +6,6 @@ import me.jakub.randomtp.utils.Log;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -45,8 +44,7 @@ public class rtpcommand implements CommandExecutor {
                     if (player.hasPermission("randomTp.rtp.everyone")) {
                         player.sendMessage(Utils.getTpEveryoneMessage());
                         for (Player target : Bukkit.getOnlinePlayers()) {
-                            Location loc = TeleportUtils.startGenerateLocation(target);
-                            TeleportUtils.startTp(target, loc, true, true);
+                            TeleportUtils.rtpPlayer(target, true, true);
                         }
                     }else{player.sendMessage(Utils.getNoPermission());}
                 }
@@ -59,8 +57,7 @@ public class rtpcommand implements CommandExecutor {
 
                         if (target != null) {
                             if (target.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
-                                Location loc = TeleportUtils.startGenerateLocation(target);
-                                TeleportUtils.startTp(target, loc, true, true);
+                                TeleportUtils.rtpPlayer(target, true, true);
                                 player.sendMessage(Utils.getTpMessageSender(target));
                             } else {
                                 player.sendMessage("§cThat player is not in the overworld!");
@@ -95,22 +92,18 @@ public class rtpcommand implements CommandExecutor {
 
                         // player doesn't have a cooldown
                         if (Randomtp.vaultHooked) {//Vault things
-                                Location loc = TeleportUtils.startGenerateLocation(player);
-                                TeleportUtils.startTp(player, loc, false, false);
+                                TeleportUtils.rtpPlayer(player, false, false);
 
                         }else{
-                            Location loc = TeleportUtils.startGenerateLocation(player);
-                            TeleportUtils.startTp(player, loc, false, true);
+                            TeleportUtils.rtpPlayer(player, false, true);
                         }//END Cooldown
                     }else {
                         //Has cooldown bypass perms
                         if(Randomtp.vaultHooked) {
-                                Location loc = TeleportUtils.startGenerateLocation(player);
-                                TeleportUtils.startTp(player, loc, false, false);
+                            TeleportUtils.rtpPlayer(player, false, false);
 
                         }else{
-                            Location loc = TeleportUtils.startGenerateLocation(player);
-                            TeleportUtils.startTp(player, loc, false, true);
+                            TeleportUtils.rtpPlayer(player, false, true);
                         }
                     }
                 }else{player.sendMessage(Utils.getNoPermission());}
@@ -123,8 +116,7 @@ public class rtpcommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
                         if (target.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
-                            Location loc = TeleportUtils.startGenerateLocation(target);
-                            TeleportUtils.startTp(target, loc, true, true);
+                            TeleportUtils.rtpPlayer(target, true, true);
                             Log.log(Log.LogLevel.SUCCESS,"Successfully teleported " + target.getName() + " to a random location");
                         } else {
                             Log.log(Log.LogLevel.ERROR,"That player is not in the overworld!");

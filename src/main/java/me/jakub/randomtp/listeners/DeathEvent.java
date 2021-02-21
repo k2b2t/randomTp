@@ -26,8 +26,7 @@ public class DeathEvent implements Listener {
             Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                 @Override
                 public void run() {
-                    Location loc = TeleportUtils.startGenerateLocation(player);
-                    TeleportUtils.startTp(player, loc, true, true);
+                    TeleportUtils.rtpPlayer(player, true, true);
                 }
             }, 15);
         }

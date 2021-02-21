@@ -218,6 +218,10 @@ public class TeleportUtils {
         player.sendMessage(Utils.getTpMessage());
     }
 
+    public static void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice){
+        Location loc = TeleportUtils.startGenerateLocation(player);
+        TeleportUtils.startTp(player, loc, bypassCountdown, bypassPrice);
+    }
 
 
 }

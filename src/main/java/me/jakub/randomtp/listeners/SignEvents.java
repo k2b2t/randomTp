@@ -47,8 +47,7 @@ public class SignEvents implements Listener {
                             sign.getLine(1).equalsIgnoreCase(ChatColor.AQUA + "Click to RTP!")) {
                         Player player = e.getPlayer();
                         if (player.hasPermission("randomTp.sign.use")) {
-                            Location loc = TeleportUtils.startGenerateLocation(player);
-                            TeleportUtils.startTp(player, loc, true, true);
+                            TeleportUtils.rtpPlayer(player, true, true);
                         } else {
                             player.sendMessage(Utils.getNoPermission());
                         }
