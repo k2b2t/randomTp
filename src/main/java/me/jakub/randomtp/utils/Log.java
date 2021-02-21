@@ -9,6 +9,9 @@ public class Log {
         if (message == null){return;}
 
         switch (level){
+            case CRITICAL:
+                Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "[Randomtp] &8[&4&lCRITICAL&r&8] &r" + message));
+                break;
             case ERROR:
                 Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "[Randomtp] &8[&c&lERROR&r&8] &r" + message));
                 break;
@@ -33,6 +36,6 @@ public class Log {
         }
     }
 
-    public enum LogLevel { ERROR, WARNING, INFO, SUCCESS, OUTLINE, DEFAULT, PLAIN }
+    public enum LogLevel { ERROR, WARNING, INFO, SUCCESS, OUTLINE, DEFAULT, PLAIN, CRITICAL }
 
 }
