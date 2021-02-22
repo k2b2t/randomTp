@@ -76,6 +76,11 @@ public class TeleportUtils {
         return randomLocation;
     }
 
+    /**
+     * Generates a safe location
+     * @param player Player to get the world from
+     * @return Returns the locations if successful, returns null if it couldn't generate a location
+     */
     public static Location startGenerateLocation(Player player) {
         int maxAttempts = Utils.getMaxAttempts();
         int attempts = 0;
@@ -93,6 +98,11 @@ public class TeleportUtils {
     }
 
 
+    /**
+     * Checks if a location isn't null and is safe
+     * @param loc Location to check
+     * @return Returns true if location is safe, otherwise returns false
+     */
     public static boolean checkGeneratedLocation(Location loc) {
         if (loc != null && isLocationSafe(loc)) {
             return true;
@@ -217,6 +227,12 @@ public class TeleportUtils {
         player.sendMessage(Utils.getTpMessage());
     }
 
+    /**
+     * RTP a player
+     * @param player Player to RTP
+     * @param bypassCountdown Bypass the countdown
+     * @param bypassPrice Bypass the price
+     */
     public static void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice) {
         Location loc = TeleportUtils.startGenerateLocation(player);
         TeleportUtils.startTp(player, loc, bypassCountdown, bypassPrice);
