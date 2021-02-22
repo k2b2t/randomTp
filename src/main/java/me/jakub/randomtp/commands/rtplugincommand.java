@@ -23,13 +23,13 @@ public class rtplugincommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
 
-        if (commandSender instanceof Player){
+        if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
 
-            if (args.length == 0){
+            if (args.length == 0) {
                 player.sendMessage("§6You are running §bRandomTP§6 Version: §b" + Randomtp.version);
                 player.sendMessage("§6For help type the command §b/rtplugin help");
-            }else if (args[0].equalsIgnoreCase("help")){
+            } else if (args[0].equalsIgnoreCase("help")) {
                 player.sendMessage("§6Version: §c" + Randomtp.version);
                 player.sendMessage("§3§lCommands:");
                 player.sendMessage("§6/rtp - Teleports you to a random location within the border set in the config");
@@ -54,19 +54,18 @@ public class rtplugincommand implements CommandExecutor {
                 player.sendMessage("§6randomTp.countdown.bypass - Bypass countdown");
                 player.sendMessage("§3§lConfig:");
                 player.sendMessage("§6Border size: §b" + plugin.getConfig().getInt("border"));
-            }else if (args[0].equalsIgnoreCase("setborder")){
+            } else if (args[0].equalsIgnoreCase("setborder")) {
 
 
-                if(player.hasPermission("randomTp.setborder")) {
+                if (player.hasPermission("randomTp.setborder")) {
                     if (args.length == 2) { //If player provided a number
                         try { //Checks if the arg is a number
                             Integer num = Integer.parseInt(args[1]);
                             WorldBorder worldBorder = player.getWorld().getWorldBorder();
                             int size = ((int) worldBorder.getSize() / 2);
-                            if (num > size){
+                            if (num > size) {
                                 player.sendMessage("§cThat number is larger than the World Border (" + size + ")");
-                            }
-                            else if (num <= 30000000 && num >= 10) { //Checks if it is lower than 30mil and higher than 10
+                            } else if (num <= 30000000 && num >= 10) { //Checks if it is lower than 30mil and higher than 10
                                 plugin.getConfig().set("border", num);
                                 plugin.saveConfig();
                                 player.sendMessage("§6Set border to §b" + args[1] + "§6 blocks"); //Sets the int "blocks" to the number in the config
@@ -82,25 +81,26 @@ public class rtplugincommand implements CommandExecutor {
                     } else {
                         player.sendMessage("§cYou didn't enter a valid number!"); //Either too many or none args were provided
                     }
-                }else{
+                } else {
                     player.sendMessage(Utils.getNoPermission());
                 }
 
 
-            }else if(args[0].equalsIgnoreCase("reload")){
-                if (player.hasPermission("randomTp.reload")){
+            } else if (args[0].equalsIgnoreCase("reload")) {
+                if (player.hasPermission("randomTp.reload")) {
                     plugin.reloadConfig();
                     player.sendMessage("§bReloaded the config!");
-                }else{player.sendMessage(Utils.getNoPermission());}
-            }
-            else{
+                } else {
+                    player.sendMessage(Utils.getNoPermission());
+                }
+            } else {
                 player.sendMessage(Utils.getUnknownCommand());
             }
-        }else if(commandSender instanceof ConsoleCommandSender){
-            if (args.length == 0){
+        } else if (commandSender instanceof ConsoleCommandSender) {
+            if (args.length == 0) {
                 Log.log(Log.LogLevel.PLAIN, "§6You are running §bRandomTP§6 Version: §b" + Randomtp.version);
                 Log.log(Log.LogLevel.PLAIN, "§6For help type the command §brtplugin help");
-            }else if (args[0].equalsIgnoreCase("help")){
+            } else if (args[0].equalsIgnoreCase("help")) {
                 Log.log(Log.LogLevel.PLAIN, "§6Version: §c" + Randomtp.version);
                 Log.log(Log.LogLevel.PLAIN, "§3§lCommands:");
                 Log.log(Log.LogLevel.PLAIN, "§6/rtp - Teleports you to a random location within the border set in the config (Default: 1000)");
@@ -125,7 +125,7 @@ public class rtplugincommand implements CommandExecutor {
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.countdown.bypass - Bypass countdown");
                 Log.log(Log.LogLevel.PLAIN, "§3§lConfig:");
                 Log.log(Log.LogLevel.PLAIN, "§6Border size: §b" + plugin.getConfig().getInt("border"));
-            }else{
+            } else {
                 Log.log(Log.LogLevel.DEFAULT, "That command either does not exist or is player only");
             }
         }

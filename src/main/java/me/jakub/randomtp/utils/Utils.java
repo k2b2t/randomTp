@@ -22,7 +22,7 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.tp-everyone-message"));
     }
 
-    public static String getTpMessage(){
+    public static String getTpMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.tp-message"));
     }
 
@@ -30,79 +30,81 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.tp-message-sender")).replace("%player%", target.getName());
     }
 
-    public static String getUnknownCommand(){
+    public static String getUnknownCommand() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.unknown-command"));
     }
 
-    public static String getPlayerNotInOverMessage(){
+    public static String getPlayerNotInOverMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.player-not-in-overworld"));
     }
 
-    public static String getNotEnoughMoneyMessage(){
+    public static String getNotEnoughMoneyMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.not-enough-money"));
     }
 
-    public static String getTookMoneyMessage(double amount){
+    public static String getTookMoneyMessage(double amount) {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.took-money-message")).replace("%amount%", String.valueOf(amount));
     }
 
-    public static String getSignCreateMessage(){
+    public static String getSignCreateMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.sign-create"));
     }
 
-    public static String getSignRemoveMessage(){
+    public static String getSignRemoveMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.sign-break"));
     }
 
-    public static String getCooldownMessage(String timeLeft){
+    public static String getCooldownMessage(String timeLeft) {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.cooldown-message")).replace("%left%", String.valueOf(timeLeft));
     }
 
-    public static String getWorldDisabledMessage(){
+    public static String getWorldDisabledMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.world-disabled-message"));
     }
 
-    public static String getCouldntGenerateMessage(){
+    public static String getCouldntGenerateMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.couldnt-generate-message"));
     }
 
-    public static boolean getBiomeBlacklistEnabled(){
+    public static boolean getBiomeBlacklistEnabled() {
         return plugin.getConfig().getBoolean("Biome-blacklist.enabled");
     }
 
-    public static List<String> getBiomes(){
+    public static List<String> getBiomes() {
         return (List<String>) plugin.getConfig().getList("Biome-blacklist.biomes");
     }
 
-    public static boolean isWorldSet(Player player){
+    public static boolean isWorldSet(Player player) {
         return (plugin.getConfig().isSet("Worlds." + player.getWorld().getName() + ".border"));
     }
 
-    public static int getBorderForWorld(String worldName){
+    public static int getBorderForWorld(String worldName) {
         return plugin.getConfig().getInt("Worlds." + worldName + ".border");
     }
 
-    public static boolean isWorldDisabled(String worldName){
+    public static boolean isWorldDisabled(String worldName) {
         return plugin.getConfig().getBoolean("Worlds." + worldName + ".disabled");
     }
 
-    public static int getMaxAttempts(){
+    public static int getMaxAttempts() {
         return plugin.getConfig().getInt("Rtp-settings.max-attempts");
     }
 
-    public static boolean getRtpOnDeath(){
+    public static boolean getRtpOnDeath() {
         return plugin.getConfig().getBoolean("rtp-on-death");
     }
 
-    public static boolean getUpdateCheckerEnabled(){
+    public static boolean getUpdateCheckerEnabled() {
         return plugin.getConfig().getBoolean("update-checker");
     }
 
-    public static double getAmount(){
+    public static double getAmount() {
         return plugin.getConfig().getDouble("Vault.rtp-price");
     }
 
-    public static boolean getEnabledSigns(){return plugin.getConfig().getBoolean("Signs.enabled");}
+    public static boolean getEnabledSigns() {
+        return plugin.getConfig().getBoolean("Signs.enabled");
+    }
 
 
 }

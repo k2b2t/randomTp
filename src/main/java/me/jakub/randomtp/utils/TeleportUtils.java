@@ -20,7 +20,8 @@ public class TeleportUtils {
     }
 
     public static HashSet<Material> bad_blocks = new HashSet<>();
-    static{
+
+    static {
         bad_blocks.add(Material.LAVA);
         bad_blocks.add(Material.FIRE);
         bad_blocks.add(Material.CACTUS);
@@ -34,7 +35,7 @@ public class TeleportUtils {
     public static HashSet<Player> willTp = new HashSet<Player>();
 
 
-    public static Location generateLocation(Player player){
+    public static Location generateLocation(Player player) {
         //Called upon when generating a location
         Random random = new Random();
 
@@ -46,20 +47,19 @@ public class TeleportUtils {
         int var1 = random.nextInt(border); //X coordinate
         int var2 = random.nextInt(border); //Z coordinate
 
-        if (Utils.isWorldSet(player)){
+        if (Utils.isWorldSet(player)) {
             var1 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
             var2 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
         }
 
 
-
         int var3 = random.nextInt(2); //basically a random boolean
-        if (var3 == 1){
+        if (var3 == 1) {
             var1 = var1 * -1; //50% chance the x coordinate will be negative
 
         }
         var3 = random.nextInt(2);
-        if(var3 == 1){
+        if (var3 == 1) {
             var2 = var2 * -1; //50% chance the x coordinate will be negative
         }
 
@@ -68,7 +68,7 @@ public class TeleportUtils {
         z = var2;
 
 
-        Location randomLocation = new Location(player.getWorld(), x, y,z); //create a new location
+        Location randomLocation = new Location(player.getWorld(), x, y, z); //create a new location
 
         y = randomLocation.getWorld().getHighestBlockYAt(randomLocation); //set the Y coordinate to the highest point
         randomLocation.setY(y + 1);
@@ -76,14 +76,14 @@ public class TeleportUtils {
         return randomLocation;
     }
 
-    public static Location startGenerateLocation(Player player){
+    public static Location startGenerateLocation(Player player) {
         int maxAttempts = Utils.getMaxAttempts();
         int attempts = 0;
-        while(attempts < maxAttempts){
+        while (attempts < maxAttempts) {
             Location loc = generateLocation(player);
-            if (!isLocationSafe(loc)){
+            if (!isLocationSafe(loc)) {
                 attempts++;
-            }else{
+            } else {
                 attempts = 0;
                 return loc;
             }
@@ -93,17 +93,16 @@ public class TeleportUtils {
     }
 
 
-    public static boolean checkGeneratedLocation(Location loc){
-        if (loc != null && isLocationSafe(loc)){
+    public static boolean checkGeneratedLocation(Location loc) {
+        if (loc != null && isLocationSafe(loc)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
 
-
-    public static boolean isLocationSafe(Location location){
+    public static boolean isLocationSafe(Location location) {
         //Checking if the generated random location is safe
         int x = location.getBlockX();
         int y = location.getBlockY();
@@ -128,11 +127,11 @@ public class TeleportUtils {
         return !(bad_blocks.contains(below.getType())) || (block.getType().isSolid()) || (above.getType().isSolid());
     }
 
-    public static void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice){
+    public static void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice) {
 
         boolean countdownEnabled = plugin.getConfig().getBoolean("Countdown.enabled");
 
-        if (!checkGeneratedLocation(location)){
+        if (!checkGeneratedLocation(location)) {
             player.sendMessage(Utils.getCouldntGenerateMessage());
             return;
         }
@@ -142,16 +141,16 @@ public class TeleportUtils {
             return;
         }
 
-        if (Utils.isWorldDisabled(location.getWorld().getName())){
+        if (Utils.isWorldDisabled(location.getWorld().getName())) {
             player.sendMessage(Utils.getWorldDisabledMessage());
             return;
         }
 
 
         if (!player.hasPermission("randomTp.countdown.bypass") && countdownEnabled) {
-            if (bypassCountdown){
+            if (bypassCountdown) {
                 tp(player, location, bypassPrice);
-            }else {
+            } else {
                 count = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
                     @Override
                     public void run() {
@@ -174,28 +173,28 @@ public class TeleportUtils {
                     }
                 }, 0, 20);
             }
-        }else{
+        } else {
             //Has countdown bypass perm or countdown is disabled
             tp(player, location, bypassPrice);
         }
 
     }
 
-    public static void tp(Player player, Location location, boolean bypassPrice){
+    public static void tp(Player player, Location location, boolean bypassPrice) {
 
-        if(Randomtp.vaultHooked && !bypassPrice) {
+        if (Randomtp.vaultHooked && !bypassPrice) {
             if (!VaultHook.takeMoney(player, Utils.getAmount())) {
                 return;
             }
         }
-            location.getWorld().getChunkAt(location.getBlock()).load(true);
-            player.teleport(location);
-            afterTp(player);
+        location.getWorld().getChunkAt(location.getBlock()).load(true);
+        player.teleport(location);
+        afterTp(player);
 
     }
 
 
-    public static void afterTp(Player player){
+    public static void afterTp(Player player) {
         if (plugin.getConfig().getBoolean("Titles.enabled")) {
             player.sendTitle(
                     ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Titles.generating-title")),
@@ -206,19 +205,19 @@ public class TeleportUtils {
             );
         }
 
-        if (plugin.getConfig().getBoolean("Sounds.enabled")){
+        if (plugin.getConfig().getBoolean("Sounds.enabled")) {
             PlayerUtils.playSound(player);
         }
         if (plugin.getConfig().getBoolean("Invincibility.enabled")) {
             PlayerUtils.addInvincibility(player, plugin.getConfig().getInt("Invincibility.potion-seconds"), plugin.getConfig().getInt("Invincibility.potion-amplifier"));
         }
-        if (plugin.getConfig().getBoolean("Particles.enabled")){
+        if (plugin.getConfig().getBoolean("Particles.enabled")) {
             PlayerUtils.spawnParticle(player);
         }
         player.sendMessage(Utils.getTpMessage());
     }
 
-    public static void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice){
+    public static void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice) {
         Location loc = TeleportUtils.startGenerateLocation(player);
         TeleportUtils.startTp(player, loc, bypassCountdown, bypassPrice);
     }

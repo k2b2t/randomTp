@@ -18,10 +18,10 @@ public class JoinEvent implements Listener {
 
 
     @EventHandler
-    public void onFirstJoin(PlayerJoinEvent e){
+    public void onFirstJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        if (!player.hasPlayedBefore()){
-            if (plugin.getConfig().getBoolean("rtp-on-first-join")){
+        if (!player.hasPlayedBefore()) {
+            if (plugin.getConfig().getBoolean("rtp-on-first-join")) {
                 Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                     @Override
                     public void run() {

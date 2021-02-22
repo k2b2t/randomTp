@@ -20,9 +20,9 @@ public class DeathEvent implements Listener {
 
 
     @EventHandler
-    public void onDeath(PlayerRespawnEvent e){
+    public void onDeath(PlayerRespawnEvent e) {
         Player player = e.getPlayer();
-        if (Utils.getRtpOnDeath() && player.hasPermission("randomTp.rtp.onDeath")){
+        if (Utils.getRtpOnDeath() && player.hasPermission("randomTp.rtp.onDeath")) {
             Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                 @Override
                 public void run() {

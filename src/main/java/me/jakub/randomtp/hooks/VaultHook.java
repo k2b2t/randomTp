@@ -7,29 +7,29 @@ import org.bukkit.entity.Player;
 
 public class VaultHook {
 
-        static Economy economy = Randomtp.getEconomy();
+    static Economy economy = Randomtp.getEconomy();
 
-        public static boolean takeMoney(Player player, double amount){
-                if(player.hasPermission("randomTp.price.bypass")){
-                        return true;
-                }
-                if (hasMoney(player, amount)){
-                        removeMoney(player, amount);
-                        player.sendMessage(Utils.getTookMoneyMessage(amount));
-                        return true;
-                }else{
-                        player.sendMessage(Utils.getNotEnoughMoneyMessage());
-                        return false;
-                }
+    public static boolean takeMoney(Player player, double amount) {
+        if (player.hasPermission("randomTp.price.bypass")) {
+            return true;
         }
-
-
-        private static boolean hasMoney(Player player, double money){
-                return economy.has(player, money);
+        if (hasMoney(player, amount)) {
+            removeMoney(player, amount);
+            player.sendMessage(Utils.getTookMoneyMessage(amount));
+            return true;
+        } else {
+            player.sendMessage(Utils.getNotEnoughMoneyMessage());
+            return false;
         }
+    }
 
-        private static void removeMoney(Player player, double money){
-                economy.withdrawPlayer(player, money);
-        }
+
+    private static boolean hasMoney(Player player, double money) {
+        return economy.has(player, money);
+    }
+
+    private static void removeMoney(Player player, double money) {
+        economy.withdrawPlayer(player, money);
+    }
 
 }

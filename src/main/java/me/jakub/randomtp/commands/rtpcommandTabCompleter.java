@@ -13,11 +13,11 @@ public class rtpcommandTabCompleter implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
 
-        if (sender instanceof Player){
+        if (sender instanceof Player) {
             List<String> strings = new ArrayList<>();
             Player[] players = new Player[Bukkit.getServer().getOnlinePlayers().size()];
             Bukkit.getServer().getOnlinePlayers().toArray(players);
-            for (int i = 0; i < players.length ; i++){
+            for (int i = 0; i < players.length; i++) {
                 strings.add(players[i].getName());
             }
             strings.add("@everyone");

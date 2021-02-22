@@ -15,7 +15,7 @@ public class UpdateChecker {
     private int resourceId;
 
     public UpdateChecker(Randomtp plugin, int resourceId) {
-        this.plugin  = plugin;
+        this.plugin = plugin;
         this.resourceId = resourceId;
     }
 

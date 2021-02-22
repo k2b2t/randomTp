@@ -3,30 +3,30 @@ package me.jakub.randomtp.utils;
 
 public class Cooldown {
 
-    public static String getStr(long timeLeft, FormatType formatType){
-        switch (formatType){
+    public static String getStr(long timeLeft, FormatType formatType) {
+        switch (formatType) {
             case HOURS:
-                if (timeLeft >= 3600){
+                if (timeLeft >= 3600) {
                     return String.valueOf(timeLeft / 3600 + " hour(s)");
-                }else if (timeLeft >= 60){
+                } else if (timeLeft >= 60) {
                     return String.valueOf(timeLeft / 60 + " minute(s)");
-                }else{
+                } else {
                     return String.valueOf(timeLeft + " second(s)");
                 }
             case MINUTES:
-                if (timeLeft >= 60){
+                if (timeLeft >= 60) {
                     return String.valueOf(timeLeft / 60 + " minute(s)");
-                }else{
+                } else {
                     return String.valueOf(timeLeft + " second(s)");
                 }
             case SECONDS:
                 return String.valueOf(timeLeft + " second(s)");
             case AUTO:
-                if (timeLeft >= 3600){
+                if (timeLeft >= 3600) {
                     return String.valueOf(timeLeft / 3600 + " hour(s)");
-                }else if (timeLeft >= 60){
+                } else if (timeLeft >= 60) {
                     return String.valueOf(timeLeft / 60 + " minute(s)");
-                }else{
+                } else {
                     return String.valueOf(timeLeft + " second(s)");
                 }
             default:
@@ -35,5 +35,5 @@ public class Cooldown {
     }
 
 
-    public enum FormatType{SECONDS, MINUTES, HOURS, AUTO}
+    public enum FormatType {SECONDS, MINUTES, HOURS, AUTO}
 }

@@ -5,10 +5,12 @@ import org.bukkit.ChatColor;
 
 public class Log {
 
-    public static void log(LogLevel level, String message){
-        if (message == null){return;}
+    public static void log(LogLevel level, String message) {
+        if (message == null) {
+            return;
+        }
 
-        switch (level){
+        switch (level) {
             case CRITICAL:
                 Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "[Randomtp] &8[&4&lCRITICAL&r&8] &r" + message));
                 break;
@@ -36,6 +38,6 @@ public class Log {
         }
     }
 
-    public enum LogLevel { ERROR, WARNING, INFO, SUCCESS, OUTLINE, DEFAULT, PLAIN, CRITICAL }
+    public enum LogLevel {ERROR, WARNING, INFO, SUCCESS, OUTLINE, DEFAULT, PLAIN, CRITICAL}
 
 }

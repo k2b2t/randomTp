@@ -31,9 +31,9 @@ public class rtpcommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if(commandSender instanceof Player){
+        if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
-            if (TeleportUtils.hasCountdown.contains(player)){
+            if (TeleportUtils.hasCountdown.contains(player)) {
                 return true;
             }
 
@@ -46,9 +46,11 @@ public class rtpcommand implements CommandExecutor {
                         for (Player target : Bukkit.getOnlinePlayers()) {
                             TeleportUtils.rtpPlayer(target, true, true);
                         }
-                    }else{player.sendMessage(Utils.getNoPermission());}
+                    } else {
+                        player.sendMessage(Utils.getNoPermission());
+                    }
                 }
-                if(!args[0].equalsIgnoreCase("@everyone")) {
+                if (!args[0].equalsIgnoreCase("@everyone")) {
 
                     if (player.hasPermission("randomTp.rtp.others")) {
 
@@ -65,10 +67,12 @@ public class rtpcommand implements CommandExecutor {
                         } else {
                             player.sendMessage("§cCouldn't find that player!");
                         }
-                    }else{player.sendMessage(Utils.getNoPermission());}
-            }
+                    } else {
+                        player.sendMessage(Utils.getNoPermission());
+                    }
+                }
 
-            }else{
+            } else {
                 if (player.hasPermission("randomTp.rtp")) {
 
                     if (!player.hasPermission("randomTp.cooldown.bypass")) {
@@ -81,7 +85,7 @@ public class rtpcommand implements CommandExecutor {
                                 try {
                                     String formatted = Cooldown.getStr(timeLeft, Cooldown.FormatType.valueOf(plugin.getConfig().getString("Cooldown.msg-format-type")));
                                     player.sendMessage(Utils.getCooldownMessage(formatted));
-                                }catch (Exception e){
+                                } catch (Exception e) {
                                     Log.log(Log.LogLevel.ERROR, "Wrong message cooldown type was used in the config, use either SECONDS, MINUTES, HOURS or AUTO");
                                 }
                                 return true;
@@ -92,40 +96,42 @@ public class rtpcommand implements CommandExecutor {
 
                         // player doesn't have a cooldown
                         if (Randomtp.vaultHooked) {//Vault things
-                                TeleportUtils.rtpPlayer(player, false, false);
-
-                        }else{
-                            TeleportUtils.rtpPlayer(player, false, true);
-                        }//END Cooldown
-                    }else {
-                        //Has cooldown bypass perms
-                        if(Randomtp.vaultHooked) {
                             TeleportUtils.rtpPlayer(player, false, false);
 
-                        }else{
+                        } else {
+                            TeleportUtils.rtpPlayer(player, false, true);
+                        }//END Cooldown
+                    } else {
+                        //Has cooldown bypass perms
+                        if (Randomtp.vaultHooked) {
+                            TeleportUtils.rtpPlayer(player, false, false);
+
+                        } else {
                             TeleportUtils.rtpPlayer(player, false, true);
                         }
                     }
-                }else{player.sendMessage(Utils.getNoPermission());}
+                } else {
+                    player.sendMessage(Utils.getNoPermission());
+                }
             }
 
-        }else{
-            if(commandSender instanceof ConsoleCommandSender) {
+        } else {
+            if (commandSender instanceof ConsoleCommandSender) {
                 //If executed from console
                 if (args.length == 1) {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
                         if (target.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
                             TeleportUtils.rtpPlayer(target, true, true);
-                            Log.log(Log.LogLevel.SUCCESS,"Successfully teleported " + target.getName() + " to a random location");
+                            Log.log(Log.LogLevel.SUCCESS, "Successfully teleported " + target.getName() + " to a random location");
                         } else {
-                            Log.log(Log.LogLevel.ERROR,"That player is not in the overworld!");
+                            Log.log(Log.LogLevel.ERROR, "That player is not in the overworld!");
                         }
                     } else {
-                        Log.log(Log.LogLevel.ERROR,"Couldn't find that player");
+                        Log.log(Log.LogLevel.ERROR, "Couldn't find that player");
                     }
                 } else {
-                    Log.log(Log.LogLevel.ERROR,"Usage: rtp <player>");
+                    Log.log(Log.LogLevel.ERROR, "Usage: rtp <player>");
                 }
             }
         }

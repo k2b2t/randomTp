@@ -56,11 +56,11 @@ public final class Randomtp extends JavaPlugin {
                 Log.log(Log.LogLevel.ERROR, "No Vault or Essentials plugin found!");
                 Log.log(Log.LogLevel.ERROR, "Check if you have both Vault and Essentials installed");
                 vaultHooked = false;
-            }else{
+            } else {
                 Log.log(Log.LogLevel.SUCCESS, "Successfully hooked into Vault");
                 vaultHooked = true;
             }
-        }else{
+        } else {
             vaultHooked = false;
         }
 
@@ -98,7 +98,7 @@ public final class Randomtp extends JavaPlugin {
     public static Economy getEconomy() {
         if (vaultHooked) {
             return econ;
-        }else{
+        } else {
             return null;
         }
     }

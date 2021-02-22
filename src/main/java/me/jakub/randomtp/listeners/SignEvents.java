@@ -16,9 +16,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class SignEvents implements Listener {
 
 
-
     @EventHandler
-    public void onSignChange(SignChangeEvent e){
+    public void onSignChange(SignChangeEvent e) {
         Player player = e.getPlayer();
         Sign sign = (Sign) e.getBlock().getState();
         if (Utils.getEnabledSigns()) {
@@ -37,8 +36,8 @@ public class SignEvents implements Listener {
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent e){
-        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
+    public void onInteract(PlayerInteractEvent e) {
+        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             if (Utils.getEnabledSigns()) {
                 if (e.getClickedBlock().getState() instanceof Sign) {
                     Sign sign = (Sign) e.getClickedBlock().getState();
@@ -58,7 +57,7 @@ public class SignEvents implements Listener {
     }
 
     @EventHandler
-    public void onBreak(BlockBreakEvent e){
+    public void onBreak(BlockBreakEvent e) {
         if (Utils.getEnabledSigns()) {
             if (e.getBlock().getState() instanceof Sign) {
                 Sign sign = (Sign) e.getBlock().getState();
