@@ -12,6 +12,7 @@ import me.jakub.randomtp.metrics.MetricsLite;
 import me.jakub.randomtp.utils.*;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -42,10 +43,10 @@ public final class Randomtp extends JavaPlugin {
         getCommand("rtplugin").setExecutor(new rtplugincommand(this));
         getCommand("rtplugin").setTabCompleter(new rtplugincommandTabCompleter());
 
-        TeleportUtils utils = new TeleportUtils(this);
-        Utils utils1 = new Utils(this);
-        MetricsLite metricsLite = new MetricsLite(this, 10130);
-        PlayerUtils playerUtils = new PlayerUtils(this);
+        new TeleportUtils(this);
+        new Utils(this);
+        new MetricsLite(this, 10130);
+        new PlayerUtils(this);
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();

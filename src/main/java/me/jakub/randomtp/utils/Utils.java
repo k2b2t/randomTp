@@ -74,6 +74,15 @@ public class Utils {
         return (List<String>) plugin.getConfig().getList("Biome-blacklist.biomes");
     }
 
+    //TODO
+    /*public static List<String> getBlocks() {
+        return (List<String>) plugin.getConfig().getList("Block-blacklist.blocks");
+    }
+
+    public static boolean getBlockBlacklistEnabled() {
+        return plugin.getConfig().getBoolean("Block-blacklist.enabled");
+    }*/
+
     public static boolean isWorldSet(Player player) {
         return (plugin.getConfig().isSet("Worlds." + player.getWorld().getName() + ".border"));
     }

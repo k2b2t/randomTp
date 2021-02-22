@@ -7,6 +7,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -26,8 +27,8 @@ public class TeleportUtils {
         bad_blocks.add(Material.FIRE);
         bad_blocks.add(Material.CACTUS);
         bad_blocks.add(Material.WATER);
-
     }
+
 
     static int startCount = 5;
     static int count;
@@ -78,6 +79,7 @@ public class TeleportUtils {
 
     /**
      * Generates a safe location
+     *
      * @param player Player to get the world from
      * @return Returns the locations if successful, returns null if it couldn't generate a location
      */
@@ -100,6 +102,7 @@ public class TeleportUtils {
 
     /**
      * Checks if a location isn't null and is safe
+     *
      * @param loc Location to check
      * @return Returns true if location is safe, otherwise returns false
      */
@@ -134,7 +137,10 @@ public class TeleportUtils {
             }
         }
 
-        return !(bad_blocks.contains(below.getType())) || (block.getType().isSolid()) || (above.getType().isSolid());
+        return !(bad_blocks.contains(below.getType()))
+                || (block.getType().isSolid())
+                || (above.getType().isSolid());
+
     }
 
     public static void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice) {
@@ -229,9 +235,10 @@ public class TeleportUtils {
 
     /**
      * RTP a player
-     * @param player Player to RTP
+     *
+     * @param player          Player to RTP
      * @param bypassCountdown Bypass the countdown
-     * @param bypassPrice Bypass the price
+     * @param bypassPrice     Bypass the price
      */
     public static void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice) {
         Location loc = TeleportUtils.startGenerateLocation(player);

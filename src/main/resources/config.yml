@@ -87,7 +87,7 @@ Signs:
 
 #--Titles--
 Titles:
-  #Should a title appear when generating a location? Yes = true; No = false
+  #Should players see titles when being teleported
   enabled: true
   #Title message
   generating-title: "&bTeleporting you to a random location"
