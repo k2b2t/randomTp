@@ -3,7 +3,6 @@ package me.jakub.randomtp.listeners;
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
-import org.bukkit.ChatColor;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,11 +31,14 @@ public class SignEvents implements Listener {
             if (e.getLine(0).equalsIgnoreCase("[RandomTP]") || e.getLine(0).equalsIgnoreCase("[RTP]")) {
                 if (player.hasPermission("randomTp.sign.create")) {
                     e.setCancelled(true);
-                    sign.setLine(0, ChatColor.GREEN + "[RandomTP]");
-                    sign.setLine(1, ChatColor.AQUA + "Click to RTP!");
+                    sign.setLine(0, Utils.getSignLine(0));
+                    sign.setLine(1, Utils.getSignLine(1));
+                    sign.setLine(2, Utils.getSignLine(2));
+                    sign.setLine(3, Utils.getSignLine(3));
                     sign.update();
                     player.sendMessage(Utils.getSignCreateMessage());
                 } else {
+                    e.setCancelled(true);
                     player.sendMessage(Utils.getNoPermission());
                 }
             }
@@ -50,8 +52,10 @@ public class SignEvents implements Listener {
                 if (e.getClickedBlock().getState() instanceof Sign) {
                     Sign sign = (Sign) e.getClickedBlock().getState();
 
-                    if (sign.getLine(0).equalsIgnoreCase(ChatColor.GREEN + "[RandomTP]") &&
-                            sign.getLine(1).equalsIgnoreCase(ChatColor.AQUA + "Click to RTP!")) {
+                    if (sign.getLine(0).equalsIgnoreCase(Utils.getSignLine(0)) &&
+                            sign.getLine(1).equalsIgnoreCase(Utils.getSignLine(1)) &&
+                            sign.getLine(2).equalsIgnoreCase(Utils.getSignLine(2)) &&
+                            sign.getLine(3).equalsIgnoreCase(Utils.getSignLine(3))) {
                         Player player = e.getPlayer();
                         if (player.hasPermission("randomTp.sign.use")) {
                             teleportUtils.rtpPlayer(player, true, true);
@@ -69,11 +73,18 @@ public class SignEvents implements Listener {
         if (Utils.getEnabledSigns()) {
             if (e.getBlock().getState() instanceof Sign) {
                 Sign sign = (Sign) e.getBlock().getState();
-                if (sign.getLine(0).equalsIgnoreCase(ChatColor.GREEN + "[RandomTP]") &&
-                        sign.getLine(1).equalsIgnoreCase(ChatColor.AQUA + "Click to RTP!")) {
+                if (sign.getLine(0).equalsIgnoreCase(Utils.getSignLine(0)) &&
+                        sign.getLine(1).equalsIgnoreCase(Utils.getSignLine(1)) &&
+                        sign.getLine(2).equalsIgnoreCase(Utils.getSignLine(2)) &&
+                        sign.getLine(3).equalsIgnoreCase(Utils.getSignLine(3))) {
                     Player player = e.getPlayer();
                     if (player.hasPermission("randomTp.sign.break")) {
-                        player.sendMessage(Utils.getSignRemoveMessage());
+                        if (player.isSneaking()) {
+                            player.sendMessage(Utils.getSignRemoveMessage());
+                        } else {
+                            e.setCancelled(true);
+                            player.sendMessage(Utils.getNotShiftMessage());
+                        }
                     } else {
                         e.setCancelled(true);
                         player.sendMessage(Utils.getNoPermission());

@@ -83,6 +83,13 @@ Biome-blacklist:
 Signs:
   #If you want to enable RTP signs
   enabled: true
+  Lines:
+    #What text should be on the signs
+    #!!! If you don't use color codes (ex: &a &b &e) on signs players without the permission could create RTP signs !!!
+    one: "&a[RandomTP]"
+    two: "&bClick to RTP!"
+    three: ""
+    four: ""
 
 
 #--Titles--
@@ -149,3 +156,5 @@ Messages:
   cooldown-message: "&6You have a cooldown of &b%left%!"
   #Message when the plugin couldn't generate a location
   couldnt-generate-message: "&cCouldn't generate a safe location!"
+  #Player tries to remove a sign while not shifting
+  need-to-shift: "&cYou need to &6shift &cif you want to remove the sign"

@@ -66,6 +66,10 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.couldnt-generate-message"));
     }
 
+    public static String getNotShiftMessage() {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.need-to-shift"));
+    }
+
     public static boolean getBiomeBlacklistEnabled() {
         return plugin.getConfig().getBoolean("Biome-blacklist.enabled");
     }
@@ -82,6 +86,21 @@ public class Utils {
     public static boolean getBlockBlacklistEnabled() {
         return plugin.getConfig().getBoolean("Block-blacklist.enabled");
     }*/
+
+    public static String getSignLine(int index) {
+        switch (index) {
+            case 0:
+                return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Signs.Lines.one"));
+            case 1:
+                return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Signs.Lines.two"));
+            case 2:
+                return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Signs.Lines.three"));
+            case 3:
+                return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Signs.Lines.four"));
+            default:
+                return "";
+        }
+    }
 
     public static boolean isWorldSet(Player player) {
         return (plugin.getConfig().isSet("Worlds." + player.getWorld().getName() + ".border"));

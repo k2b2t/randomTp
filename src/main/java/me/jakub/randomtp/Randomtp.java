@@ -1,7 +1,5 @@
 package me.jakub.randomtp;
 
-import lombok.Data;
-import lombok.Getter;
 import me.jakub.randomtp.commands.rtpcommand;
 import me.jakub.randomtp.commands.rtpcommandTabCompleter;
 import me.jakub.randomtp.commands.rtplugincommand;
@@ -20,7 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Randomtp extends JavaPlugin {
 
-    public static String version = "2.10";
+    public static String version = "2.11";
 
     private static Economy econ = null;
 

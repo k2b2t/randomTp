@@ -75,7 +75,7 @@ public class TeleportUtils {
             case NORMAL:
                 setYOver(randomLocation);
                 break;
-            case NETHER:
+            case NETHER://TODO nether rtp
                 break;
         }
 
@@ -128,29 +128,29 @@ public class TeleportUtils {
 
     public boolean isLocationSafe(Location location) {
         //Checking if the generated random location is safe
-            int x = location.getBlockX();
-            int y = location.getBlockY();
-            int z = location.getBlockZ();
+        int x = location.getBlockX();
+        int y = location.getBlockY();
+        int z = location.getBlockZ();
 
-            Block block = location.getWorld().getBlockAt(x, y, z);
-            Block below = location.getWorld().getBlockAt(x, y - 1, z);
-            Block above = location.getWorld().getBlockAt(x, y + 1, z);
+        Block block = location.getWorld().getBlockAt(x, y, z);
+        Block below = location.getWorld().getBlockAt(x, y - 1, z);
+        Block above = location.getWorld().getBlockAt(x, y + 1, z);
 
-            if (Utils.getBiomeBlacklistEnabled()) {
-                for (String b : Utils.getBiomes()) {
-                    try {
-                        if (Biome.valueOf(b).equals(location.getBlock().getBiome())) {
-                            return false;
-                        }
-                    } catch (Exception e) {
-                        Log.log(Log.LogLevel.ERROR, "Wrong biome name was used in the config!");
+        if (Utils.getBiomeBlacklistEnabled()) {
+            for (String b : Utils.getBiomes()) {
+                try {
+                    if (Biome.valueOf(b).equals(location.getBlock().getBiome())) {
+                        return false;
                     }
+                } catch (Exception e) {
+                    Log.log(Log.LogLevel.ERROR, "Wrong biome name was used in the config!");
                 }
             }
+        }
 
-            return !(bad_blocks.contains(below.getType()))
-                    || (block.getType().isSolid())
-                    || (above.getType().isSolid());
+        return !(bad_blocks.contains(below.getType()))
+                || (block.getType().isSolid())
+                || (above.getType().isSolid());
 
     }
 
