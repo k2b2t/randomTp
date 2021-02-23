@@ -7,7 +7,6 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -27,6 +26,7 @@ public class TeleportUtils {
         bad_blocks.add(Material.FIRE);
         bad_blocks.add(Material.CACTUS);
         bad_blocks.add(Material.WATER);
+        bad_blocks.add(Material.MAGMA_BLOCK);
     }
 
 
@@ -71,11 +71,22 @@ public class TeleportUtils {
 
         Location randomLocation = new Location(player.getWorld(), x, y, z); //create a new location
 
-        y = randomLocation.getWorld().getHighestBlockYAt(randomLocation); //set the Y coordinate to the highest point
-        randomLocation.setY(y + 1);
+        switch (player.getWorld().getEnvironment()) {
+            case NORMAL:
+                setYOver(randomLocation);
+                break;
+            case NETHER:
+                break;
+        }
 
         return randomLocation;
     }
+
+    public void setYOver(Location randomLocation) {
+        int y = randomLocation.getWorld().getHighestBlockYAt(randomLocation); //set the Y coordinate to the highest point
+        randomLocation.setY(y + 1);
+    }
+
 
     /**
      * Generates a safe location
@@ -117,29 +128,29 @@ public class TeleportUtils {
 
     public boolean isLocationSafe(Location location) {
         //Checking if the generated random location is safe
-        int x = location.getBlockX();
-        int y = location.getBlockY();
-        int z = location.getBlockZ();
+            int x = location.getBlockX();
+            int y = location.getBlockY();
+            int z = location.getBlockZ();
 
-        Block block = location.getWorld().getBlockAt(x, y, z);
-        Block below = location.getWorld().getBlockAt(x, y - 1, z);
-        Block above = location.getWorld().getBlockAt(x, y + 1, z);
+            Block block = location.getWorld().getBlockAt(x, y, z);
+            Block below = location.getWorld().getBlockAt(x, y - 1, z);
+            Block above = location.getWorld().getBlockAt(x, y + 1, z);
 
-        if (Utils.getBiomeBlacklistEnabled()) {
-            for (String b : Utils.getBiomes()) {
-                try {
-                    if (Biome.valueOf(b).equals(location.getBlock().getBiome())) {
-                        return false;
+            if (Utils.getBiomeBlacklistEnabled()) {
+                for (String b : Utils.getBiomes()) {
+                    try {
+                        if (Biome.valueOf(b).equals(location.getBlock().getBiome())) {
+                            return false;
+                        }
+                    } catch (Exception e) {
+                        Log.log(Log.LogLevel.ERROR, "Wrong biome name was used in the config!");
                     }
-                } catch (Exception e) {
-                    Log.log(Log.LogLevel.ERROR, "Wrong biome name was used in the config!");
                 }
             }
-        }
 
-        return !(bad_blocks.contains(below.getType()))
-                || (block.getType().isSolid())
-                || (above.getType().isSolid());
+            return !(bad_blocks.contains(below.getType()))
+                    || (block.getType().isSolid())
+                    || (above.getType().isSolid());
 
     }
 

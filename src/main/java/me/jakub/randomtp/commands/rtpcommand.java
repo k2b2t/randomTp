@@ -33,6 +33,7 @@ public class rtpcommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
+
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
             if (TeleportUtils.hasCountdown.contains(player)) {
