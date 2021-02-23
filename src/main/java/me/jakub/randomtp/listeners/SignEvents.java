@@ -1,9 +1,9 @@
 package me.jakub.randomtp.listeners;
 
+import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +15,14 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 public class SignEvents implements Listener {
 
+
+    static Randomtp plugin;
+
+    public SignEvents(Randomtp plugin) {
+        this.plugin = plugin;
+    }
+
+    TeleportUtils teleportUtils = new TeleportUtils(plugin);
 
     @EventHandler
     public void onSignChange(SignChangeEvent e) {
@@ -46,7 +54,7 @@ public class SignEvents implements Listener {
                             sign.getLine(1).equalsIgnoreCase(ChatColor.AQUA + "Click to RTP!")) {
                         Player player = e.getPlayer();
                         if (player.hasPermission("randomTp.sign.use")) {
-                            TeleportUtils.rtpPlayer(player, true, true);
+                            teleportUtils.rtpPlayer(player, true, true);
                         } else {
                             player.sendMessage(Utils.getNoPermission());
                         }

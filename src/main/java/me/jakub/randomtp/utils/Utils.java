@@ -103,7 +103,7 @@ public class Utils {
         return plugin.getConfig().getBoolean("rtp-on-death");
     }
 
-    public static boolean getUpdateCheckerEnabled() {
+    public boolean getUpdateCheckerEnabled() {
         return plugin.getConfig().getBoolean("update-checker");
     }
 

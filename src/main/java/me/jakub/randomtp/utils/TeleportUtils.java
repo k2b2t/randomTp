@@ -36,7 +36,7 @@ public class TeleportUtils {
     public static HashSet<Player> willTp = new HashSet<Player>();
 
 
-    public static Location generateLocation(Player player) {
+    public Location generateLocation(Player player) {
         //Called upon when generating a location
         Random random = new Random();
 
@@ -83,7 +83,7 @@ public class TeleportUtils {
      * @param player Player to get the world from
      * @return Returns the locations if successful, returns null if it couldn't generate a location
      */
-    public static Location startGenerateLocation(Player player) {
+    public Location startGenerateLocation(Player player) {
         int maxAttempts = Utils.getMaxAttempts();
         int attempts = 0;
         while (attempts < maxAttempts) {
@@ -106,7 +106,7 @@ public class TeleportUtils {
      * @param loc Location to check
      * @return Returns true if location is safe, otherwise returns false
      */
-    public static boolean checkGeneratedLocation(Location loc) {
+    public boolean checkGeneratedLocation(Location loc) {
         if (loc != null && isLocationSafe(loc)) {
             return true;
         } else {
@@ -115,7 +115,7 @@ public class TeleportUtils {
     }
 
 
-    public static boolean isLocationSafe(Location location) {
+    public boolean isLocationSafe(Location location) {
         //Checking if the generated random location is safe
         int x = location.getBlockX();
         int y = location.getBlockY();
@@ -143,7 +143,7 @@ public class TeleportUtils {
 
     }
 
-    public static void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice) {
+    public void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice) {
 
         boolean countdownEnabled = plugin.getConfig().getBoolean("Countdown.enabled");
 
@@ -196,7 +196,7 @@ public class TeleportUtils {
 
     }
 
-    public static void tp(Player player, Location location, boolean bypassPrice) {
+    public void tp(Player player, Location location, boolean bypassPrice) {
 
         if (Randomtp.vaultHooked && !bypassPrice) {
             if (!VaultHook.takeMoney(player, Utils.getAmount())) {
@@ -210,7 +210,7 @@ public class TeleportUtils {
     }
 
 
-    public static void afterTp(Player player) {
+    public void afterTp(Player player) {
         if (plugin.getConfig().getBoolean("Titles.enabled")) {
             player.sendTitle(
                     ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Titles.generating-title")),
@@ -240,9 +240,9 @@ public class TeleportUtils {
      * @param bypassCountdown Bypass the countdown
      * @param bypassPrice     Bypass the price
      */
-    public static void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice) {
-        Location loc = TeleportUtils.startGenerateLocation(player);
-        TeleportUtils.startTp(player, loc, bypassCountdown, bypassPrice);
+    public void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice) {
+        Location loc = startGenerateLocation(player);
+        startTp(player, loc, bypassCountdown, bypassPrice);
     }
 
 

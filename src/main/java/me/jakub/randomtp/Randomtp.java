@@ -1,5 +1,7 @@
 package me.jakub.randomtp;
 
+import lombok.Data;
+import lombok.Getter;
 import me.jakub.randomtp.commands.rtpcommand;
 import me.jakub.randomtp.commands.rtpcommandTabCompleter;
 import me.jakub.randomtp.commands.rtplugincommand;
@@ -12,7 +14,6 @@ import me.jakub.randomtp.metrics.MetricsLite;
 import me.jakub.randomtp.utils.*;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,7 +35,7 @@ public final class Randomtp extends JavaPlugin {
         Log.log(Log.LogLevel.INFO, "Use /rtplugin help for more info");
 
         getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
-        getServer().getPluginManager().registerEvents(new SignEvents(), this);
+        getServer().getPluginManager().registerEvents(new SignEvents(this), this);
         getServer().getPluginManager().registerEvents(new CountdownEvents(), this);
         getServer().getPluginManager().registerEvents(new DeathEvent(this), this);
 
@@ -44,7 +45,7 @@ public final class Randomtp extends JavaPlugin {
         getCommand("rtplugin").setTabCompleter(new rtplugincommandTabCompleter());
 
         new TeleportUtils(this);
-        new Utils(this);
+        Utils utils = new Utils(this);
         new MetricsLite(this, 10130);
         new PlayerUtils(this);
 
@@ -66,11 +67,11 @@ public final class Randomtp extends JavaPlugin {
         }
 
         Log.log(Log.LogLevel.SUCCESS, "Finished loading!");
-        if (Utils.getUpdateCheckerEnabled()) {
+        if (utils.getUpdateCheckerEnabled()) {
             Log.log(Log.LogLevel.INFO, "Checking for updates..");
         }
 
-        if (Utils.getUpdateCheckerEnabled()) {
+        if (utils.getUpdateCheckerEnabled()) {
             new UpdateChecker(this, 86659).getLatestVersion(version -> {
                 if (this.version.equalsIgnoreCase(version)) {
                     Log.log(Log.LogLevel.INFO, "RandomTP is up to date");
