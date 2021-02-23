@@ -21,9 +21,19 @@ Cooldown:
   #SECONDS - Always shows in seconds
   #AUTO - Automatically decides the best type to use (recommended)
   msg-format-type: AUTO
+  Messages:
+    hour: "hour(s)"
+    minute: "minute(s)"
+    second: "second(s)"
 
 Countdown:
   enabled: true
+  #Should the plugin count down in chat when RTP'ing
+  #ie.
+  #Teleporing in 5 seconds
+  #Teleporing in 4 seconds
+  #...........
+  countdown-message: true
 
 Rtp-settings:
   #Max attempts to generate location
@@ -158,3 +168,10 @@ Messages:
   couldnt-generate-message: "&cCouldn't generate a safe location!"
   #Player tries to remove a sign while not shifting
   need-to-shift: "&cYou need to &6shift &cif you want to remove the sign"
+  #Message the player sees when the countdown starts
+  countdown-message: "&6Teleporting in 5 seconds... &4Do not move or take damage!"
+  #Counting down message when RTP'ing
+  #Use %time% as a placeholder for seconds remaining
+  counting-down-message: "&6Teleporting in %time% seconds"
+  #Message when RTP gets cancelled
+  teleportation-cancelled-message: "&4Cancelled teleportation!"

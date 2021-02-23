@@ -70,6 +70,30 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.need-to-shift"));
     }
 
+    public static String getCountdownMessage() {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.countdown-message"));
+    }
+
+    public static String getCountingDownMessage(int i){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.counting-down-message")).replace("%time%", String.valueOf(i));
+    }
+
+    public static String RTPCancelledMessage(){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.teleportation-cancelled-message"));
+    }
+
+    public static String getHour(){
+        return plugin.getConfig().getString("Cooldown.Messages.hour");
+    }
+
+    public static String getMinute(){
+        return plugin.getConfig().getString("Cooldown.Messages.minute");
+    }
+
+    public static String getSecond(){
+        return plugin.getConfig().getString("Cooldown.Messages.second");
+    }
+
     public static boolean getBiomeBlacklistEnabled() {
         return plugin.getConfig().getBoolean("Biome-blacklist.enabled");
     }
@@ -134,5 +158,8 @@ public class Utils {
         return plugin.getConfig().getBoolean("Signs.enabled");
     }
 
+    public static boolean getCountdownMessageEnabled() {
+        return plugin.getConfig().getBoolean("Countdown.countdown-message");
+    }
 
 }

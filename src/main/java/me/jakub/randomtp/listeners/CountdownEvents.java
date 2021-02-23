@@ -1,6 +1,7 @@
 package me.jakub.randomtp.listeners;
 
 import me.jakub.randomtp.utils.TeleportUtils;
+import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +23,7 @@ public class CountdownEvents implements Listener {
             } else {
 
                 TeleportUtils.willTp.remove(player);
-                player.sendMessage("§4Cancelled teleportation!");
+                player.sendMessage(Utils.RTPCancelledMessage());
             }
         }
     }
@@ -33,7 +34,7 @@ public class CountdownEvents implements Listener {
             Player player = (Player) e.getEntity();
             if (TeleportUtils.willTp.contains(player) && TeleportUtils.hasCountdown.contains(player)) {
                 TeleportUtils.willTp.remove(player);
-                player.sendMessage("§4Cancelled teleportation!");
+                player.sendMessage(Utils.RTPCancelledMessage());
             }
         }
     }

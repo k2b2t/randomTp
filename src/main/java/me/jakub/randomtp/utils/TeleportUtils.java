@@ -184,11 +184,14 @@ public class TeleportUtils {
                         if (startCount == 5) {
                             hasCountdown.add(player);
                             willTp.add(player);
-                            player.sendMessage("§6Teleporting you in " + startCount + " seconds.");
-                            player.sendMessage("§4Do not move or take damage.");
+                            player.sendMessage(Utils.getCountdownMessage());
+                        }else if (startCount < 5 && startCount > 0){
+                            if (Utils.getCountdownMessageEnabled() && willTp.contains(player)){
+                                player.sendMessage(Utils.getCountingDownMessage(startCount));
+                            }
                         }
                         startCount--;
-                        if (startCount == 0) {
+                        if (startCount == -1) {
                             Bukkit.getScheduler().cancelTask(count);
                             startCount = 5;
                             hasCountdown.remove(player);

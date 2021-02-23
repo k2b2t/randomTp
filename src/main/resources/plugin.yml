@@ -2,7 +2,7 @@ name: Randomtp
 version: ${project.version}
 main: me.jakub.randomtp.Randomtp
 author: Kubajsa
-api-version: 1.16
+api-version: 1.13
 description: This is a /rtp plugin
 softdepend: [Vault]
 commands:
