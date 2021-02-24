@@ -11,11 +11,11 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 
-public class rtplugincommand implements CommandExecutor {
+public class RTPluginCommand implements CommandExecutor {
 
     static Randomtp plugin;
 
-    public rtplugincommand(Randomtp plugin) {
+    public RTPluginCommand(Randomtp plugin) {
         this.plugin = plugin;
     }
 

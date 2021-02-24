@@ -1,6 +1,7 @@
 package me.jakub.randomtp.utils;
 
 import me.jakub.randomtp.Randomtp;
+import me.jakub.randomtp.commands.RTPCommand;
 import me.jakub.randomtp.hooks.VaultHook;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
@@ -154,7 +155,7 @@ public class TeleportUtils {
 
     }
 
-    public void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice) {
+    public void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown) {
 
         boolean countdownEnabled = plugin.getConfig().getBoolean("Countdown.enabled");
 
@@ -185,8 +186,8 @@ public class TeleportUtils {
                             hasCountdown.add(player);
                             willTp.add(player);
                             player.sendMessage(Utils.getCountdownMessage());
-                        }else if (startCount < 5 && startCount > 0){
-                            if (Utils.getCountdownMessageEnabled() && willTp.contains(player)){
+                        } else if (startCount < 5 && startCount > 0) {
+                            if (Utils.getCountdownMessageEnabled() && willTp.contains(player)) {
                                 player.sendMessage(Utils.getCountingDownMessage(startCount));
                             }
                         }
@@ -197,6 +198,9 @@ public class TeleportUtils {
                             hasCountdown.remove(player);
                             if (willTp.contains(player)) {
                                 tp(player, location, bypassPrice);
+                                if (startCooldown) {
+                                    RTPCommand.cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("Cooldown.seconds") * 1000));
+                                }
                             }
                             willTp.remove(player);
                         }
@@ -254,9 +258,9 @@ public class TeleportUtils {
      * @param bypassCountdown Bypass the countdown
      * @param bypassPrice     Bypass the price
      */
-    public void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice) {
+    public void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown) {
         Location loc = startGenerateLocation(player);
-        startTp(player, loc, bypassCountdown, bypassPrice);
+        startTp(player, loc, bypassCountdown, bypassPrice, startCooldown);
     }
 
 

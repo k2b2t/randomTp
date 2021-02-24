@@ -1,9 +1,9 @@
 package me.jakub.randomtp;
 
-import me.jakub.randomtp.commands.rtpcommand;
-import me.jakub.randomtp.commands.rtpcommandTabCompleter;
-import me.jakub.randomtp.commands.rtplugincommand;
-import me.jakub.randomtp.commands.rtplugincommandTabCompleter;
+import me.jakub.randomtp.commands.RTPCommand;
+import me.jakub.randomtp.commands.RTPCommandTabCompleter;
+import me.jakub.randomtp.commands.RTPluginCommand;
+import me.jakub.randomtp.commands.RTPluginCommandTabCompleter;
 import me.jakub.randomtp.listeners.CountdownEvents;
 import me.jakub.randomtp.listeners.DeathEvent;
 import me.jakub.randomtp.listeners.JoinEvent;
@@ -37,10 +37,10 @@ public final class Randomtp extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CountdownEvents(), this);
         getServer().getPluginManager().registerEvents(new DeathEvent(this), this);
 
-        getCommand("rtp").setExecutor(new rtpcommand(this));
-        getCommand("rtp").setTabCompleter(new rtpcommandTabCompleter());
-        getCommand("rtplugin").setExecutor(new rtplugincommand(this));
-        getCommand("rtplugin").setTabCompleter(new rtplugincommandTabCompleter());
+        getCommand("rtp").setExecutor(new RTPCommand(this));
+        getCommand("rtp").setTabCompleter(new RTPCommandTabCompleter());
+        getCommand("rtplugin").setExecutor(new RTPluginCommand(this));
+        getCommand("rtplugin").setTabCompleter(new RTPluginCommandTabCompleter());
 
         new TeleportUtils(this);
         Utils utils = new Utils(this);

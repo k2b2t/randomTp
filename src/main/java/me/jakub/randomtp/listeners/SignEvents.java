@@ -1,6 +1,7 @@
 package me.jakub.randomtp.listeners;
 
 import me.jakub.randomtp.Randomtp;
+import me.jakub.randomtp.commands.RTPCommand;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.block.Sign;
@@ -58,7 +59,7 @@ public class SignEvents implements Listener {
                             sign.getLine(3).equalsIgnoreCase(Utils.getSignLine(3))) {
                         Player player = e.getPlayer();
                         if (player.hasPermission("randomTp.sign.use")) {
-                            teleportUtils.rtpPlayer(player, true, true);
+                            teleportUtils.rtpPlayer(player, true, true, false);
                         } else {
                             player.sendMessage(Utils.getNoPermission());
                         }
