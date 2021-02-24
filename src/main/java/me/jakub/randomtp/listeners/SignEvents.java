@@ -1,7 +1,6 @@
 package me.jakub.randomtp.listeners;
 
 import me.jakub.randomtp.Randomtp;
-import me.jakub.randomtp.commands.RTPCommand;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.block.Sign;
