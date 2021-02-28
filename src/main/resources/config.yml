@@ -11,6 +11,13 @@
 #If you don't have a set border for a specific world it will use this
 border: 1000
 
+#Always RTP Players to this world
+Force-default-world:
+  enabled: false
+  #Name of the world you want your players to be ALWAYS RTP'd to
+  world-name: world
+
+
 #Cooldown for the /rtp command
 #Set to 0 for no cooldown
 Cooldown:
@@ -165,7 +172,7 @@ Messages:
   #Cooldown message, %left% is for example 8 hour(s), 13 second(s), 1 minute(s) etc.
   cooldown-message: "&6You have a cooldown of &b%left%!"
   #Message when the plugin couldn't generate a location
-  couldnt-generate-message: "&cCouldn't generate a safe location!"
+  couldnt-generate-message: "&cCouldn't generate a safe location! Please try again"
   #Player tries to remove a sign while not shifting
   need-to-shift: "&cYou need to &6shift &cif you want to remove the sign"
   #Message the player sees when the countdown starts

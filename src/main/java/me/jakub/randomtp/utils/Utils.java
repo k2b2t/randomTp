@@ -1,7 +1,9 @@
 package me.jakub.randomtp.utils;
 
 import me.jakub.randomtp.Randomtp;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -74,23 +76,42 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.countdown-message"));
     }
 
-    public static String getCountingDownMessage(int i){
+    public static String getCountingDownMessage(int i) {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.counting-down-message")).replace("%time%", String.valueOf(i));
     }
 
-    public static String RTPCancelledMessage(){
+    public static String RTPCancelledMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.teleportation-cancelled-message"));
     }
 
-    public static String getHour(){
+    public static boolean getForceDefaultWorldEnabled() {
+        return plugin.getConfig().getBoolean("Force-default-world.enabled");
+    }
+
+    public static World forcedWorld(Player player) {
+        try {
+            World world = Bukkit.getWorld(plugin.getConfig().getString("Force-default-world.world-name"));
+            if (world != null) {
+                return world;
+            }else{
+                Log.log(Log.LogLevel.ERROR, "Wrong Force Default World world name was used in the config!!! Turning off force world");
+                return player.getWorld();
+            }
+        } catch (Exception e) {
+            Log.log(Log.LogLevel.ERROR, "Wrong Force Default World world name was used in the config!!! Turning off force world");
+            return player.getWorld();
+        }
+    }
+
+    public static String getHour() {
         return plugin.getConfig().getString("Cooldown.Messages.hour");
     }
 
-    public static String getMinute(){
+    public static String getMinute() {
         return plugin.getConfig().getString("Cooldown.Messages.minute");
     }
 
-    public static String getSecond(){
+    public static String getSecond() {
         return plugin.getConfig().getString("Cooldown.Messages.second");
     }
 
@@ -126,8 +147,8 @@ public class Utils {
         }
     }
 
-    public static boolean isWorldSet(Player player) {
-        return (plugin.getConfig().isSet("Worlds." + player.getWorld().getName() + ".border"));
+    public static boolean isWorldSet(World world) {
+        return (plugin.getConfig().isSet("Worlds." + world.getName() + ".border"));
     }
 
     public static int getBorderForWorld(String worldName) {

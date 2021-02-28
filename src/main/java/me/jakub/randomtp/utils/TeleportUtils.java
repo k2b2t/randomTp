@@ -41,6 +41,9 @@ public class TeleportUtils {
         //Called upon when generating a location
         Random random = new Random();
 
+        boolean forceWorld = Utils.getForceDefaultWorldEnabled();
+        World forcedWorld = Utils.forcedWorld(player); //player is used as a backup world
+
         int x = 0;
         int y = 0;
         int z = 0;
@@ -49,9 +52,17 @@ public class TeleportUtils {
         int var1 = random.nextInt(border); //X coordinate
         int var2 = random.nextInt(border); //Z coordinate
 
-        if (Utils.isWorldSet(player)) {
-            var1 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
-            var2 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
+
+        if (forceWorld) {
+            if (Utils.isWorldSet(forcedWorld)) {
+                var1 = random.nextInt(Utils.getBorderForWorld(forcedWorld.getName()));
+                var2 = random.nextInt(Utils.getBorderForWorld(forcedWorld.getName()));
+            }
+        }else{
+            if (Utils.isWorldSet(player.getWorld())){
+                var1 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
+                var2 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
+            }
         }
 
 
@@ -69,14 +80,22 @@ public class TeleportUtils {
         y = 150; //useless line of code :)
         z = var2;
 
+        Location randomLocation;
+        if (!forceWorld) {
+            randomLocation = new Location(player.getWorld(), x, y, z); //create a new location
+        } else {
+            randomLocation = new Location(forcedWorld, x, y, z); //create a new location
+        }
 
-        Location randomLocation = new Location(player.getWorld(), x, y, z); //create a new location
-
-        switch (player.getWorld().getEnvironment()) {
+        switch (randomLocation.getWorld().getEnvironment()) {
             case NORMAL:
                 setYOver(randomLocation);
                 break;
             case NETHER://TODO nether rtp
+                setYOver(randomLocation);
+                break;
+            default:
+                setYOver(randomLocation);
                 break;
         }
 
@@ -164,7 +183,7 @@ public class TeleportUtils {
             return;
         }
 
-        if (!player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
+        if (!location.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
             player.sendMessage(Utils.getPlayerNotInOverMessage());
             return;
         }
@@ -257,6 +276,7 @@ public class TeleportUtils {
      * @param player          Player to RTP
      * @param bypassCountdown Bypass the countdown
      * @param bypassPrice     Bypass the price
+     * @param startCooldown   Add player to cooldown
      */
     public void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown) {
         Location loc = startGenerateLocation(player);
