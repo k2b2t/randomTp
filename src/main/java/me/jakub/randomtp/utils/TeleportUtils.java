@@ -31,7 +31,7 @@ public class TeleportUtils {
     }
 
 
-    static int startCount = 5;
+    /*static int startCount = 5;*/
     static int count;
     public static HashSet<Player> hasCountdown = new HashSet<Player>();
     public static HashSet<Player> willTp = new HashSet<Player>();
@@ -237,13 +237,15 @@ public class TeleportUtils {
                 tp(player, location, bypassPrice);
             } else {
                 count = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+                    int baseCount = Utils.getCountdown();
+                    int startCount = baseCount;
                     @Override
                     public void run() {
-                        if (startCount == 5) {
+                        if (startCount == baseCount) {
                             hasCountdown.add(player);
                             willTp.add(player);
-                            player.sendMessage(Utils.getCountdownMessage());
-                        } else if (startCount < 5 && startCount > 0) {
+                            player.sendMessage(Utils.getCountdownMessage(baseCount));
+                        } else if (startCount < baseCount && startCount > 0) {
                             if (Utils.getCountdownMessageEnabled() && willTp.contains(player)) {
                                 player.sendMessage(Utils.getCountingDownMessage(startCount));
                             }
@@ -251,7 +253,7 @@ public class TeleportUtils {
                         startCount--;
                         if (startCount == -1) {
                             Bukkit.getScheduler().cancelTask(count);
-                            startCount = 5;
+                            startCount = baseCount;
                             hasCountdown.remove(player);
                             if (willTp.contains(player)) {
                                 tp(player, location, bypassPrice);

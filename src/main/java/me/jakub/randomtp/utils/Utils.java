@@ -72,8 +72,8 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.need-to-shift"));
     }
 
-    public static String getCountdownMessage() {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.countdown-message"));
+    public static String getCountdownMessage(int baseSec) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.countdown-message")).replace("%count%", String.valueOf(baseSec));
     }
 
     public static String getCountingDownMessage(int i) {
@@ -121,6 +121,10 @@ public class Utils {
 
     public static List<String> getBiomes() {
         return (List<String>) plugin.getConfig().getList("Biome-blacklist.biomes");
+    }
+    
+    public static int getCountdown(){
+        return plugin.getConfig().getInt("Countdown.seconds");
     }
 
     //TODO block blacklist maybe?

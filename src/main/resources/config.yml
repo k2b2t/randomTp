@@ -36,6 +36,7 @@ Cooldown:
 
 Countdown:
   enabled: true
+  seconds: 5
   #Should the plugin count down in chat when RTP'ing
   #ie.
   #Teleporing in 5 seconds
@@ -179,7 +180,8 @@ Messages:
   #Player tries to remove a sign while not shifting
   need-to-shift: "&cYou need to &6shift &cif you want to remove the sign"
   #Message the player sees when the countdown starts
-  countdown-message: "&6Teleporting in 5 seconds... &4Do not move or take damage!"
+  #Use %count% as a placeholder for the countdown timer lenght in seconds
+  countdown-message: "&6Teleporting in %count% seconds... &4Do not move or take damage!"
   #Counting down message when RTP'ing
   #Use %time% as a placeholder for seconds remaining
   counting-down-message: "&6Teleporting in %time% seconds"
