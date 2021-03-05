@@ -58,8 +58,8 @@ public class TeleportUtils {
                 var1 = random.nextInt(Utils.getBorderForWorld(forcedWorld.getName()));
                 var2 = random.nextInt(Utils.getBorderForWorld(forcedWorld.getName()));
             }
-        }else{
-            if (Utils.isWorldSet(player.getWorld())){
+        } else {
+            if (Utils.isWorldSet(player.getWorld())) {
                 var1 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
                 var2 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
             }
@@ -91,19 +91,45 @@ public class TeleportUtils {
             case NORMAL:
                 setYOver(randomLocation);
                 break;
-            case NETHER://TODO nether rtp
+            case NETHER:
+                setYNether(randomLocation);
+                break;
+            case THE_END:
                 setYOver(randomLocation);
                 break;
             default:
                 setYOver(randomLocation);
                 break;
         }
-
         return randomLocation;
     }
 
     public void setYOver(Location randomLocation) {
         int y = randomLocation.getWorld().getHighestBlockYAt(randomLocation); //set the Y coordinate to the highest point
+
+        randomLocation.setY(y + 1);
+    }
+
+    public void setYNether(Location randomLocation) {
+        int x = randomLocation.getBlockX();
+        int z = randomLocation.getBlockZ();
+        int y = 126;
+        for (int i = 0; i < randomLocation.getWorld().getMaxHeight(); i++) {
+            Block cblock = randomLocation.getWorld().getBlockAt(x, i, z);
+            Block ublock = randomLocation.getWorld().getBlockAt(x, i - 1, z);
+            Block ablock = randomLocation.getWorld().getBlockAt(x, i + 1, z);
+            if (!ablock.getType().isSolid() &&
+                    !bad_blocks.contains(ablock.getType()) &&
+                    cblock.getType().isSolid() &&
+                    !bad_blocks.contains(cblock) &&
+                    !ublock.getType().isSolid() &&
+                    !(cblock.getY() >= 126) //Check if the Y isn't above the nether roof
+            ) {
+                y = i;
+                randomLocation.setY(y + 1);
+                return;
+            }
+        }
         randomLocation.setY(y + 1);
     }
 
@@ -112,7 +138,7 @@ public class TeleportUtils {
      * Generates a safe location
      *
      * @param player Player to get the world from
-     * @return Returns the locations if successful, returns null if it couldn't generate a location
+     * @return Returns the location if successful, returns null if it couldn't generate a location
      */
     public Location startGenerateLocation(Player player) {
         int maxAttempts = Utils.getMaxAttempts();
@@ -167,10 +193,22 @@ public class TeleportUtils {
                 }
             }
         }
-
-        return !(bad_blocks.contains(below.getType()))
-                || (block.getType().isSolid())
-                || (above.getType().isSolid());
+        if (location.getWorld().getEnvironment() == World.Environment.NORMAL) {
+            return !(bad_blocks.contains(below.getType()))
+                    || (block.getType().isSolid())
+                    || (above.getType().isSolid())
+                    || (below.getType().isSolid());
+        }else if (location.getWorld().getEnvironment() == World.Environment.NETHER){
+            return (
+                    !bad_blocks.contains(below.getType()) &&
+                            !block.getType().isSolid() &&
+                            !above.getType().isSolid() &&
+                            below.getType().isSolid() &&
+                            !(location.getBlockY() >= 126)
+                    );
+        }else{
+            return false;//TODO ADD HERE IF END
+        }
 
     }
 
@@ -183,7 +221,7 @@ public class TeleportUtils {
             return;
         }
 
-        if (!location.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
+        if (location.getWorld().getEnvironment() == World.Environment.THE_END) {
             player.sendMessage(Utils.getPlayerNotInOverMessage());
             return;
         }

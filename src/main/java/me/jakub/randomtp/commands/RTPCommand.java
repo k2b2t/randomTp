@@ -1,13 +1,11 @@
 package me.jakub.randomtp.commands;
 
-import lombok.Getter;
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.utils.Cooldown;
 import me.jakub.randomtp.utils.Log;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -62,12 +60,8 @@ public class RTPCommand implements CommandExecutor {
                         Player target = Bukkit.getServer().getPlayer(args[0]);
 
                         if (target != null) {
-                            if (target.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
                                 teleportUtils.rtpPlayer(target, true, true, false);
                                 player.sendMessage(Utils.getTpMessageSender(target));
-                            } else {
-                                player.sendMessage("§cThat player is not in the overworld!");
-                            }
                         } else {
                             player.sendMessage("§cCouldn't find that player!");
                         }
@@ -122,12 +116,8 @@ public class RTPCommand implements CommandExecutor {
                 if (args.length == 1) {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
-                        if (target.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
                             teleportUtils.rtpPlayer(target, true, true, false);
                             Log.log(Log.LogLevel.SUCCESS, "Successfully teleported " + target.getName() + " to a random location");
-                        } else {
-                            Log.log(Log.LogLevel.ERROR, "That player is not in the overworld!");
-                        }
                     } else {
                         Log.log(Log.LogLevel.ERROR, "Couldn't find that player");
                     }

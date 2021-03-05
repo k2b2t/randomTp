@@ -21,7 +21,8 @@ Force-default-world:
 #Cooldown for the /rtp command
 #Set to 0 for no cooldown
 Cooldown:
-  seconds: 600
+  #Cooldown in seconds
+  seconds: 18000
   #In what format should be the remaining cooldown displayed
   #HOURS - Shows in hours if possible
   #MINUTES - Shows in minutes if possible
@@ -58,6 +59,8 @@ Rtp-settings:
 #    border: 100
 Worlds:
   #World name
+  #Nether World name: world_nether
+  #When disabling RTP in a world it is recommended to set the border to 10
   world:
     #disabled - Should RTP be disabled in this world
     disabled: false
@@ -65,7 +68,7 @@ Worlds:
     border: 1000
 #  pvp:
 #    disabled: true
-#    border: 1000
+#    border: 10
 #  build:
 #    disabled: false
 #    border: 10000

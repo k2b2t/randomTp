@@ -123,7 +123,7 @@ public class Utils {
         return (List<String>) plugin.getConfig().getList("Biome-blacklist.biomes");
     }
 
-    //TODO
+    //TODO block blacklist maybe?
     /*public static List<String> getBlocks() {
         return (List<String>) plugin.getConfig().getList("Block-blacklist.blocks");
     }
