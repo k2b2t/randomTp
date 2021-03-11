@@ -207,7 +207,7 @@ public class TeleportUtils {
                             !(location.getBlockY() >= 126)
                     );
         }else{
-            return false;//TODO ADD HERE IF END
+            return false;
         }
 
     }
@@ -319,6 +319,18 @@ public class TeleportUtils {
      * @param startCooldown   Add player to cooldown
      */
     public void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown) {
+        boolean forceWorld = Utils.getForceDefaultWorldEnabled();
+        World forcedWorld = Utils.forcedWorld(player); //player is used as a backup world
+        World locForCheck;
+        if (forceWorld) {
+            locForCheck = forcedWorld;
+        }else{
+            locForCheck = player.getWorld();
+        }
+        if (Utils.isWorldDisabled(locForCheck.getName())) {
+            player.sendMessage(Utils.getWorldDisabledMessage());
+            return;
+        }
         Location loc = startGenerateLocation(player);
         startTp(player, loc, bypassCountdown, bypassPrice, startCooldown);
     }
