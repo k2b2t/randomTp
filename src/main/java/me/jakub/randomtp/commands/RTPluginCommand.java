@@ -27,10 +27,10 @@ public class RTPluginCommand implements CommandExecutor {
             Player player = (Player) commandSender;
 
             if (args.length == 0) {
-                player.sendMessage("§6You are running §bRandomTP§6 Version: §b" + Randomtp.version);
+                player.sendMessage("§6You are running §bRandomTP§6 Version: §b" + Randomtp.VERSION);
                 player.sendMessage("§6For help type the command §b/rtplugin help");
             } else if (args[0].equalsIgnoreCase("help")) {
-                player.sendMessage("§6Version: §c" + Randomtp.version);
+                player.sendMessage("§6Version: §c" + Randomtp.VERSION);
                 player.sendMessage("§3§lCommands:");
                 player.sendMessage("§6/rtp - Teleports you to a random location within the border set in the config");
                 player.sendMessage("§6/rtp [player] - /rtp other players");
@@ -88,8 +88,9 @@ public class RTPluginCommand implements CommandExecutor {
 
             } else if (args[0].equalsIgnoreCase("reload")) {
                 if (player.hasPermission("randomTp.reload")) {
-                    plugin.reloadConfig();
-                    player.sendMessage("§bReloaded the config!");
+                    Utils.reloadConfig(player);
+                    /*plugin.reloadConfig();
+                    player.sendMessage("§bReloaded the config!");*/
                 } else {
                     player.sendMessage(Utils.getNoPermission());
                 }
@@ -98,10 +99,10 @@ public class RTPluginCommand implements CommandExecutor {
             }
         } else if (commandSender instanceof ConsoleCommandSender) {
             if (args.length == 0) {
-                Log.log(Log.LogLevel.PLAIN, "§6You are running §bRandomTP§6 Version: §b" + Randomtp.version);
+                Log.log(Log.LogLevel.PLAIN, "§6You are running §bRandomTP§6 Version: §b" + Randomtp.VERSION);
                 Log.log(Log.LogLevel.PLAIN, "§6For help type the command §brtplugin help");
             } else if (args[0].equalsIgnoreCase("help")) {
-                Log.log(Log.LogLevel.PLAIN, "§6Version: §c" + Randomtp.version);
+                Log.log(Log.LogLevel.PLAIN, "§6Version: §c" + Randomtp.VERSION);
                 Log.log(Log.LogLevel.PLAIN, "§3§lCommands:");
                 Log.log(Log.LogLevel.PLAIN, "§6/rtp - Teleports you to a random location within the border set in the config (Default: 1000)");
                 Log.log(Log.LogLevel.PLAIN, "§6/rtp [player] - /rtp other players");
@@ -125,7 +126,10 @@ public class RTPluginCommand implements CommandExecutor {
                 Log.log(Log.LogLevel.PLAIN, "§6randomTp.countdown.bypass - Bypass countdown");
                 Log.log(Log.LogLevel.PLAIN, "§3§lConfig:");
                 Log.log(Log.LogLevel.PLAIN, "§6Border size: §b" + plugin.getConfig().getInt("border"));
-            } else {
+            } else if (args[0].equalsIgnoreCase("reload")) {
+                Utils.reloadConfig();
+            }
+            else {
                 Log.log(Log.LogLevel.DEFAULT, "That command either does not exist or is player only");
             }
         }

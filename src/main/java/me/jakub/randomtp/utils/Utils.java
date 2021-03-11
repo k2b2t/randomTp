@@ -103,6 +103,16 @@ public class Utils {
         }
     }
 
+    public static void reloadConfig(){
+        plugin.reloadConfig();
+        Log.log(Log.LogLevel.SUCCESS, "Reloaded the config!");
+    }
+
+    public static void reloadConfig(Player player){
+        plugin.reloadConfig();
+        player.sendMessage("§bReloaded the config!");
+    }
+
     public static String getHour() {
         return plugin.getConfig().getString("Cooldown.Messages.hour");
     }

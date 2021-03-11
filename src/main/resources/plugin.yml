@@ -3,7 +3,7 @@ version: ${project.version}
 main: me.jakub.randomtp.Randomtp
 author: Kubajsa
 api-version: 1.13
-description: This is a /rtp plugin
+description: Highly customizable 1.13-1.16 RTP plugin
 softdepend: [Vault]
 commands:
   rtp:
@@ -24,13 +24,13 @@ permissions:
   randomTp.rtp.onDeath:
     description: Allows you rtp on death
   randomTp.setborder:
-    description: Allows you to set the rtp border
+    description: Allows you to set the RTP border
   randomTp.reload:
     description: Allows you to reload the plugin
   randomTp.cooldown.bypass:
     description: Allows you to bypass the cooldown
   randomTp.price.bypass:
-    description: Bypass rtp price
+    description: Bypass RTP price
   randomTp.countdown.bypass:
     description: Bypass countdown
   randomTp.sign.use:

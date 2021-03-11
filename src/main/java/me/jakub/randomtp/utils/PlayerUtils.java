@@ -25,7 +25,7 @@ public class PlayerUtils {
             String var1 = plugin.getConfig().getString("Sounds.sound");
             player.playSound(player.getLocation(), Sound.valueOf(var1), 1, 1);
         } catch (Exception e) {
-            Log.log(Log.LogLevel.ERROR, "Couldn't play sound, wrong sound name was used");
+            Log.log(Log.LogLevel.ERROR, "Couldn't play sound, wrong sound name was used in the config");
         }
     }
 
@@ -35,7 +35,7 @@ public class PlayerUtils {
         try {
             player.getWorld().spawnParticle(Particle.valueOf(var100), player.getLocation(), var10);
         } catch (Exception e) {
-            Log.log(Log.LogLevel.ERROR, "Couldn't spawn particle, wrong particle name was used");
+            Log.log(Log.LogLevel.ERROR, "Couldn't spawn particle, wrong particle name was used in the config");
         }
     }
 }

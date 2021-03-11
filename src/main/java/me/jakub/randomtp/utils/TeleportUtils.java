@@ -31,7 +31,6 @@ public class TeleportUtils {
     }
 
 
-    /*static int startCount = 5;*/
     static int count;
     public static HashSet<Player> hasCountdown = new HashSet<Player>();
     public static HashSet<Player> willTp = new HashSet<Player>();
@@ -102,6 +101,7 @@ public class TeleportUtils {
                 break;
         }
         return randomLocation;
+        //Note: don't return null here
     }
 
     public void setYOver(Location randomLocation) {
