@@ -68,7 +68,6 @@ public class TeleportUtils {
         int var3 = random.nextInt(2); //basically a random boolean
         if (var3 == 1) {
             var1 = var1 * -1; //50% chance the x coordinate will be negative
-
         }
         var3 = random.nextInt(2);
         if (var3 == 1) {
@@ -194,19 +193,28 @@ public class TeleportUtils {
             }
         }
         if (location.getWorld().getEnvironment() == World.Environment.NORMAL) {
-            return !(bad_blocks.contains(below.getType()))
-                    || (block.getType().isSolid())
-                    || (above.getType().isSolid())
-                    || (below.getType().isSolid());
-        }else if (location.getWorld().getEnvironment() == World.Environment.NETHER){
+            return !(bad_blocks.contains(above.getType()))
+                    && !(bad_blocks.contains(block.getType()))
+                    && !(bad_blocks.contains(below.getType()))
+                    && !(above.getType().isSolid())
+                    && !(block.getType().isSolid())
+                    && below.getType().isSolid();
+        } else if (location.getWorld().getEnvironment() == World.Environment.NETHER) {
             return (
                     !bad_blocks.contains(below.getType()) &&
                             !block.getType().isSolid() &&
                             !above.getType().isSolid() &&
                             below.getType().isSolid() &&
                             !(location.getBlockY() >= 126)
-                    );
-        }else{
+            );
+        } else if (location.getWorld().getEnvironment() == World.Environment.THE_END) {
+            return !(bad_blocks.contains(above.getType()))
+                    && !(bad_blocks.contains(block.getType()))
+                    && !(bad_blocks.contains(below.getType()))
+                    && !(above.getType().isSolid())
+                    && !(block.getType().isSolid())
+                    && below.getType().isSolid();
+        } else {
             return false;
         }
 
@@ -218,11 +226,6 @@ public class TeleportUtils {
 
         if (!checkGeneratedLocation(location)) {
             player.sendMessage(Utils.getCouldntGenerateMessage());
-            return;
-        }
-
-        if (location.getWorld().getEnvironment() == World.Environment.THE_END) {
-            player.sendMessage(Utils.getPlayerNotInOverMessage());
             return;
         }
 
@@ -239,6 +242,7 @@ public class TeleportUtils {
                 count = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
                     int baseCount = Utils.getCountdown();
                     int startCount = baseCount;
+
                     @Override
                     public void run() {
                         if (startCount == baseCount) {
@@ -280,6 +284,7 @@ public class TeleportUtils {
                 return;
             }
         }
+        location.add(0.5, 0, 0.5); //Set the location to the center of the block
         location.getWorld().getChunkAt(location.getBlock()).load(true);
         player.teleport(location);
         afterTp(player);
@@ -324,7 +329,7 @@ public class TeleportUtils {
         World locForCheck;
         if (forceWorld) {
             locForCheck = forcedWorld;
-        }else{
+        } else {
             locForCheck = player.getWorld();
         }
         if (Utils.isWorldDisabled(locForCheck.getName())) {

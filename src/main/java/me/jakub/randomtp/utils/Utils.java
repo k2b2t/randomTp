@@ -36,10 +36,6 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.unknown-command"));
     }
 
-    public static String getPlayerNotInOverMessage() {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.player-not-in-overworld"));
-    }
-
     public static String getNotEnoughMoneyMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.not-enough-money"));
     }

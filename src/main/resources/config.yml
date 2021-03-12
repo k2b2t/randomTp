@@ -59,9 +59,8 @@ Rtp-settings:
 #    disabled: true
 #    border: 100
 Worlds:
-  #World name
   #Nether World name: world_nether
-  #When disabling RTP in a world it is recommended to set the border to 10
+  #End World name: world_the_end
   world:
     #disabled - Should RTP be disabled in this world
     disabled: false
@@ -163,8 +162,6 @@ Messages:
   unknown-command: "&cUnknown command, try /rtplugin help"
   #Not enough permission
   no-permission: "&cInsufficient permission."
-  #Canceled teleport because you aren't in the overworld
-  player-not-in-overworld: "&cYou couldn't be teleported because you are not in the overworld"
   #If player doesn't have enough money to /rtp
   not-enough-money: "&cYou do not have enough money to do that!"
   #Successful transaction message
