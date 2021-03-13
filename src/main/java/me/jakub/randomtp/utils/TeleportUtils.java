@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Random;
 
 public class TeleportUtils {
@@ -139,12 +140,12 @@ public class TeleportUtils {
      * @param player Player to get the world from
      * @return Returns the location if successful, returns null if it couldn't generate a location
      */
-    public Location startGenerateLocation(Player player) {
+    public Location startGenerateLocation(Player player, Biome biome) {
         int maxAttempts = Utils.getMaxAttempts();
         int attempts = 0;
         while (attempts < maxAttempts) {
             Location loc = generateLocation(player);
-            if (!isLocationSafe(loc)) {
+            if (!isLocationSafe(loc, biome)) {
                 attempts++;
             } else {
                 attempts = 0;
@@ -162,8 +163,8 @@ public class TeleportUtils {
      * @param loc Location to check
      * @return Returns true if location is safe, otherwise returns false
      */
-    public boolean checkGeneratedLocation(Location loc) {
-        if (loc != null && isLocationSafe(loc)) {
+    public boolean checkGeneratedLocation(Location loc, Biome biome) {
+        if (loc != null && isLocationSafe(loc, biome)) {
             return true;
         } else {
             return false;
@@ -171,7 +172,7 @@ public class TeleportUtils {
     }
 
 
-    public boolean isLocationSafe(Location location) {
+    public boolean isLocationSafe(Location location, Biome biome) {
         //Checking if the generated random location is safe
         int x = location.getBlockX();
         int y = location.getBlockY();
@@ -192,6 +193,13 @@ public class TeleportUtils {
                 }
             }
         }
+
+        if (biome != null) {
+            if (location.getBlock().getBiome() != biome) {
+                return false;
+            }
+        }
+
         if (location.getWorld().getEnvironment() == World.Environment.NORMAL) {
             return !(bad_blocks.contains(above.getType()))
                     && !(bad_blocks.contains(block.getType()))
@@ -220,11 +228,11 @@ public class TeleportUtils {
 
     }
 
-    public void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown) {
+    public void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, Biome biome) {
 
         boolean countdownEnabled = plugin.getConfig().getBoolean("Countdown.enabled");
 
-        if (!checkGeneratedLocation(location)) {
+        if (!checkGeneratedLocation(location, biome)) {
             player.sendMessage(Utils.getCouldntGenerateMessage());
             return;
         }
@@ -323,7 +331,7 @@ public class TeleportUtils {
      * @param bypassPrice     Bypass the price
      * @param startCooldown   Add player to cooldown
      */
-    public void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown) {
+    public void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, Biome biome) {
         boolean forceWorld = Utils.getForceDefaultWorldEnabled();
         World forcedWorld = Utils.forcedWorld(player); //player is used as a backup world
         World locForCheck;
@@ -336,8 +344,39 @@ public class TeleportUtils {
             player.sendMessage(Utils.getWorldDisabledMessage());
             return;
         }
-        Location loc = startGenerateLocation(player);
-        startTp(player, loc, bypassCountdown, bypassPrice, startCooldown);
+        Location loc = startGenerateLocation(player, biome);
+        startTp(player, loc, bypassCountdown, bypassPrice, startCooldown, biome);
+    }
+
+
+    public void rtpToBiome(Player sender, Player target, String biomeString, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, boolean output) {
+        try {
+            Biome biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
+        } catch (Exception e) {
+            if (output) {
+                sender.sendMessage(Utils.getWrongBiomeMessage());
+            }
+            return;
+        }
+        Biome biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
+
+        rtpPlayer(target, bypassCountdown, bypassPrice, startCooldown, biome);
+        if (output) {
+            sender.sendMessage(Utils.getTpMessageSenderBiome(target, biome));
+        }
+    }
+
+    public void rtpToBiomeConsole(Player target, String biomeString, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown) {
+        try {
+            Biome biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
+        } catch (Exception e) {
+            Log.log(Log.LogLevel.ERROR, "Couldn't find that biome");
+            return;
+        }
+        Biome biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
+
+        rtpPlayer(target, bypassCountdown, bypassPrice, startCooldown, biome);
+        Log.log(Log.LogLevel.SUCCESS, "Successfully teleported " + target.getName() + " in the biome " + biome.name().toLowerCase(Locale.ROOT));
     }
 
 

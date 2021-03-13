@@ -33,8 +33,8 @@ public class RTPluginCommand implements CommandExecutor {
                 player.sendMessage("§6Version: §c" + Randomtp.VERSION);
                 player.sendMessage("§3§lCommands:");
                 player.sendMessage("§6/rtp - Teleports you to a random location within the border set in the config");
-                player.sendMessage("§6/rtp [player] - /rtp other players");
-                player.sendMessage("§6/rtp @everyone - /rtp everyone on the server");
+                player.sendMessage("§6/rtp [player] [biome] - /rtp other players");
+                player.sendMessage("§6/rtp @everyone [biome] - /rtp everyone on the server");
                 player.sendMessage("§6/wild - /rtp alias");
                 player.sendMessage("§6/rtplugin help - Shows you this message");
                 player.sendMessage("§6/rtplugin setborder - Allows you to set the border");
@@ -105,8 +105,8 @@ public class RTPluginCommand implements CommandExecutor {
                 Log.log(Log.LogLevel.PLAIN, "§6Version: §c" + Randomtp.VERSION);
                 Log.log(Log.LogLevel.PLAIN, "§3§lCommands:");
                 Log.log(Log.LogLevel.PLAIN, "§6/rtp - Teleports you to a random location within the border set in the config (Default: 1000)");
-                Log.log(Log.LogLevel.PLAIN, "§6/rtp [player] - /rtp other players");
-                Log.log(Log.LogLevel.PLAIN, "§6/rtp @everyone - /rtp everyone on the server");
+                Log.log(Log.LogLevel.PLAIN, "§6/rtp [player] [biome] - /rtp other players");
+                Log.log(Log.LogLevel.PLAIN, "§6/rtp @everyone [biome] - /rtp everyone on the server");
                 Log.log(Log.LogLevel.PLAIN, "§6/wild - /rtp alias");
                 Log.log(Log.LogLevel.PLAIN, "§6/rtplugin help - Shows you this message");
                 Log.log(Log.LogLevel.PLAIN, "§6/rtplugin setborder - Allows you to set the border");

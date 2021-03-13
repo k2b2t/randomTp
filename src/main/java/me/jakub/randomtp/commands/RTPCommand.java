@@ -6,6 +6,7 @@ import me.jakub.randomtp.utils.Log;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.block.Biome;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -46,13 +47,17 @@ public class RTPCommand implements CommandExecutor {
                     if (player.hasPermission("randomTp.rtp.everyone")) {
                         player.sendMessage(Utils.getTpEveryoneMessage());
                         for (Player target : Bukkit.getOnlinePlayers()) {
-                            teleportUtils.rtpPlayer(target, true, true, false);
+
+                            if (args.length == 2) {
+                                teleportUtils.rtpToBiome(player, target, args[1], true, true, false, false);
+                            } else {
+                                teleportUtils.rtpPlayer(target, true, true, false, null);
+                            }
                         }
                     } else {
                         player.sendMessage(Utils.getNoPermission());
                     }
-                }
-                if (!args[0].equalsIgnoreCase("@everyone")) {
+                } else {
 
                     if (player.hasPermission("randomTp.rtp.others")) {
 
@@ -60,8 +65,14 @@ public class RTPCommand implements CommandExecutor {
                         Player target = Bukkit.getServer().getPlayer(args[0]);
 
                         if (target != null) {
-                                teleportUtils.rtpPlayer(target, true, true, false);
-                                player.sendMessage(Utils.getTpMessageSender(target));
+
+                            if (args.length == 2) {
+                                teleportUtils.rtpToBiome(player, target, args[1], true, true, false, true);
+                                return true;
+                            }
+
+                            teleportUtils.rtpPlayer(target, true, true, false, null);
+                            player.sendMessage(Utils.getTpMessageSender(target));
                         } else {
                             player.sendMessage("§cCouldn't find that player!");
                         }
@@ -90,20 +101,11 @@ public class RTPCommand implements CommandExecutor {
                             }
                         }
                         // player doesn't have a cooldown
-                        if (Randomtp.vaultHooked) {//Vault things
-                            teleportUtils.rtpPlayer(player, false, false, true);
-
-                        } else {
-                            teleportUtils.rtpPlayer(player, false, true, true);
-                        }//END Cooldown
+                        //END Cooldown
+                        teleportUtils.rtpPlayer(player, false, !Randomtp.vaultHooked, true, null);
                     } else {
                         //Has cooldown bypass perms
-                        if (Randomtp.vaultHooked) {
-                            teleportUtils.rtpPlayer(player, false, false, false);
-
-                        } else {
-                            teleportUtils.rtpPlayer(player, false, true, false);
-                        }
+                        teleportUtils.rtpPlayer(player, false, !Randomtp.vaultHooked, false, null);
                     }
                 } else {
                     player.sendMessage(Utils.getNoPermission());
@@ -113,16 +115,21 @@ public class RTPCommand implements CommandExecutor {
         } else {
             if (commandSender instanceof ConsoleCommandSender) {
                 //If executed from console
-                if (args.length == 1) {
+                if (args.length != 0) {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
-                            teleportUtils.rtpPlayer(target, true, true, false);
-                            Log.log(Log.LogLevel.SUCCESS, "Successfully teleported " + target.getName() + " to a random location");
+
+                        if (args.length == 2){
+                            teleportUtils.rtpToBiomeConsole(target, args[1], true, true, false);
+                            return true;
+                        }
+                        teleportUtils.rtpPlayer(target, true, true, false, null);
+                        Log.log(Log.LogLevel.SUCCESS, "Successfully teleported " + target.getName() + " to a random location");
                     } else {
                         Log.log(Log.LogLevel.ERROR, "Couldn't find that player");
                     }
                 } else {
-                    Log.log(Log.LogLevel.ERROR, "Usage: rtp <player>");
+                    Log.log(Log.LogLevel.ERROR, "Usage: rtp <player> [biome]");
                 }
             }
         }

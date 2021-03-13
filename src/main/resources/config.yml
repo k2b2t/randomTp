@@ -154,6 +154,8 @@ Messages:
   tp-message: "&6You were teleported to a random location"
   #Message that the player that executed the command /rtp <player> will receive.
   tp-message-sender: "&6You teleported &c%player% &6to a random location"
+  #Message when you RTP someone to a specific biome
+  tp-message-sender-biome: "&6You teleported &c%player% &6to a random location in the biome &c%biome%"
   #The message you see when you execute the /rtp @everyone command
   tp-everyone-message: "&6Teleporting everyone on the server"
   #Message when the world you try to rtp in is disabled
@@ -184,3 +186,5 @@ Messages:
   counting-down-message: "&6Teleporting in %time% seconds"
   #Message when RTP gets cancelled
   teleportation-cancelled-message: "&4Cancelled teleportation!"
+  #Wrong biome name was used when /rtp'ing
+  wrong-biome-name: "&cCouldn't find that biome!"

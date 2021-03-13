@@ -4,9 +4,11 @@ import me.jakub.randomtp.Randomtp;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.Locale;
 
 public class Utils {
 
@@ -30,6 +32,10 @@ public class Utils {
 
     public static String getTpMessageSender(Player target) {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.tp-message-sender")).replace("%player%", target.getName());
+    }
+
+    public static String getTpMessageSenderBiome(Player target, Biome biome){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.tp-message-sender-biome")).replace("%player%", target.getName()).replace("%biome%", biome.name().toLowerCase(Locale.ROOT));
     }
 
     public static String getUnknownCommand() {
@@ -191,6 +197,10 @@ public class Utils {
 
     public static boolean getCountdownMessageEnabled() {
         return plugin.getConfig().getBoolean("Countdown.countdown-message");
+    }
+
+    public static String getWrongBiomeMessage(){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.wrong-biome-name"));
     }
 
 }

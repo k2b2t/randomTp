@@ -9,7 +9,7 @@ commands:
   rtp:
     description: Randomly teleports the player to a random location
     aliases: wild
-    usage: /<command> [player|@everyone]
+    usage: /<command> [player|@everyone] [biome]
   rtplugin:
     description: Main RandomTP plugin command
     usage: /<command> <help|setborder|reload> [number]

@@ -1,6 +1,7 @@
 package me.jakub.randomtp.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.block.Biome;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -8,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class RTPCommandTabCompleter implements TabCompleter {
     @Override
@@ -21,7 +23,17 @@ public class RTPCommandTabCompleter implements TabCompleter {
                 strings.add(players[i].getName());
             }
             strings.add("@everyone");
-            return strings;
+
+            if (args.length == 1) {
+                return strings;
+            }else if(args.length == 2){
+                List<String> biomes = new ArrayList<>();
+                for (Biome biome : Biome.values()){
+                    biomes.add(biome.name().toLowerCase(Locale.ROOT));
+                }
+
+                return biomes;
+            }
 
         }
         return null;
