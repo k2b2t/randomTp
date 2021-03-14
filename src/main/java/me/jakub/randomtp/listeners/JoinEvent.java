@@ -26,7 +26,7 @@ public class JoinEvent implements Listener {
                 Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                     @Override
                     public void run() {
-                        teleportUtils.rtpPlayer(player, true, true, false, null);
+                        teleportUtils.rtpPlayer(player, null,  true, true, false, null, false);
                     }
                 }, 15);
             }

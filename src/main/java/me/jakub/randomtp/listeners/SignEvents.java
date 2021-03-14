@@ -58,7 +58,7 @@ public class SignEvents implements Listener {
                             sign.getLine(3).equalsIgnoreCase(Utils.getSignLine(3))) {
                         Player player = e.getPlayer();
                         if (player.hasPermission("randomTp.sign.use")) {
-                            teleportUtils.rtpPlayer(player, true, true, false, null);
+                            teleportUtils.rtpPlayer(player, null, true, true, false, null, false);
                         } else {
                             player.sendMessage(Utils.getNoPermission());
                         }

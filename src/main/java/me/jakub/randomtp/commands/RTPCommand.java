@@ -6,7 +6,6 @@ import me.jakub.randomtp.utils.Log;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.block.Biome;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -49,9 +48,9 @@ public class RTPCommand implements CommandExecutor {
                         for (Player target : Bukkit.getOnlinePlayers()) {
 
                             if (args.length == 2) {
-                                teleportUtils.rtpToBiome(player, target, args[1], true, true, false, false);
+                                teleportUtils.rtpPlayer(target, player, true, true, false, args[1], false);
                             } else {
-                                teleportUtils.rtpPlayer(target, true, true, false, null);
+                                teleportUtils.rtpPlayer(target, player, true, true, false, null, false);
                             }
                         }
                     } else {
@@ -67,11 +66,13 @@ public class RTPCommand implements CommandExecutor {
                         if (target != null) {
 
                             if (args.length == 2) {
-                                teleportUtils.rtpToBiome(player, target, args[1], true, true, false, true);
+                                teleportUtils.rtpPlayer(target, player, true, true, false, args[1], true);
+                                /*teleportUtils.rtpToBiome(player, target, args[1], true, true, false, true);*/
                                 return true;
                             }
 
-                            teleportUtils.rtpPlayer(target, true, true, false, null);
+                            teleportUtils.rtpPlayer(target, player, true, true, false, null, false);
+                            /*teleportUtils.rtpPlayer(target, true, true, false, null);*/
                             player.sendMessage(Utils.getTpMessageSender(target));
                         } else {
                             player.sendMessage("§cCouldn't find that player!");
@@ -102,10 +103,10 @@ public class RTPCommand implements CommandExecutor {
                         }
                         // player doesn't have a cooldown
                         //END Cooldown
-                        teleportUtils.rtpPlayer(player, false, !Randomtp.vaultHooked, true, null);
+                        teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false);
                     } else {
                         //Has cooldown bypass perms
-                        teleportUtils.rtpPlayer(player, false, !Randomtp.vaultHooked, false, null);
+                        teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, false, null, false);
                     }
                 } else {
                     player.sendMessage(Utils.getNoPermission());
@@ -119,12 +120,13 @@ public class RTPCommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
 
-                        if (args.length == 2){
-                            teleportUtils.rtpToBiomeConsole(target, args[1], true, true, false);
+                        if (args.length == 2) {
+                            teleportUtils.rtpPlayer(target, null, true, true, false, args[1], false);
+                            Log.log(Log.LogLevel.SUCCESS, "Teleporting " + target.getName() + " to a random location in biome " + args[1]);
                             return true;
                         }
-                        teleportUtils.rtpPlayer(target, true, true, false, null);
-                        Log.log(Log.LogLevel.SUCCESS, "Successfully teleported " + target.getName() + " to a random location");
+                        teleportUtils.rtpPlayer(target, null, true, true, false, null, false);
+                        Log.log(Log.LogLevel.SUCCESS, "Teleporting " + target.getName() + " to a random location");
                     } else {
                         Log.log(Log.LogLevel.ERROR, "Couldn't find that player");
                     }

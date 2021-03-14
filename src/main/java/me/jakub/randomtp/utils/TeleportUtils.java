@@ -323,61 +323,53 @@ public class TeleportUtils {
         player.sendMessage(Utils.getTpMessage());
     }
 
+
     /**
      * RTP a player
      *
-     * @param player          Player to RTP
-     * @param bypassCountdown Bypass the countdown
-     * @param bypassPrice     Bypass the price
-     * @param startCooldown   Add player to cooldown
+     * @param target          Player to RTP
+     * @param sender          Command sender (nullable)
+     * @param bypassCountdown Bypass countdown
+     * @param bypassPrice     Bypass RTP price
+     * @param startCooldown   Should a cooldown start for the player target
+     * @param biomeString     Name of a biome (null for no specific biome)
+     * @param biomeOutput     Should it output biome messages
      */
-    public void rtpPlayer(Player player, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, Biome biome) {
+    public void rtpPlayer(Player target, Player sender, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, String biomeString, boolean biomeOutput) {
+        Biome biome = null;
         boolean forceWorld = Utils.getForceDefaultWorldEnabled();
-        World forcedWorld = Utils.forcedWorld(player); //player is used as a backup world
+        World forcedWorld = Utils.forcedWorld(target); //player is used as a backup world
         World locForCheck;
         if (forceWorld) {
             locForCheck = forcedWorld;
         } else {
-            locForCheck = player.getWorld();
+            locForCheck = target.getWorld();
         }
         if (Utils.isWorldDisabled(locForCheck.getName())) {
-            player.sendMessage(Utils.getWorldDisabledMessage());
+            target.sendMessage(Utils.getWorldDisabledMessage());
             return;
         }
-        Location loc = startGenerateLocation(player, biome);
-        startTp(player, loc, bypassCountdown, bypassPrice, startCooldown, biome);
-    }
 
-
-    public void rtpToBiome(Player sender, Player target, String biomeString, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, boolean output) {
-        try {
-            Biome biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
-        } catch (Exception e) {
-            if (output) {
-                sender.sendMessage(Utils.getWrongBiomeMessage());
+        if (biomeString != null) {
+            try {
+                biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
+            } catch (Exception e) {
+                if (biomeOutput && sender != null) {
+                    sender.sendMessage(Utils.getWrongBiomeMessage());
+                }
+                return;
             }
-            return;
-        }
-        Biome biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
+            biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
 
-        rtpPlayer(target, bypassCountdown, bypassPrice, startCooldown, biome);
-        if (output) {
-            sender.sendMessage(Utils.getTpMessageSenderBiome(target, biome));
+            Location loc = startGenerateLocation(target, biome);
+            startTp(target, loc, bypassCountdown, bypassPrice, startCooldown, biome);
+            if (biomeOutput && sender != null) {
+                sender.sendMessage(Utils.getTpMessageSenderBiome(target, biome));
+            }
+        } else {
+            Location loc = startGenerateLocation(target, biome);
+            startTp(target, loc, bypassCountdown, bypassPrice, startCooldown, biome);
         }
     }
-
-    public void rtpToBiomeConsole(Player target, String biomeString, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown) {
-        try {
-            Biome biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
-        } catch (Exception e) {
-            Log.log(Log.LogLevel.ERROR, "Couldn't find that biome");
-            return;
-        }
-        Biome biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
-
-        rtpPlayer(target, bypassCountdown, bypassPrice, startCooldown, biome);
-        Log.log(Log.LogLevel.SUCCESS, "Successfully teleported " + target.getName() + " in the biome " + biome.name().toLowerCase(Locale.ROOT));
-    }
-
 
 }
