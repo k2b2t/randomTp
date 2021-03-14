@@ -2,6 +2,7 @@ package me.jakub.randomtp.utils;
 
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.commands.RTPCommand;
+import me.jakub.randomtp.gui.confirmgui.ConfirmGUI;
 import me.jakub.randomtp.hooks.VaultHook;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
@@ -335,7 +336,12 @@ public class TeleportUtils {
      * @param biomeString     Name of a biome (null for no specific biome)
      * @param biomeOutput     Should it output biome messages
      */
-    public void rtpPlayer(Player target, Player sender, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, String biomeString, boolean biomeOutput) {
+    public void rtpPlayer(Player target, Player sender, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, String biomeString, boolean biomeOutput, boolean guiChecked) {
+        if (!guiChecked && Utils.isConfirmGUIEnabled()){
+            ConfirmGUI confirmGUI = new ConfirmGUI();
+            confirmGUI.openConfirmGUI(target);
+            return;
+        }
         Biome biome = null;
         boolean forceWorld = Utils.getForceDefaultWorldEnabled();
         World forcedWorld = Utils.forcedWorld(target); //player is used as a backup world

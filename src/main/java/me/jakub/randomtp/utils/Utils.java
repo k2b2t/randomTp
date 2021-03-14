@@ -3,6 +3,7 @@ package me.jakub.randomtp.utils;
 import me.jakub.randomtp.Randomtp;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
@@ -34,7 +35,7 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.tp-message-sender")).replace("%player%", target.getName());
     }
 
-    public static String getTpMessageSenderBiome(Player target, Biome biome){
+    public static String getTpMessageSenderBiome(Player target, Biome biome) {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.tp-message-sender-biome")).replace("%player%", target.getName()).replace("%biome%", biome.name().toLowerCase(Locale.ROOT));
     }
 
@@ -95,7 +96,7 @@ public class Utils {
             World world = Bukkit.getWorld(plugin.getConfig().getString("Force-default-world.world-name"));
             if (world != null) {
                 return world;
-            }else{
+            } else {
                 Log.log(Log.LogLevel.ERROR, "Wrong Force Default World world name was used in the config!!! Turning off force world");
                 return player.getWorld();
             }
@@ -105,12 +106,12 @@ public class Utils {
         }
     }
 
-    public static void reloadConfig(){
+    public static void reloadConfig() {
         plugin.reloadConfig();
         Log.log(Log.LogLevel.SUCCESS, "Reloaded the config!");
     }
 
-    public static void reloadConfig(Player player){
+    public static void reloadConfig(Player player) {
         plugin.reloadConfig();
         player.sendMessage("§bReloaded the config!");
     }
@@ -134,8 +135,34 @@ public class Utils {
     public static List<String> getBiomes() {
         return (List<String>) plugin.getConfig().getList("Biome-blacklist.biomes");
     }
-    
-    public static int getCountdown(){
+
+    public static String getConfirmGUITitle() {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Rtp-settings.Confirm-gui.title"));
+    }
+
+    public static boolean isConfirmGUIEnabled() {
+        return plugin.getConfig().getBoolean("Rtp-settings.Confirm-gui.enabled");
+    }
+
+    public static Material getConfirmItem(){
+        try {
+            return Material.valueOf(plugin.getConfig().getString("Rtp-settings.Confirm-gui.confirm-item").toUpperCase(Locale.ROOT));
+        }catch (Exception e){
+            Log.log(Log.LogLevel.ERROR, "Wrong confirm item name was used in the config!");
+            return Material.EMERALD_BLOCK;
+        }
+    }
+
+    public static Material getCancelItem(){
+        try {
+            return Material.valueOf(plugin.getConfig().getString("Rtp-settings.Confirm-gui.cancel-item").toUpperCase(Locale.ROOT));
+        }catch (Exception e){
+            Log.log(Log.LogLevel.ERROR, "Wrong cancel item name was used in the config!");
+            return Material.REDSTONE_BLOCK;
+        }
+    }
+
+    public static int getCountdown() {
         return plugin.getConfig().getInt("Countdown.seconds");
     }
 
@@ -199,7 +226,7 @@ public class Utils {
         return plugin.getConfig().getBoolean("Countdown.countdown-message");
     }
 
-    public static String getWrongBiomeMessage(){
+    public static String getWrongBiomeMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.wrong-biome-name"));
     }
 
