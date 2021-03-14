@@ -13,27 +13,24 @@ import java.util.Arrays;
 public class ConfirmGUI {
 
     public Inventory createConfirmGUI() {
-        Inventory confirmGUI = Bukkit.createInventory(null, 9, Utils.getConfirmGUITitle());
+        Inventory confirmGUI = Bukkit.createInventory(null, 27, Utils.getConfirmGUITitle());
 
         ItemStack background = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
         ItemMeta backgroundMeta = background.getItemMeta();
         backgroundMeta.setDisplayName(" ");
         background.setItemMeta(backgroundMeta);
 
-        ItemStack confirm = new ItemStack(Material.EMERALD_BLOCK);
+        ItemStack confirm = new ItemStack(Utils.getConfirmItem());
         ItemMeta confirmMeta = confirm.getItemMeta();
         confirmMeta.setDisplayName("§a§lConfirm RTP");
         confirm.setItemMeta(confirmMeta);
 
-        ItemStack cancel = new ItemStack(Material.REDSTONE_BLOCK);
+        ItemStack cancel = new ItemStack(Utils.getCancelItem());
         ItemMeta cancelMeta = cancel.getItemMeta();
         cancelMeta.setDisplayName("§c§lCancel RTP");
         cancel.setItemMeta(cancelMeta);
 
-
-        ItemStack[] items = {background, background, confirm, background, background, background, cancel, background, background};
-        confirmGUI.setContents(items);
-        //initItems(confirmGUI, background, confirm, cancel);
+        initItems(confirmGUI, background, confirm, cancel);
         return confirmGUI;
     }
 
@@ -41,17 +38,36 @@ public class ConfirmGUI {
         player.openInventory(createConfirmGUI());
     }
 
-    /*private void initItems(Inventory inv, ItemStack background, ItemStack confirm, ItemStack cancel) {
+    private void initItems(Inventory inv, ItemStack background, ItemStack confirm, ItemStack cancel) {
 
         inv.setItem(0, background);
-        inv.setItem(0, background);
-        inv.setItem(0, background);
-        inv.setItem(0, background);
-        inv.setItem(0, background);
-        inv.setItem(0, background);
-        inv.setItem(0, background);
-        inv.setItem(0, background);
+        inv.setItem(1, background);
+        inv.setItem(2, background);
+        inv.setItem(3, background);
+        inv.setItem(4, background);
+        inv.setItem(5, background);
+        inv.setItem(6, background);
+        inv.setItem(7, background);
+        inv.setItem(8, background);
+        inv.setItem(9, background);
+        inv.setItem(10, background);
+        inv.setItem(11, confirm);
+        inv.setItem(12, background);
+        inv.setItem(13, background);
+        inv.setItem(14, background);
+        inv.setItem(15, cancel);
+        inv.setItem(16, background);
+        inv.setItem(17, background);
+        inv.setItem(18, background);
+        inv.setItem(19, background);
+        inv.setItem(20, background);
+        inv.setItem(21, background);
+        inv.setItem(22, background);
+        inv.setItem(23, background);
+        inv.setItem(24, background);
+        inv.setItem(25, background);
+        inv.setItem(26, background);
 
-    }*/
+    }
 
 }

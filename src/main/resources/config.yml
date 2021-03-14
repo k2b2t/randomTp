@@ -54,6 +54,10 @@ Rtp-settings:
     enabled: false
     #Title of the GUI **USE COLOR CODES**
     title: "&aConfirm RTP"
+    #Confirm item material
+    confirm-item: EMERALD_BLOCK
+    #Cancel item material
+    cancel-item: REDSTONE_BLOCK
 
 #RTP Settings for specific worlds
 

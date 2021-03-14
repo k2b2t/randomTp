@@ -3,6 +3,7 @@ package me.jakub.randomtp.utils;
 import me.jakub.randomtp.Randomtp;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
@@ -141,6 +142,24 @@ public class Utils {
 
     public static boolean isConfirmGUIEnabled() {
         return plugin.getConfig().getBoolean("Rtp-settings.Confirm-gui.enabled");
+    }
+
+    public static Material getConfirmItem(){
+        try {
+            return Material.valueOf(plugin.getConfig().getString("Rtp-settings.Confirm-gui.confirm-item").toUpperCase(Locale.ROOT));
+        }catch (Exception e){
+            Log.log(Log.LogLevel.ERROR, "Wrong confirm item name was used in the config!");
+            return Material.EMERALD_BLOCK;
+        }
+    }
+
+    public static Material getCancelItem(){
+        try {
+            return Material.valueOf(plugin.getConfig().getString("Rtp-settings.Confirm-gui.cancel-item").toUpperCase(Locale.ROOT));
+        }catch (Exception e){
+            Log.log(Log.LogLevel.ERROR, "Wrong cancel item name was used in the config!");
+            return Material.REDSTONE_BLOCK;
+        }
     }
 
     public static int getCountdown() {
