@@ -4,10 +4,8 @@ import me.jakub.randomtp.commands.RTPCommand;
 import me.jakub.randomtp.commands.RTPCommandTabCompleter;
 import me.jakub.randomtp.commands.RTPluginCommand;
 import me.jakub.randomtp.commands.RTPluginCommandTabCompleter;
-import me.jakub.randomtp.listeners.CountdownEvents;
-import me.jakub.randomtp.listeners.DeathEvent;
-import me.jakub.randomtp.listeners.JoinEvent;
-import me.jakub.randomtp.listeners.SignEvents;
+import me.jakub.randomtp.gui.confirmgui.ConfirmGUI;
+import me.jakub.randomtp.listeners.*;
 import me.jakub.randomtp.metrics.MetricsLite;
 import me.jakub.randomtp.utils.*;
 import net.milkbowl.vault.economy.Economy;
@@ -36,6 +34,7 @@ public final class Randomtp extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SignEvents(this), this);
         getServer().getPluginManager().registerEvents(new CountdownEvents(), this);
         getServer().getPluginManager().registerEvents(new DeathEvent(this), this);
+        getServer().getPluginManager().registerEvents(new GUIEvent(this), this);
 
         getCommand("rtp").setExecutor(new RTPCommand(this));
         getCommand("rtp").setTabCompleter(new RTPCommandTabCompleter());

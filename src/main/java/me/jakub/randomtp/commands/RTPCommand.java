@@ -48,9 +48,9 @@ public class RTPCommand implements CommandExecutor {
                         for (Player target : Bukkit.getOnlinePlayers()) {
 
                             if (args.length == 2) {
-                                teleportUtils.rtpPlayer(target, player, true, true, false, args[1], false);
+                                teleportUtils.rtpPlayer(target, player, true, true, false, args[1], false, true);
                             } else {
-                                teleportUtils.rtpPlayer(target, player, true, true, false, null, false);
+                                teleportUtils.rtpPlayer(target, player, true, true, false, null, false, true);
                             }
                         }
                     } else {
@@ -66,12 +66,12 @@ public class RTPCommand implements CommandExecutor {
                         if (target != null) {
 
                             if (args.length == 2) {
-                                teleportUtils.rtpPlayer(target, player, true, true, false, args[1], true);
+                                teleportUtils.rtpPlayer(target, player, true, true, false, args[1], true, true);
                                 /*teleportUtils.rtpToBiome(player, target, args[1], true, true, false, true);*/
                                 return true;
                             }
 
-                            teleportUtils.rtpPlayer(target, player, true, true, false, null, false);
+                            teleportUtils.rtpPlayer(target, player, true, true, false, null, false, true);
                             /*teleportUtils.rtpPlayer(target, true, true, false, null);*/
                             player.sendMessage(Utils.getTpMessageSender(target));
                         } else {
@@ -103,10 +103,10 @@ public class RTPCommand implements CommandExecutor {
                         }
                         // player doesn't have a cooldown
                         //END Cooldown
-                        teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false);
+                        teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false, false);
                     } else {
                         //Has cooldown bypass perms
-                        teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, false, null, false);
+                        teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, false, null, false, false);
                     }
                 } else {
                     player.sendMessage(Utils.getNoPermission());
@@ -121,11 +121,11 @@ public class RTPCommand implements CommandExecutor {
                     if (target != null) {
 
                         if (args.length == 2) {
-                            teleportUtils.rtpPlayer(target, null, true, true, false, args[1], false);
+                            teleportUtils.rtpPlayer(target, null, true, true, false, args[1], false, true);
                             Log.log(Log.LogLevel.SUCCESS, "Teleporting " + target.getName() + " to a random location in biome " + args[1]);
                             return true;
                         }
-                        teleportUtils.rtpPlayer(target, null, true, true, false, null, false);
+                        teleportUtils.rtpPlayer(target, null, true, true, false, null, false, true);
                         Log.log(Log.LogLevel.SUCCESS, "Teleporting " + target.getName() + " to a random location");
                     } else {
                         Log.log(Log.LogLevel.ERROR, "Couldn't find that player");

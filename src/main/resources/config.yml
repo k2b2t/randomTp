@@ -5,6 +5,8 @@
 #| | \ \ (_| | | | | (_| | (_) | | | | | |    | |  | |
 #|_|  \_\__,_|_| |_|\__,_|\___/|_| |_| |_|    |_|  |_|
 #By: Kubajsa
+#Need help with the plugin? Feel free to join the Discord server
+#https://discord.gg/M83rMvrG6H
 
 
 #Default border
@@ -47,6 +49,11 @@ Countdown:
 Rtp-settings:
   #Max attempts to generate location
   max-attempts: 30
+  Confirm-gui:
+    #Set to true if you want players to confirm their /rtp command in a GUI
+    enabled: false
+    #Title of the GUI **USE COLOR CODES**
+    title: "&aConfirm RTP"
 
 #RTP Settings for specific worlds
 
