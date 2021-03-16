@@ -8,6 +8,7 @@ import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
 import java.util.Locale;
@@ -335,9 +336,10 @@ public class TeleportUtils {
      * @param startCooldown   Should a cooldown start for the player target
      * @param biomeString     Name of a biome (null for no specific biome)
      * @param biomeOutput     Should it output biome messages
+     * @param guiChecked      True if you don't want to use the confirm GUI
      */
     public void rtpPlayer(Player target, Player sender, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, String biomeString, boolean biomeOutput, boolean guiChecked) {
-        if (!guiChecked && Utils.isConfirmGUIEnabled()){
+        if (!guiChecked && Utils.isConfirmGUIEnabled()) {
             ConfirmGUI confirmGUI = new ConfirmGUI();
             confirmGUI.openConfirmGUI(target);
             return;
@@ -355,7 +357,6 @@ public class TeleportUtils {
             target.sendMessage(Utils.getWorldDisabledMessage());
             return;
         }
-
         if (biomeString != null) {
             try {
                 biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
