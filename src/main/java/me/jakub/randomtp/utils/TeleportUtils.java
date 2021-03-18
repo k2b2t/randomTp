@@ -51,22 +51,9 @@ public class TeleportUtils {
         int y = 0;
         int z = 0;
 
-        int border = plugin.getConfig().getInt("border");
-        int var1 = random.nextInt(border); //X coordinate
-        int var2 = random.nextInt(border); //Z coordinate
 
-
-        if (forceWorld) {
-            if (Utils.isWorldSet(forcedWorld)) {
-                var1 = random.nextInt(Utils.getBorderForWorld(forcedWorld.getName()));
-                var2 = random.nextInt(Utils.getBorderForWorld(forcedWorld.getName()));
-            }
-        } else {
-            if (Utils.isWorldSet(player.getWorld())) {
-                var1 = random.nextInt(Utils.getBorderForWorld(world.getName()));
-                var2 = random.nextInt(Utils.getBorderForWorld(world.getName()));
-            }
-        }
+        int var1 = random.nextInt(Utils.getBorderForWorld(world.getName())); //X coordinate
+        int var2 = random.nextInt(Utils.getBorderForWorld(world.getName())); //Z coordinate
 
 
         int var3 = random.nextInt(2); //basically a random boolean
