@@ -59,6 +59,33 @@ Rtp-settings:
     #Cancel item material
     cancel-item: REDSTONE_BLOCK
 
+  World-gui:
+    #If enabled, when a player executes /rtp the plugin will show a GUI with the option to pick the world
+    enabled: false
+    #Title of the World GUI
+    gui-title: "§aPick the world"
+    Slots:
+      #You have three slots in the World GUI
+      one:
+        #enabled - If it should appear in the World GUI
+        enabled: true
+        #world-name - The name of the world
+        world-name: world
+        #title - The title of the Item
+        title: "§aRTP to world: world"
+        #The item material
+        material: GRASS_BLOCK
+      two:
+        enabled: true
+        world-name: world
+        title: "§aRTP to world: world"
+        material: GRASS_BLOCK
+      three:
+        enabled: true
+        world-name: world
+        title: "§aRTP to world: world"
+        material: GRASS_BLOCK
+
 #RTP Settings for specific worlds
 
 #--Template--

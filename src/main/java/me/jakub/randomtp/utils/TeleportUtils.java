@@ -3,6 +3,7 @@ package me.jakub.randomtp.utils;
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.commands.RTPCommand;
 import me.jakub.randomtp.gui.confirmgui.ConfirmGUI;
+import me.jakub.randomtp.gui.confirmgui.WorldGUI;
 import me.jakub.randomtp.hooks.VaultHook;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
@@ -39,7 +40,7 @@ public class TeleportUtils {
     public static HashSet<Player> willTp = new HashSet<Player>();
 
 
-    public Location generateLocation(Player player) {
+    public Location generateLocation(Player player, World world) {
         //Called upon when generating a location
         Random random = new Random();
 
@@ -62,8 +63,8 @@ public class TeleportUtils {
             }
         } else {
             if (Utils.isWorldSet(player.getWorld())) {
-                var1 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
-                var2 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
+                var1 = random.nextInt(Utils.getBorderForWorld(world.getName()));
+                var2 = random.nextInt(Utils.getBorderForWorld(world.getName()));
             }
         }
 
@@ -83,9 +84,9 @@ public class TeleportUtils {
 
         Location randomLocation;
         if (!forceWorld) {
-            randomLocation = new Location(player.getWorld(), x, y, z); //create a new location
+            randomLocation = new Location(world, x, y, z); //create a new location
         } else {
-            randomLocation = new Location(forcedWorld, x, y, z); //create a new location
+            randomLocation = new Location(world, x, y, z); //create a new location
         }
 
         switch (randomLocation.getWorld().getEnvironment()) {
@@ -142,11 +143,11 @@ public class TeleportUtils {
      * @param player Player to get the world from
      * @return Returns the location if successful, returns null if it couldn't generate a location
      */
-    public Location startGenerateLocation(Player player, Biome biome) {
+    public Location startGenerateLocation(Player player, Biome biome, World world) {
         int maxAttempts = Utils.getMaxAttempts();
         int attempts = 0;
         while (attempts < maxAttempts) {
-            Location loc = generateLocation(player);
+            Location loc = generateLocation(player, world);
             if (!isLocationSafe(loc, biome)) {
                 attempts++;
             } else {
@@ -230,7 +231,7 @@ public class TeleportUtils {
 
     }
 
-    public void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, Biome biome) {
+    public void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, Biome biome, World world) {
 
         boolean countdownEnabled = plugin.getConfig().getBoolean("Countdown.enabled");
 
@@ -338,12 +339,22 @@ public class TeleportUtils {
      * @param biomeOutput     Should it output biome messages
      * @param guiChecked      True if you don't want to use the confirm GUI
      */
-    public void rtpPlayer(Player target, Player sender, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, String biomeString, boolean biomeOutput, boolean guiChecked) {
-        if (!guiChecked && Utils.isConfirmGUIEnabled()) {
+    public void rtpPlayer(Player target, Player sender, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, String biomeString, boolean biomeOutput, boolean guiChecked, boolean worldChecked, World world) {
+        if (!guiChecked && Utils.isConfirmGUIEnabled() && !Utils.getWorldGUIEnabled()) {//TODO Add check if !Utils.getChooseWorldGuiEnabled
             ConfirmGUI confirmGUI = new ConfirmGUI();
             confirmGUI.openConfirmGUI(target);
             return;
         }
+
+        if (!worldChecked && Utils.getWorldGUIEnabled()) {
+            WorldGUI worldGUI = new WorldGUI();
+            worldGUI.openWorldGUI(target);
+            return;
+        }
+        if (world == null) {
+            world = Utils.forcedWorld(target);
+        }
+
         Biome biome = null;
         boolean forceWorld = Utils.getForceDefaultWorldEnabled();
         World forcedWorld = Utils.forcedWorld(target); //player is used as a backup world
@@ -368,14 +379,14 @@ public class TeleportUtils {
             }
             biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
 
-            Location loc = startGenerateLocation(target, biome);
-            startTp(target, loc, bypassCountdown, bypassPrice, startCooldown, biome);
+            Location loc = startGenerateLocation(target, biome, world);
+            startTp(target, loc, bypassCountdown, bypassPrice, startCooldown, biome, world);
             if (biomeOutput && sender != null) {
                 sender.sendMessage(Utils.getTpMessageSenderBiome(target, biome));
             }
         } else {
-            Location loc = startGenerateLocation(target, biome);
-            startTp(target, loc, bypassCountdown, bypassPrice, startCooldown, biome);
+            Location loc = startGenerateLocation(target, biome, world);
+            startTp(target, loc, bypassCountdown, bypassPrice, startCooldown, biome, world);
         }
     }
 
