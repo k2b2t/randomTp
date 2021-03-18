@@ -4,7 +4,6 @@ import me.jakub.randomtp.commands.RTPCommand;
 import me.jakub.randomtp.commands.RTPCommandTabCompleter;
 import me.jakub.randomtp.commands.RTPluginCommand;
 import me.jakub.randomtp.commands.RTPluginCommandTabCompleter;
-import me.jakub.randomtp.gui.confirmgui.ConfirmGUI;
 import me.jakub.randomtp.listeners.*;
 import me.jakub.randomtp.metrics.MetricsLite;
 import me.jakub.randomtp.utils.*;

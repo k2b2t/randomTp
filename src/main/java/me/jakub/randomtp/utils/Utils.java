@@ -278,10 +278,10 @@ public class Utils {
         //Very nice code lmao
         if (worldName != null) {
             try {
-                int i =  plugin.getConfig().getInt("Worlds." + worldName + ".border");
-                if (i <= 0){
+                int i = plugin.getConfig().getInt("Worlds." + worldName + ".border");
+                if (i <= 0) {
                     return plugin.getConfig().getInt("border");
-                }else{
+                } else {
                     return plugin.getConfig().getInt("Worlds." + worldName + ".border");
                 }
             } catch (Exception e) {
