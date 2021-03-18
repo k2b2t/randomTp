@@ -43,20 +43,17 @@ public class GUIEvent implements Listener {
             e.setCancelled(true);
 
             if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Utils.getWorldGUIItemName(1))) {
-                System.out.println(1);
                 player.closeInventory();
                 player.updateInventory();
                 teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false, true, true, Utils.getWorldGUIItemWorld(1));
             } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Utils.getWorldGUIItemName(2))) {
-                System.out.println(2);
                 player.closeInventory();
                 player.updateInventory();
-                teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false, true, true, Utils.getWorldGUIItemWorld(1));
+                teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false, true, true, Utils.getWorldGUIItemWorld(2));
             } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Utils.getWorldGUIItemName(3))) {
-                System.out.println(3);
                 player.closeInventory();
                 player.updateInventory();
-                teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false, true, true, Utils.getWorldGUIItemWorld(1));
+                teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false, true, true, Utils.getWorldGUIItemWorld(3));
             }
 
         }

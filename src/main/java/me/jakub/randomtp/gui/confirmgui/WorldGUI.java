@@ -12,11 +12,11 @@ import java.util.List;
 
 public class WorldGUI {
 
-    public Inventory createWorldInventory() {
-        boolean oneEnabled = Utils.getWorldGUIItemEnabled(1);
-        boolean twoEnabled = Utils.getWorldGUIItemEnabled(2);
-        boolean threeEnabled = Utils.getWorldGUIItemEnabled(3);
+    boolean oneEnabled = Utils.getWorldGUIItemEnabled(1);
+    boolean twoEnabled = Utils.getWorldGUIItemEnabled(2);
+    boolean threeEnabled = Utils.getWorldGUIItemEnabled(3);
 
+    public Inventory createWorldInventory() {
         Inventory inventory = Bukkit.createInventory(null, 27, Utils.getWorldGUITitle());
 
         ItemStack background = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
@@ -44,11 +44,11 @@ public class WorldGUI {
         return inventory;
     }
 
-    public void openWorldGUI(Player player){
+    public void openWorldGUI(Player player) {
         player.openInventory(createWorldInventory());
     }
 
-    private void initItems(Inventory inv, ItemStack background, ItemStack worldOne, ItemStack worldTwo, ItemStack worldThree){
+    private void initItems(Inventory inv, ItemStack background, ItemStack worldOne, ItemStack worldTwo, ItemStack worldThree) {
         inv.setItem(0, background);
         inv.setItem(1, background);
         inv.setItem(2, background);
@@ -61,9 +61,21 @@ public class WorldGUI {
         inv.setItem(9, background);
         inv.setItem(10, background);
         inv.setItem(11, background);
-        inv.setItem(12, worldOne);
-        inv.setItem(13, worldTwo);
-        inv.setItem(14, worldThree);
+        if (oneEnabled) {
+            inv.setItem(12, worldOne);
+        } else {
+            inv.setItem(12, background);
+        }
+        if (twoEnabled) {
+            inv.setItem(13, worldTwo);
+        } else {
+            inv.setItem(13, background);
+        }
+        if (threeEnabled) {
+            inv.setItem(14, worldThree);
+        } else {
+            inv.setItem(14, background);
+        }
         inv.setItem(15, background);
         inv.setItem(16, background);
         inv.setItem(17, background);

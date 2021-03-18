@@ -170,8 +170,8 @@ public class Utils {
         return plugin.getConfig().getBoolean("Rtp-settings.World-gui.enabled");
     }
 
-    public static boolean getWorldGUIItemEnabled(int index){
-        switch (index){
+    public static boolean getWorldGUIItemEnabled(int index) {
+        switch (index) {
             case 1:
                 return plugin.getConfig().getBoolean("Rtp-settings.World-gui.Slots.one.enabled");
             case 2:
@@ -183,8 +183,8 @@ public class Utils {
         }
     }
 
-    public static String getWorldGUIItemName(int index){
-        switch (index){
+    public static String getWorldGUIItemName(int index) {
+        switch (index) {
             case 1:
                 return plugin.getConfig().getString("Rtp-settings.World-gui.Slots.one.title");
             case 2:
@@ -196,8 +196,8 @@ public class Utils {
         }
     }
 
-    public static World getWorldGUIItemWorld(int index){
-        switch (index){
+    public static World getWorldGUIItemWorld(int index) {
+        switch (index) {
             case 1:
                 return getWorldFromString(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.one.world-name"));
             case 2:
@@ -210,9 +210,9 @@ public class Utils {
     }
 
 
-    public static Material getWorldGUIItemMaterial(int index){
+    public static Material getWorldGUIItemMaterial(int index) {
         try {
-            switch (index){
+            switch (index) {
                 case 1:
                     return Material.valueOf(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.one.world-name"));
                 case 2:
@@ -222,23 +222,22 @@ public class Utils {
                 default:
                     return Material.GRASS_BLOCK;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return Material.GRASS_BLOCK;
         }
 
     }
 
 
-
-    private static World getWorldFromString(String worldName){
+    private static World getWorldFromString(String worldName) {
         try {
             World world = Bukkit.getWorld(worldName);
-            if (world != null){
+            if (world != null) {
                 return world;
-            }else{
+            } else {
                 return null;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
@@ -276,7 +275,21 @@ public class Utils {
     }
 
     public static int getBorderForWorld(String worldName) {
-        return plugin.getConfig().getInt("Worlds." + worldName + ".border");
+        //Very nice code lmao
+        if (worldName != null) {
+            try {
+                int i =  plugin.getConfig().getInt("Worlds." + worldName + ".border");
+                if (i <= 0){
+                    return plugin.getConfig().getInt("border");
+                }else{
+                    return plugin.getConfig().getInt("Worlds." + worldName + ".border");
+                }
+            } catch (Exception e) {
+                return plugin.getConfig().getInt("border");
+            }
+        } else {
+            return plugin.getConfig().getInt("border");
+        }
     }
 
     public static boolean isWorldDisabled(String worldName) {

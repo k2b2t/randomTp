@@ -352,9 +352,8 @@ public class TeleportUtils {
             return;
         }
         if (world == null) {
-            world = Utils.forcedWorld(target);
+            world = Utils.getForceDefaultWorldEnabled() ? Utils.forcedWorld(target) : target.getWorld();
         }
-
         Biome biome = null;
         boolean forceWorld = Utils.getForceDefaultWorldEnabled();
         World forcedWorld = Utils.forcedWorld(target); //player is used as a backup world
@@ -378,7 +377,6 @@ public class TeleportUtils {
                 return;
             }
             biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
-
             Location loc = startGenerateLocation(target, biome, world);
             startTp(target, loc, bypassCountdown, bypassPrice, startCooldown, biome, world);
             if (biomeOutput && sender != null) {
