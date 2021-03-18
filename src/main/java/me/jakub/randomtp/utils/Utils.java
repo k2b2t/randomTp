@@ -214,11 +214,11 @@ public class Utils {
         try {
             switch (index) {
                 case 1:
-                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.one.world-name"));
+                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.one.material"));
                 case 2:
-                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.two.world-name"));
+                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.two.material"));
                 case 3:
-                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.three.world-name"));
+                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.three.material"));
                 default:
                     return Material.GRASS_BLOCK;
             }

@@ -327,7 +327,7 @@ public class TeleportUtils {
      * @param guiChecked      True if you don't want to use the confirm GUI
      */
     public void rtpPlayer(Player target, Player sender, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, String biomeString, boolean biomeOutput, boolean guiChecked, boolean worldChecked, World world) {
-        if (!guiChecked && Utils.isConfirmGUIEnabled() && !Utils.getWorldGUIEnabled()) {//TODO Add check if !Utils.getChooseWorldGuiEnabled
+        if (!guiChecked && Utils.isConfirmGUIEnabled() && !Utils.getWorldGUIEnabled()) {
             ConfirmGUI confirmGUI = new ConfirmGUI();
             confirmGUI.openConfirmGUI(target);
             return;
