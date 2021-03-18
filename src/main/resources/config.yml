@@ -52,7 +52,8 @@ Rtp-settings:
   Confirm-gui:
     #Set to true if you want players to confirm their /rtp command in a GUI
     enabled: false
-    #Title of the GUI **USE COLOR CODES**
+    #Title of the GUI
+    #Make sure to use color codes (&<color code>) in the title. or else...
     title: "&aConfirm RTP"
     #Confirm item material
     confirm-item: EMERALD_BLOCK
@@ -63,7 +64,9 @@ Rtp-settings:
     #If enabled, when a player executes /rtp the plugin will show a GUI with the option to pick the world
     enabled: false
     #Title of the World GUI
+    #Make sure to use color codes (&<color code>) in the title. or else...
     gui-title: "§aPick the world"
+    #Item slot settings
     Slots:
       #You have three slots in the World GUI
       one:

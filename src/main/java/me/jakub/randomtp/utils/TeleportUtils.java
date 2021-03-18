@@ -325,6 +325,8 @@ public class TeleportUtils {
      * @param biomeString     Name of a biome (null for no specific biome)
      * @param biomeOutput     Should it output biome messages
      * @param guiChecked      True if you don't want to use the confirm GUI
+     * @param worldChecked    False to show the world GUI
+     * @param world           World to RTP to (overrides everything else)
      */
     public void rtpPlayer(Player target, Player sender, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, String biomeString, boolean biomeOutput, boolean guiChecked, boolean worldChecked, World world) {
         if (!guiChecked && Utils.isConfirmGUIEnabled() && !Utils.getWorldGUIEnabled()) {
@@ -342,15 +344,7 @@ public class TeleportUtils {
             world = Utils.getForceDefaultWorldEnabled() ? Utils.forcedWorld(target) : target.getWorld();
         }
         Biome biome = null;
-        boolean forceWorld = Utils.getForceDefaultWorldEnabled();
-        World forcedWorld = Utils.forcedWorld(target); //player is used as a backup world
-        World locForCheck;
-        if (forceWorld) {
-            locForCheck = forcedWorld;
-        } else {
-            locForCheck = target.getWorld();
-        }
-        if (Utils.isWorldDisabled(locForCheck.getName())) {
+        if (Utils.isWorldDisabled(world.getName())) {
             target.sendMessage(Utils.getWorldDisabledMessage());
             return;
         }
