@@ -144,21 +144,101 @@ public class Utils {
         return plugin.getConfig().getBoolean("Rtp-settings.Confirm-gui.enabled");
     }
 
-    public static Material getConfirmItem(){
+    public static Material getConfirmItem() {
         try {
             return Material.valueOf(plugin.getConfig().getString("Rtp-settings.Confirm-gui.confirm-item").toUpperCase(Locale.ROOT));
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.log(Log.LogLevel.ERROR, "Wrong confirm item name was used in the config!");
             return Material.EMERALD_BLOCK;
         }
     }
 
-    public static Material getCancelItem(){
+    public static Material getCancelItem() {
         try {
             return Material.valueOf(plugin.getConfig().getString("Rtp-settings.Confirm-gui.cancel-item").toUpperCase(Locale.ROOT));
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.log(Log.LogLevel.ERROR, "Wrong cancel item name was used in the config!");
             return Material.REDSTONE_BLOCK;
+        }
+    }
+
+    public static String getWorldGUITitle() {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Rtp-settings.World-gui.gui-title"));
+    }
+
+    public static boolean getWorldGUIEnabled() {
+        return plugin.getConfig().getBoolean("Rtp-settings.World-gui.enabled");
+    }
+
+    public static boolean getWorldGUIItemEnabled(int index) {
+        switch (index) {
+            case 1:
+                return plugin.getConfig().getBoolean("Rtp-settings.World-gui.Slots.one.enabled");
+            case 2:
+                return plugin.getConfig().getBoolean("Rtp-settings.World-gui.Slots.two.enabled");
+            case 3:
+                return plugin.getConfig().getBoolean("Rtp-settings.World-gui.Slots.three.enabled");
+            default:
+                return false;
+        }
+    }
+
+    public static String getWorldGUIItemName(int index) {
+        switch (index) {
+            case 1:
+                return plugin.getConfig().getString("Rtp-settings.World-gui.Slots.one.title");
+            case 2:
+                return plugin.getConfig().getString("Rtp-settings.World-gui.Slots.two.title");
+            case 3:
+                return plugin.getConfig().getString("Rtp-settings.World-gui.Slots.three.title");
+            default:
+                return "§cITEM NAME NOT SET";
+        }
+    }
+
+    public static World getWorldGUIItemWorld(int index) {
+        switch (index) {
+            case 1:
+                return getWorldFromString(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.one.world-name"));
+            case 2:
+                return getWorldFromString(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.two.world-name"));
+            case 3:
+                return getWorldFromString(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.three.world-name"));
+            default:
+                return null;
+        }
+    }
+
+
+    public static Material getWorldGUIItemMaterial(int index) {
+        try {
+            switch (index) {
+                case 1:
+                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.one.material"));
+                case 2:
+                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.two.material"));
+                case 3:
+                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.World-gui.Slots.three.material"));
+                default:
+                    return Material.GRASS_BLOCK;
+            }
+        } catch (Exception e) {
+            return Material.GRASS_BLOCK;
+        }
+
+    }
+
+
+    private static World getWorldFromString(String worldName) {
+        try {
+            World world = Bukkit.getWorld(worldName);
+            if (world != null) {
+                return world;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
         }
     }
 
@@ -195,7 +275,21 @@ public class Utils {
     }
 
     public static int getBorderForWorld(String worldName) {
-        return plugin.getConfig().getInt("Worlds." + worldName + ".border");
+        //Very nice code lmao
+        if (worldName != null) {
+            try {
+                int i = plugin.getConfig().getInt("Worlds." + worldName + ".border");
+                if (i <= 0) {
+                    return plugin.getConfig().getInt("border");
+                } else {
+                    return plugin.getConfig().getInt("Worlds." + worldName + ".border");
+                }
+            } catch (Exception e) {
+                return plugin.getConfig().getInt("border");
+            }
+        } else {
+            return plugin.getConfig().getInt("border");
+        }
     }
 
     public static boolean isWorldDisabled(String worldName) {

@@ -3,6 +3,7 @@ package me.jakub.randomtp.utils;
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.commands.RTPCommand;
 import me.jakub.randomtp.gui.confirmgui.ConfirmGUI;
+import me.jakub.randomtp.gui.confirmgui.WorldGUI;
 import me.jakub.randomtp.hooks.VaultHook;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
@@ -39,7 +40,7 @@ public class TeleportUtils {
     public static HashSet<Player> willTp = new HashSet<Player>();
 
 
-    public Location generateLocation(Player player) {
+    public Location generateLocation(Player player, World world) {
         //Called upon when generating a location
         Random random = new Random();
 
@@ -50,22 +51,9 @@ public class TeleportUtils {
         int y = 0;
         int z = 0;
 
-        int border = plugin.getConfig().getInt("border");
-        int var1 = random.nextInt(border); //X coordinate
-        int var2 = random.nextInt(border); //Z coordinate
 
-
-        if (forceWorld) {
-            if (Utils.isWorldSet(forcedWorld)) {
-                var1 = random.nextInt(Utils.getBorderForWorld(forcedWorld.getName()));
-                var2 = random.nextInt(Utils.getBorderForWorld(forcedWorld.getName()));
-            }
-        } else {
-            if (Utils.isWorldSet(player.getWorld())) {
-                var1 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
-                var2 = random.nextInt(Utils.getBorderForWorld(player.getWorld().getName()));
-            }
-        }
+        int var1 = random.nextInt(Utils.getBorderForWorld(world.getName())); //X coordinate
+        int var2 = random.nextInt(Utils.getBorderForWorld(world.getName())); //Z coordinate
 
 
         int var3 = random.nextInt(2); //basically a random boolean
@@ -83,9 +71,9 @@ public class TeleportUtils {
 
         Location randomLocation;
         if (!forceWorld) {
-            randomLocation = new Location(player.getWorld(), x, y, z); //create a new location
+            randomLocation = new Location(world, x, y, z); //create a new location
         } else {
-            randomLocation = new Location(forcedWorld, x, y, z); //create a new location
+            randomLocation = new Location(world, x, y, z); //create a new location
         }
 
         switch (randomLocation.getWorld().getEnvironment()) {
@@ -142,11 +130,11 @@ public class TeleportUtils {
      * @param player Player to get the world from
      * @return Returns the location if successful, returns null if it couldn't generate a location
      */
-    public Location startGenerateLocation(Player player, Biome biome) {
+    public Location startGenerateLocation(Player player, Biome biome, World world) {
         int maxAttempts = Utils.getMaxAttempts();
         int attempts = 0;
         while (attempts < maxAttempts) {
-            Location loc = generateLocation(player);
+            Location loc = generateLocation(player, world);
             if (!isLocationSafe(loc, biome)) {
                 attempts++;
             } else {
@@ -230,7 +218,7 @@ public class TeleportUtils {
 
     }
 
-    public void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, Biome biome) {
+    public void startTp(Player player, Location location, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, Biome biome, World world) {
 
         boolean countdownEnabled = plugin.getConfig().getBoolean("Countdown.enabled");
 
@@ -337,23 +325,26 @@ public class TeleportUtils {
      * @param biomeString     Name of a biome (null for no specific biome)
      * @param biomeOutput     Should it output biome messages
      * @param guiChecked      True if you don't want to use the confirm GUI
+     * @param worldChecked    False to show the world GUI
+     * @param world           World to RTP to (overrides everything else)
      */
-    public void rtpPlayer(Player target, Player sender, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, String biomeString, boolean biomeOutput, boolean guiChecked) {
-        if (!guiChecked && Utils.isConfirmGUIEnabled()) {
+    public void rtpPlayer(Player target, Player sender, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, String biomeString, boolean biomeOutput, boolean guiChecked, boolean worldChecked, World world) {
+        if (!guiChecked && Utils.isConfirmGUIEnabled() && !Utils.getWorldGUIEnabled()) {
             ConfirmGUI confirmGUI = new ConfirmGUI();
             confirmGUI.openConfirmGUI(target);
             return;
         }
-        Biome biome = null;
-        boolean forceWorld = Utils.getForceDefaultWorldEnabled();
-        World forcedWorld = Utils.forcedWorld(target); //player is used as a backup world
-        World locForCheck;
-        if (forceWorld) {
-            locForCheck = forcedWorld;
-        } else {
-            locForCheck = target.getWorld();
+
+        if (!worldChecked && Utils.getWorldGUIEnabled()) {
+            WorldGUI worldGUI = new WorldGUI();
+            worldGUI.openWorldGUI(target);
+            return;
         }
-        if (Utils.isWorldDisabled(locForCheck.getName())) {
+        if (world == null) {
+            world = Utils.getForceDefaultWorldEnabled() ? Utils.forcedWorld(target) : target.getWorld();
+        }
+        Biome biome = null;
+        if (Utils.isWorldDisabled(world.getName())) {
             target.sendMessage(Utils.getWorldDisabledMessage());
             return;
         }
@@ -367,15 +358,14 @@ public class TeleportUtils {
                 return;
             }
             biome = Biome.valueOf(biomeString.toUpperCase(Locale.ROOT));
-
-            Location loc = startGenerateLocation(target, biome);
-            startTp(target, loc, bypassCountdown, bypassPrice, startCooldown, biome);
+            Location loc = startGenerateLocation(target, biome, world);
+            startTp(target, loc, bypassCountdown, bypassPrice, startCooldown, biome, world);
             if (biomeOutput && sender != null) {
                 sender.sendMessage(Utils.getTpMessageSenderBiome(target, biome));
             }
         } else {
-            Location loc = startGenerateLocation(target, biome);
-            startTp(target, loc, bypassCountdown, bypassPrice, startCooldown, biome);
+            Location loc = startGenerateLocation(target, biome, world);
+            startTp(target, loc, bypassCountdown, bypassPrice, startCooldown, biome, world);
         }
     }
 

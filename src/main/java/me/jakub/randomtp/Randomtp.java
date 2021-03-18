@@ -4,7 +4,6 @@ import me.jakub.randomtp.commands.RTPCommand;
 import me.jakub.randomtp.commands.RTPCommandTabCompleter;
 import me.jakub.randomtp.commands.RTPluginCommand;
 import me.jakub.randomtp.commands.RTPluginCommandTabCompleter;
-import me.jakub.randomtp.gui.confirmgui.ConfirmGUI;
 import me.jakub.randomtp.listeners.*;
 import me.jakub.randomtp.metrics.MetricsLite;
 import me.jakub.randomtp.utils.*;
@@ -16,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Randomtp extends JavaPlugin {
 
-    public static final String VERSION = "2.14";
+    public static final String VERSION = "2.15";
 
     private static Economy econ = null;
 
