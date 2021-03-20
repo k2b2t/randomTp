@@ -30,30 +30,9 @@ public class RTPluginCommand implements CommandExecutor {
                 player.sendMessage("§6You are running §bRandomTP§6 Version: §b" + Randomtp.VERSION);
                 player.sendMessage("§6For help type the command §b/rtplugin help");
             } else if (args[0].equalsIgnoreCase("help")) {
-                player.sendMessage("§6Version: §c" + Randomtp.VERSION);
-                player.sendMessage("§3§lCommands:");
-                player.sendMessage("§6/rtp - Teleports you to a random location within the border set in the config");
-                player.sendMessage("§6/rtp [player] [biome] - /rtp other players");
-                player.sendMessage("§6/rtp @everyone [biome] - /rtp everyone on the server");
-                player.sendMessage("§6/wild - /rtp alias");
-                player.sendMessage("§6/rtplugin help - Shows you this message");
-                player.sendMessage("§6/rtplugin setborder - Allows you to set the border");
-                player.sendMessage("§6/rtplugin reload - Reloads the config");
-                player.sendMessage("§3§lPermissions:");
-                player.sendMessage("§6randomTp.rtp - Allows you to use /rtp");
-                player.sendMessage("§6randomTp.rtp.others - Allows you to /rtp other players");
-                player.sendMessage("§6randomTp.rtp.everyone - Allows you to /rtp @everyone");
-                player.sendMessage("§6randomTp.rtp.onDeath - RTP on death");
-                player.sendMessage("§6randomTp.setborder - Allows you to set the rtp border");
-                player.sendMessage("§6randomTp.reload - Allows you to reload the plugin");
-                player.sendMessage("§6randomTp.cooldown.bypass - Allows you to bypass the cooldown");
-                player.sendMessage("§6randomTp.price.bypass - Bypass rtp price");
-                player.sendMessage("§6randomTp.sign.create - Create RTP signs");
-                player.sendMessage("§6randomTp.sign.use - Use RTP signs");
-                player.sendMessage("§6randomTp.sign.break - Break RTP signs");
-                player.sendMessage("§6randomTp.countdown.bypass - Bypass countdown");
-                player.sendMessage("§3§lConfig:");
-                player.sendMessage("§6Border size: §b" + plugin.getConfig().getInt("border"));
+                for (String msg : Utils.getHelpMessages()){
+                    player.sendMessage(msg); //Print out help messages
+                }
             } else if (args[0].equalsIgnoreCase("setborder")) {
 
 
@@ -102,30 +81,9 @@ public class RTPluginCommand implements CommandExecutor {
                 Log.log(Log.LogLevel.PLAIN, "§6You are running §bRandomTP§6 Version: §b" + Randomtp.VERSION);
                 Log.log(Log.LogLevel.PLAIN, "§6For help type the command §brtplugin help");
             } else if (args[0].equalsIgnoreCase("help")) {
-                Log.log(Log.LogLevel.PLAIN, "§6Version: §c" + Randomtp.VERSION);
-                Log.log(Log.LogLevel.PLAIN, "§3§lCommands:");
-                Log.log(Log.LogLevel.PLAIN, "§6/rtp - Teleports you to a random location within the border set in the config (Default: 1000)");
-                Log.log(Log.LogLevel.PLAIN, "§6/rtp [player] [biome] - /rtp other players");
-                Log.log(Log.LogLevel.PLAIN, "§6/rtp @everyone [biome] - /rtp everyone on the server");
-                Log.log(Log.LogLevel.PLAIN, "§6/wild - /rtp alias");
-                Log.log(Log.LogLevel.PLAIN, "§6/rtplugin help - Shows you this message");
-                Log.log(Log.LogLevel.PLAIN, "§6/rtplugin setborder - Allows you to set the border");
-                Log.log(Log.LogLevel.PLAIN, "§6/rtplugin reload - Reloads the config");
-                Log.log(Log.LogLevel.PLAIN, "§3§lPermissions:");
-                Log.log(Log.LogLevel.PLAIN, "§6randomTp.rtp - Allows you to use /rtp");
-                Log.log(Log.LogLevel.PLAIN, "§6randomTp.rtp.others - Allows you to /rtp other players");
-                Log.log(Log.LogLevel.PLAIN, "§6randomTp.rtp.everyone - Allows you to /rtp @everyone");
-                Log.log(Log.LogLevel.PLAIN, "§6randomTp.rtp.onDeath - RTP on death");
-                Log.log(Log.LogLevel.PLAIN, "§6randomTp.setborder - Allows you to set the rtp border");
-                Log.log(Log.LogLevel.PLAIN, "§6randomTp.reload - Allows you to reload the plugin");
-                Log.log(Log.LogLevel.PLAIN, "§6randomTp.cooldown.bypass - Allows you to bypass the cooldown");
-                Log.log(Log.LogLevel.PLAIN, "§6randomTp.price.bypass - Bypass rtp price");
-                Log.log(Log.LogLevel.PLAIN, "§6randomTp.sign.create - Create RTP signs");
-                Log.log(Log.LogLevel.PLAIN, "§6randomTp.sign.use - Use RTP signs");
-                Log.log(Log.LogLevel.PLAIN, "§6randomTp.sign.break - Break RTP signs");
-                Log.log(Log.LogLevel.PLAIN, "§6randomTp.countdown.bypass - Bypass countdown");
-                Log.log(Log.LogLevel.PLAIN, "§3§lConfig:");
-                Log.log(Log.LogLevel.PLAIN, "§6Border size: §b" + plugin.getConfig().getInt("border"));
+                for (String msg1 : Utils.getHelpMessages()){
+                    Log.log(Log.LogLevel.PLAIN, msg1);
+                }
             } else if (args[0].equalsIgnoreCase("reload")) {
                 Utils.reloadConfig();
             }

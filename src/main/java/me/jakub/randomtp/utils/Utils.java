@@ -8,6 +8,7 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -65,6 +66,10 @@ public class Utils {
 
     public static String getWorldDisabledMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.world-disabled-message"));
+    }
+
+    public static String getWrongWorldMessage(){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.wrong-world-name"));
     }
 
     public static String getCouldntGenerateMessage() {
@@ -229,7 +234,7 @@ public class Utils {
     }
 
 
-    private static World getWorldFromString(String worldName) {
+    public static World getWorldFromString(String worldName) {
         try {
             World world = Bukkit.getWorld(worldName);
             if (world != null) {
@@ -322,6 +327,37 @@ public class Utils {
 
     public static String getWrongBiomeMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.wrong-biome-name"));
+    }
+
+    public static List<String> getHelpMessages(){
+        List<String> messages = new ArrayList<>();
+
+        messages.add("§6Version: §c" + Randomtp.VERSION);
+        messages.add("§3§lCommands:");
+        messages.add("§6/rtp - Teleports you to a random location within the border set in the config");
+        messages.add("§6/rtp [player] [biome] - /rtp other players");
+        messages.add("§6/rtp @everyone [biome] - /rtp everyone on the server");
+        messages.add("§6/wild - /rtp alias");
+        messages.add("§6/rtplugin help - Shows you this message");
+        messages.add("§6/rtplugin setborder - Allows you to set the border");
+        messages.add("§6/rtplugin reload - Reloads the config");
+        messages.add("§3§lPermissions:");
+        messages.add("§6randomTp.rtp - Allows you to use /rtp");
+        messages.add("§6randomTp.rtp.others - Allows you to /rtp other players");
+        messages.add("§6randomTp.rtp.everyone - Allows you to /rtp @everyone");
+        messages.add("§6randomTp.rtp.onDeath - RTP on death");
+        messages.add("§6randomTp.setborder - Allows you to set the rtp border");
+        messages.add("§6randomTp.reload - Allows you to reload the plugin");
+        messages.add("§6randomTp.cooldown.bypass - Allows you to bypass the cooldown");
+        messages.add("§6randomTp.price.bypass - Bypass rtp price");
+        messages.add("§6randomTp.sign.create - Create RTP signs");
+        messages.add("§6randomTp.sign.use - Use RTP signs");
+        messages.add("§6randomTp.sign.break - Break RTP signs");
+        messages.add("§6randomTp.countdown.bypass - Bypass countdown");
+        messages.add("§3§lConfig:");
+        messages.add("§6Border size: §b" + plugin.getConfig().getInt("border"));
+
+        return messages;
     }
 
 }

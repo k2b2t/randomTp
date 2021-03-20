@@ -6,6 +6,7 @@ import me.jakub.randomtp.utils.Log;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -48,10 +49,25 @@ public class RTPCommand implements CommandExecutor {
                         for (Player target : Bukkit.getOnlinePlayers()) {
 
                             if (args.length == 2) {
-                                teleportUtils.rtpPlayer(target, player, true, true, false, args[1], false, true, true, null);
+                                World world = Utils.getWorldFromString(args[1]);
+                                if (world == null) {
+                                    player.sendMessage(Utils.getWrongWorldMessage());
+                                    return true;
+                                } else {
+                                    teleportUtils.rtpPlayer(target, player, true, true, false, null, false, true, true, world);
+                                }
+                            } else if (args.length == 3) {
+                                World world1 = Utils.getWorldFromString(args[1]);
+                                if (world1 == null) {
+                                    player.sendMessage(Utils.getWrongWorldMessage());
+                                    return true;
+                                } else {
+                                    teleportUtils.rtpPlayer(target, player, true, true, false, args[2], false, true, true, world1);
+                                }
                             } else {
                                 teleportUtils.rtpPlayer(target, player, true, true, false, null, false, true, true, null);
                             }
+
                         }
                     } else {
                         player.sendMessage(Utils.getNoPermission());
@@ -65,15 +81,30 @@ public class RTPCommand implements CommandExecutor {
 
                         if (target != null) {
 
-                            if (args.length == 2) {
-                                teleportUtils.rtpPlayer(target, player, true, true, false, args[1], true, true, true, null);
-                                /*teleportUtils.rtpToBiome(player, target, args[1], true, true, false, true);*/
-                                return true;
+                            switch (args.length) {
+                                case 2:
+                                    World world = Utils.getWorldFromString(args[1]);
+                                    if (world == null) {
+                                        player.sendMessage(Utils.getWrongWorldMessage());
+                                        return true;
+                                    } else {
+                                        teleportUtils.rtpPlayer(target, player, true, true, false, null, true, true, true, world);
+                                        return true;
+                                    }
+                                case 3:
+                                    World world1 = Utils.getWorldFromString(args[1]);
+                                    if (world1 == null) {
+                                        player.sendMessage(Utils.getWrongWorldMessage());
+                                        return true;
+                                    } else {
+                                        teleportUtils.rtpPlayer(target, player, true, true, false, args[2], true, true, true, world1);
+                                    }
+                                    return true;
+                                default:
+                                    teleportUtils.rtpPlayer(target, player, true, true, false, null, false, true, true, null);
+                                    player.sendMessage(Utils.getTpMessageSender(target));
+                                    return true;
                             }
-
-                            teleportUtils.rtpPlayer(target, player, true, true, false, null, false, true, true, null);
-                            /*teleportUtils.rtpPlayer(target, true, true, false, null);*/
-                            player.sendMessage(Utils.getTpMessageSender(target));
                         } else {
                             player.sendMessage("§cCouldn't find that player!");
                         }
