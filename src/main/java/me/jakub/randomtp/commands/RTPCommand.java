@@ -54,7 +54,7 @@ public class RTPCommand implements CommandExecutor {
                                     player.sendMessage(Utils.getWrongWorldMessage());
                                     return true;
                                 } else {
-                                    teleportUtils.rtpPlayer(target, player, true, true, false, null, false, true, true, world);
+                                    teleportUtils.rtpPlayer(target, player, true, true, false, null, false, true, true, world, true, null);
                                 }
                             } else if (args.length == 3) {
                                 World world1 = Utils.getWorldFromString(args[1]);
@@ -62,10 +62,10 @@ public class RTPCommand implements CommandExecutor {
                                     player.sendMessage(Utils.getWrongWorldMessage());
                                     return true;
                                 } else {
-                                    teleportUtils.rtpPlayer(target, player, true, true, false, args[2], false, true, true, world1);
+                                    teleportUtils.rtpPlayer(target, player, true, true, false, args[2], false, true, true, world1, true, null);
                                 }
                             } else {
-                                teleportUtils.rtpPlayer(target, player, true, true, false, null, false, true, true, null);
+                                teleportUtils.rtpPlayer(target, player, true, true, false, null, false, true, true, null, true, null);
                             }
 
                         }
@@ -88,7 +88,7 @@ public class RTPCommand implements CommandExecutor {
                                         player.sendMessage(Utils.getWrongWorldMessage());
                                         return true;
                                     } else {
-                                        teleportUtils.rtpPlayer(target, player, true, true, false, null, true, true, true, world);
+                                        teleportUtils.rtpPlayer(target, player, true, true, false, null, true, true, true, world, true, null);
                                         return true;
                                     }
                                 case 3:
@@ -97,11 +97,11 @@ public class RTPCommand implements CommandExecutor {
                                         player.sendMessage(Utils.getWrongWorldMessage());
                                         return true;
                                     } else {
-                                        teleportUtils.rtpPlayer(target, player, true, true, false, args[2], true, true, true, world1);
+                                        teleportUtils.rtpPlayer(target, player, true, true, false, args[2], true, true, true, world1, true, null);
                                     }
                                     return true;
                                 default:
-                                    teleportUtils.rtpPlayer(target, player, true, true, false, null, false, true, true, null);
+                                    teleportUtils.rtpPlayer(target, player, true, true, false, null, false, true, true, null, true, null);
                                     player.sendMessage(Utils.getTpMessageSender(target));
                                     return true;
                             }
@@ -115,6 +115,11 @@ public class RTPCommand implements CommandExecutor {
 
             } else {
                 if (player.hasPermission("randomTp.rtp")) {
+
+                    if (Utils.isWorldCommandDisabled(player.getWorld().getName())){
+                        player.sendMessage(Utils.getWorldDisabledMessage());
+                        return true;
+                    }
 
                     if (!player.hasPermission("randomTp.cooldown.bypass")) {
 //START Cooldown
@@ -134,10 +139,10 @@ public class RTPCommand implements CommandExecutor {
                         }
                         // player doesn't have a cooldown
                         //END Cooldown
-                        teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false, false, false, null);
+                        teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false, false, false, null, false, null);
                     } else {
                         //Has cooldown bypass perms
-                        teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, false, null, false, false, false, null);
+                        teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, false, null, false, false, false, null, false, null);
                     }
                 } else {
                     player.sendMessage(Utils.getNoPermission());
@@ -152,11 +157,11 @@ public class RTPCommand implements CommandExecutor {
                     if (target != null) {
 
                         if (args.length == 2) {
-                            teleportUtils.rtpPlayer(target, null, true, true, false, args[1], false, true, true, null);
+                            teleportUtils.rtpPlayer(target, null, true, true, false, args[1], false, true, true, null, true, null);
                             Log.log(Log.LogLevel.SUCCESS, "Teleporting " + target.getName() + " to a random location in biome " + args[1]);
                             return true;
                         }
-                        teleportUtils.rtpPlayer(target, null, true, true, false, null, false, true, true, null);
+                        teleportUtils.rtpPlayer(target, null, true, true, false, null, false, true, true, null, true, null);
                         Log.log(Log.LogLevel.SUCCESS, "Teleporting " + target.getName() + " to a random location");
                     } else {
                         Log.log(Log.LogLevel.ERROR, "Couldn't find that player");

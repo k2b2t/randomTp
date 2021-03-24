@@ -68,7 +68,7 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.world-disabled-message"));
     }
 
-    public static String getWrongWorldMessage(){
+    public static String getWrongWorldMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.wrong-world-name"));
     }
 
@@ -279,8 +279,22 @@ public class Utils {
         return (plugin.getConfig().isSet("Worlds." + world.getName() + ".border"));
     }
 
-    public static int getBorderForWorld(String worldName) {
+    public static int getBorderForWorld(String worldName, RTPTier tier) {
         //Very nice code lmao
+        if (tier != null) {
+            switch (tier) {
+                case ONE:
+                    return plugin.getConfig().getInt("World-gui.TierGUI.one.border");
+                case TWO:
+                    return plugin.getConfig().getInt("World-gui.TierGUI.two.border");
+                case THREE:
+                    return plugin.getConfig().getInt("World-gui.TierGUI.three.border");
+                case FOUR:
+                    return plugin.getConfig().getInt("World-gui.TierGUI.four.border");
+                case FIVE:
+                    return plugin.getConfig().getInt("World-gui.TierGUI.five.border");
+            }
+        }
         if (worldName != null) {
             try {
                 int i = plugin.getConfig().getInt("Worlds." + worldName + ".border");
@@ -299,6 +313,14 @@ public class Utils {
 
     public static boolean isWorldDisabled(String worldName) {
         return plugin.getConfig().getBoolean("Worlds." + worldName + ".disabled");
+    }
+
+    public static boolean isWorldCommandDisabled(String worldName) {
+        try {
+            return plugin.getConfig().getBoolean("Worlds." + worldName + ".disable-command");
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public static int getMaxAttempts() {
@@ -329,7 +351,7 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.wrong-biome-name"));
     }
 
-    public static List<String> getHelpMessages(){
+    public static List<String> getHelpMessages() {
         List<String> messages = new ArrayList<>();
 
         messages.add("§6Version: §c" + Randomtp.VERSION);
@@ -360,4 +382,103 @@ public class Utils {
         return messages;
     }
 
+    public static String getTierGUITitle() {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Rtp-settings.TierGUI.title"));
+    }
+
+    public static boolean getTierGUIEnabled() {
+        return plugin.getConfig().getBoolean("Rtp-settings.TierGUI.enabled");
+    }
+
+    public static String getTierItemName(int index) {
+        try {
+            switch (index) {
+                case 1:
+                    return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Rtp-settings.TierGUI.one.title"));
+                case 2:
+                    return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Rtp-settings.TierGUI.two.title"));
+                case 3:
+                    return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Rtp-settings.TierGUI.three.title"));
+                case 4:
+                    return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Rtp-settings.TierGUI.four.title"));
+                case 5:
+                    return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Rtp-settings.TierGUI.five.title"));
+                default:
+                    return "Default name";
+            }
+
+        } catch (Exception e) {
+            return "Default name";
+        }
+    }
+
+    public static boolean getTierItemEnabled(int index) {
+        try {
+            switch (index) {
+                case 1:
+                    return plugin.getConfig().getBoolean("Rtp-settings.TierGUI.one.enabled");
+                case 2:
+                    return plugin.getConfig().getBoolean("Rtp-settings.TierGUI.two.enabled");
+                case 3:
+                    return plugin.getConfig().getBoolean("Rtp-settings.TierGUI.three.enabled");
+                case 4:
+                    return plugin.getConfig().getBoolean("Rtp-settings.TierGUI.four.enabled");
+                case 5:
+                    return plugin.getConfig().getBoolean("Rtp-settings.TierGUI.five.enabled");
+                default:
+                    return false;
+            }
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static Material getTierItemMaterial(int index) {
+        try {
+            switch (index) {
+                case 1:
+                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.TierGUI.one.material"));
+                case 2:
+                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.TierGUI.two.material"));
+                case 3:
+                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.TierGUI.three.material"));
+                case 4:
+                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.TierGUI.four.material"));
+                case 5:
+                    return Material.valueOf(plugin.getConfig().getString("Rtp-settings.TierGUI.five.material"));
+                default:
+                    return Material.GRASS_BLOCK;
+            }
+        } catch (Exception e) {
+            return Material.GRASS_BLOCK;
+        }
+    }
+
+    public static int getTierItemBorder(int index) {
+        try {
+            switch (index) {
+                case 1:
+                    return plugin.getConfig().getInt("Rtp-settings.TierGUI.one.border");
+                case 2:
+                    return plugin.getConfig().getInt("Rtp-settings.TierGUI.two.border");
+                case 3:
+                    return plugin.getConfig().getInt("Rtp-settings.TierGUI.three.border");
+                case 4:
+                    return plugin.getConfig().getInt("Rtp-settings.TierGUI.four.border");
+                case 5:
+                    return plugin.getConfig().getInt("Rtp-settings.TierGUI.five.border");
+                default:
+                    return getBorderForWorld(null, null);
+            }
+
+        } catch (Exception e) {
+            return getBorderForWorld(null, null);
+        }
+    }
+
+
+    public enum RTPTier {
+        ONE, TWO, THREE, FOUR, FIVE
+    }
 }

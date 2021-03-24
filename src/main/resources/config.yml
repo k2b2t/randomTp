@@ -88,6 +88,36 @@ Rtp-settings:
         world-name: world
         title: "§aRTP to world: world"
         material: GRASS_BLOCK
+  TierGUI:
+    #This needs the world GUI to be turned **ON**
+    enabled: true
+    #Title of the Tier GUI
+    title: "§aSelect RTP Tier"
+    one:
+      enabled: true
+      border: 1000
+      title: "§cTier One"
+      material: GRASS_BLOCK
+    two:
+      enabled: true
+      border: 3000
+      title: "§cTier Two"
+      material: GRASS_BLOCK
+    three:
+      enabled: true
+      border: 5000
+      title: "§cTier Three"
+      material: GRASS_BLOCK
+    four:
+      enabled: true
+      border: 7500
+      title: "§cTier Four"
+      material: GRASS_BLOCK
+    five:
+      enabled: true
+      border: 10000
+      title: "§cTier Five"
+      material: GRASS_BLOCK
 
 
 #RTP Settings for specific worlds
@@ -108,6 +138,9 @@ Worlds:
     disabled: false
     #border - Border in this world
     border: 1000
+    #This will disable players executing this command to RTP out of this world
+    #Note: People with the permission randomTp.rtp.others *CAN* still RTP other people
+    disable-command: false
 #  pvp:
 #    disabled: true
 #    border: 10
@@ -130,6 +163,7 @@ update-checker: true
 #Vault settings
 Vault:
   enabled: false
+  #Default price
   rtp-price: 100
 
 
