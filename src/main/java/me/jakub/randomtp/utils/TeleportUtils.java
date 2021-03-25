@@ -233,7 +233,7 @@ public class TeleportUtils {
 
         if (!player.hasPermission("randomTp.countdown.bypass") && countdownEnabled) {
             if (bypassCountdown) {
-                tp(player, location, bypassPrice);
+                tp(player, location, bypassPrice, tier);
             } else {
                 count = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
                     int baseCount = Utils.getCountdown();
@@ -256,7 +256,7 @@ public class TeleportUtils {
                             startCount = baseCount;
                             hasCountdown.remove(player);
                             if (willTp.contains(player)) {
-                                tp(player, location, bypassPrice);
+                                tp(player, location, bypassPrice, tier);
                                 if (startCooldown) {
                                     RTPCommand.cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("Cooldown.seconds") * 1000));
                                 }
@@ -268,15 +268,15 @@ public class TeleportUtils {
             }
         } else {
             //Has countdown bypass perm or countdown is disabled
-            tp(player, location, bypassPrice);
+            tp(player, location, bypassPrice, tier);
         }
 
     }
 
-    public void tp(Player player, Location location, boolean bypassPrice) {
+    public void tp(Player player, Location location, boolean bypassPrice, Utils.RTPTier tier) {
 
         if (Randomtp.vaultHooked && !bypassPrice) {
-            if (!VaultHook.takeMoney(player, Utils.getAmount())) {
+            if (!VaultHook.takeMoney(player, Utils.getAmount(), tier)) {
                 return;
             }
         }

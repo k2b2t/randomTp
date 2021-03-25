@@ -35,6 +35,7 @@ public class TierGUI {
         tierOneMeta.setDisplayName(Utils.getTierItemName(1));
         List<String> oneLore = new ArrayList<>();
         oneLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(1));
+        oneLore.add(ChatColor.GREEN + "Price: $" + Utils.getTierItemPrice(1));
         tierOneMeta.setLore(oneLore);
         tierOne.setItemMeta(tierOneMeta);
 
@@ -42,6 +43,7 @@ public class TierGUI {
         ItemMeta tierTwoMeta = tierTwo.getItemMeta();
         List<String> twoLore = new ArrayList<>();
         twoLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(2));
+        twoLore.add(ChatColor.GREEN + "Price: $" + Utils.getTierItemPrice(2));
         tierTwoMeta.setLore(twoLore);
         tierTwoMeta.setDisplayName(Utils.getTierItemName(2));
         tierTwo.setItemMeta(tierTwoMeta);
@@ -50,6 +52,7 @@ public class TierGUI {
         ItemMeta tierThreeMeta = tierThree.getItemMeta();
         List<String> threeLore = new ArrayList<>();
         threeLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(3));
+        threeLore.add(ChatColor.GREEN + "Price: $" + Utils.getTierItemPrice(3));
         tierThreeMeta.setLore(threeLore);
         tierThreeMeta.setDisplayName(Utils.getTierItemName(3));
         tierThree.setItemMeta(tierThreeMeta);
@@ -58,6 +61,7 @@ public class TierGUI {
         ItemMeta tierFourMeta = tierFour.getItemMeta();
         List<String> fourLore = new ArrayList<>();
         fourLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(4));
+        fourLore.add(ChatColor.GREEN + "Price: $" + Utils.getTierItemPrice(4));
         tierFourMeta.setLore(fourLore);
         tierFourMeta.setDisplayName(Utils.getTierItemName(4));
         tierFour.setItemMeta(tierFourMeta);
@@ -66,6 +70,7 @@ public class TierGUI {
         ItemMeta tierFiveMeta = tierFive.getItemMeta();
         List<String> fiveLore = new ArrayList<>();
         fiveLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(5));
+        fiveLore.add(ChatColor.GREEN + "Price: $" + Utils.getTierItemPrice(5));
         tierFiveMeta.setLore(fiveLore);
         tierFiveMeta.setDisplayName(Utils.getTierItemName(5));
         tierFive.setItemMeta(tierFiveMeta);

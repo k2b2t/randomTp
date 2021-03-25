@@ -480,6 +480,47 @@ public class Utils {
         }
     }
 
+    public static double getTierItemPrice(int index) {
+        try {
+            switch (index) {
+                case 1:
+                    return plugin.getConfig().getDouble("Rtp-settings.TierGUI.one.price");
+                case 2:
+                    return plugin.getConfig().getDouble("Rtp-settings.TierGUI.two.price");
+                case 3:
+                    return plugin.getConfig().getDouble("Rtp-settings.TierGUI.three.price");
+                case 4:
+                    return plugin.getConfig().getDouble("Rtp-settings.TierGUI.four.price");
+                case 5:
+                    return plugin.getConfig().getDouble("Rtp-settings.TierGUI.five.price");
+                default:
+                    return plugin.getConfig().getDouble("Vault.rtp-price");
+
+            }
+        } catch (Exception e) {
+            return plugin.getConfig().getDouble("Vault.rtp-price");
+        }
+
+    }
+
+
+    public static int getIndexByRTPTier(RTPTier tier){
+        switch (tier){
+            case ONE:
+                return 1;
+            case TWO:
+                return 2;
+            case THREE:
+                return 3;
+            case FOUR:
+                return 4;
+            case FIVE:
+                return 5;
+            default:
+                return 0;
+        }
+    }
+
 
     public enum RTPTier {
         ONE, TWO, THREE, FOUR, FIVE

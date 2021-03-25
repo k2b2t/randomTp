@@ -96,28 +96,33 @@ Rtp-settings:
     one:
       enabled: true
       border: 1000
+      price: 100
       title: "§cTier One"
-      material: GRASS_BLOCK
+      material: COAL_BLOCK
     two:
       enabled: true
       border: 3000
+      price: 300
       title: "§cTier Two"
-      material: GRASS_BLOCK
+      material: IRON_BLOCK
     three:
       enabled: true
       border: 5000
+      price: 500
       title: "§cTier Three"
-      material: GRASS_BLOCK
+      material: GOLD_BLOCK
     four:
       enabled: true
       border: 7500
+      price: 750
       title: "§cTier Four"
-      material: GRASS_BLOCK
+      material: DIAMOND_BLOCK
     five:
       enabled: true
       border: 10000
+      price: 1000
       title: "§cTier Five"
-      material: GRASS_BLOCK
+      material: NETHERITE_BLOCK
 
 
 #RTP Settings for specific worlds
