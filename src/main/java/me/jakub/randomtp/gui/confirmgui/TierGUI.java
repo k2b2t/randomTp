@@ -2,12 +2,16 @@ package me.jakub.randomtp.gui.confirmgui;
 
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TierGUI {
 
@@ -29,25 +33,40 @@ public class TierGUI {
         ItemStack tierOne = new ItemStack(Utils.getTierItemMaterial(1));
         ItemMeta tierOneMeta = tierOne.getItemMeta();
         tierOneMeta.setDisplayName(Utils.getTierItemName(1));
+        List<String> oneLore = new ArrayList<>();
+        oneLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(1));
+        tierOneMeta.setLore(oneLore);
         tierOne.setItemMeta(tierOneMeta);
 
         ItemStack tierTwo = new ItemStack(Utils.getTierItemMaterial(2));
         ItemMeta tierTwoMeta = tierTwo.getItemMeta();
+        List<String> twoLore = new ArrayList<>();
+        twoLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(2));
+        tierTwoMeta.setLore(twoLore);
         tierTwoMeta.setDisplayName(Utils.getTierItemName(2));
         tierTwo.setItemMeta(tierTwoMeta);
 
         ItemStack tierThree = new ItemStack(Utils.getTierItemMaterial(3));
         ItemMeta tierThreeMeta = tierThree.getItemMeta();
+        List<String> threeLore = new ArrayList<>();
+        threeLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(3));
+        tierThreeMeta.setLore(threeLore);
         tierThreeMeta.setDisplayName(Utils.getTierItemName(3));
         tierThree.setItemMeta(tierThreeMeta);
 
         ItemStack tierFour = new ItemStack(Utils.getTierItemMaterial(4));
         ItemMeta tierFourMeta = tierFour.getItemMeta();
+        List<String> fourLore = new ArrayList<>();
+        fourLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(4));
+        tierFourMeta.setLore(fourLore);
         tierFourMeta.setDisplayName(Utils.getTierItemName(4));
         tierFour.setItemMeta(tierFourMeta);
 
         ItemStack tierFive = new ItemStack(Utils.getTierItemMaterial(5));
         ItemMeta tierFiveMeta = tierFive.getItemMeta();
+        List<String> fiveLore = new ArrayList<>();
+        fiveLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(5));
+        tierFiveMeta.setLore(fiveLore);
         tierFiveMeta.setDisplayName(Utils.getTierItemName(5));
         tierFive.setItemMeta(tierFiveMeta);
 

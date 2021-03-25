@@ -284,7 +284,6 @@ public class Utils {
         if (tier != null) {
             switch (tier) {
                 case ONE:
-                    Log.log(Log.LogLevel.INFO, String.valueOf(plugin.getConfig().getInt("Rtp-settings.World-gui.TierGUI.one.border"))); //TODO Debug message
                     return plugin.getConfig().getInt("Rtp-settings.TierGUI.one.border");
                 case TWO:
                     return plugin.getConfig().getInt("Rtp-settings.TierGUI.two.border");
