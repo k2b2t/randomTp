@@ -50,7 +50,6 @@ public class TeleportUtils {
         int y = 0;
         int z = 0;
 
-
         int var1 = random.nextInt(Utils.getBorderForWorld(world.getName(), tier)); //X coordinate
         int var2 = random.nextInt(Utils.getBorderForWorld(world.getName(), tier)); //Z coordinate
 

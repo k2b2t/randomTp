@@ -284,15 +284,19 @@ public class Utils {
         if (tier != null) {
             switch (tier) {
                 case ONE:
-                    return plugin.getConfig().getInt("World-gui.TierGUI.one.border");
+                    Log.log(Log.LogLevel.INFO, String.valueOf(plugin.getConfig().getInt("Rtp-settings.World-gui.TierGUI.one.border"))); //TODO Debug message
+                    return plugin.getConfig().getInt("Rtp-settings.TierGUI.one.border");
                 case TWO:
-                    return plugin.getConfig().getInt("World-gui.TierGUI.two.border");
+                    return plugin.getConfig().getInt("Rtp-settings.TierGUI.two.border");
                 case THREE:
-                    return plugin.getConfig().getInt("World-gui.TierGUI.three.border");
+                    return plugin.getConfig().getInt("Rtp-settings.TierGUI.three.border");
                 case FOUR:
-                    return plugin.getConfig().getInt("World-gui.TierGUI.four.border");
+                    return plugin.getConfig().getInt("Rtp-settings.TierGUI.four.border");
                 case FIVE:
-                    return plugin.getConfig().getInt("World-gui.TierGUI.five.border");
+                    return plugin.getConfig().getInt("Rtp-settings.TierGUI.five.border");
+                default:
+                    return plugin.getConfig().getInt("border");
+
             }
         }
         if (worldName != null) {

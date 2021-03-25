@@ -2,6 +2,7 @@ package me.jakub.randomtp.listeners;
 
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.gui.confirmgui.TierGUI;
+import me.jakub.randomtp.utils.Log;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Bukkit;
@@ -46,7 +47,6 @@ public class GUIEvent implements Listener {
             TierGUI tierGUI = new TierGUI();
             boolean openTierGUI = Utils.getTierGUIEnabled();
 
-            //TODO fixxx diss
 
             if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Utils.getWorldGUIItemName(1))) {
                 player.closeInventory();
@@ -79,23 +79,23 @@ public class GUIEvent implements Listener {
             World world = Bukkit.getWorld(e.getView().getTopInventory().getItem(4).getItemMeta().getDisplayName());
             e.setCancelled(true);
 
-            if (e.getView().getTitle().equalsIgnoreCase(Utils.getTierItemName(1))) {
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Utils.getTierItemName(1))) {
                 player.closeInventory();
                 player.updateInventory();
                 teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false, true, true, world, true, Utils.RTPTier.ONE);
-            } else if (e.getView().getTitle().equalsIgnoreCase(Utils.getTierItemName(2))) {
+            } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Utils.getTierItemName(2))) {
                 player.closeInventory();
                 player.updateInventory();
                 teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false, true, true, world, true, Utils.RTPTier.TWO);
-            } else if (e.getView().getTitle().equalsIgnoreCase(Utils.getTierItemName(3))) {
+            } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Utils.getTierItemName(3))) {
                 player.closeInventory();
                 player.updateInventory();
                 teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false, true, true, world, true, Utils.RTPTier.THREE);
-            } else if (e.getView().getTitle().equalsIgnoreCase(Utils.getTierItemName(4))) {
+            } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Utils.getTierItemName(4))) {
                 player.closeInventory();
                 player.updateInventory();
                 teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false, true, true, world, true, Utils.RTPTier.FOUR);
-            } else if (e.getView().getTitle().equalsIgnoreCase(Utils.getTierItemName(5))) {
+            } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Utils.getTierItemName(5))) {
                 player.closeInventory();
                 player.updateInventory();
                 teleportUtils.rtpPlayer(player, null, false, !Randomtp.vaultHooked, true, null, false, true, true, world, true, Utils.RTPTier.FIVE);
