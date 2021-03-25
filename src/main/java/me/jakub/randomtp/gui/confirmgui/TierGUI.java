@@ -78,6 +78,9 @@ public class TierGUI {
         ItemStack info = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
         ItemMeta meta = info.getItemMeta();
         meta.setDisplayName(targetWorld.getName());
+        List<String> infoLore = new ArrayList<>();
+        infoLore.add(ChatColor.GREEN + "RTP to world: " + targetWorld.getName());
+        meta.setLore(infoLore);
         info.setItemMeta(meta);
 
         initItems(tierInv, background, tierOne, tierTwo, tierThree, tierFour, tierFive, info);
