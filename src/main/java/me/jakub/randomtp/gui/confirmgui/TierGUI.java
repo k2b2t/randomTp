@@ -33,45 +33,30 @@ public class TierGUI {
         ItemStack tierOne = new ItemStack(Utils.getTierItemMaterial(1));
         ItemMeta tierOneMeta = tierOne.getItemMeta();
         tierOneMeta.setDisplayName(Utils.getTierItemName(1));
-        List<String> oneLore = new ArrayList<>();
-        oneLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(1));
-        oneLore.add(ChatColor.GREEN + "Price: $" + Utils.getTierItemPrice(1));
-        tierOneMeta.setLore(oneLore);
+        tierOneMeta.setLore(Utils.getTierItemLore(Utils.getTierItemBorder(1), Utils.getTierItemPrice(1), targetWorld));
         tierOne.setItemMeta(tierOneMeta);
 
         ItemStack tierTwo = new ItemStack(Utils.getTierItemMaterial(2));
         ItemMeta tierTwoMeta = tierTwo.getItemMeta();
-        List<String> twoLore = new ArrayList<>();
-        twoLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(2));
-        twoLore.add(ChatColor.GREEN + "Price: $" + Utils.getTierItemPrice(2));
-        tierTwoMeta.setLore(twoLore);
+        tierTwoMeta.setLore(Utils.getTierItemLore(Utils.getTierItemBorder(2), Utils.getTierItemPrice(2), targetWorld));
         tierTwoMeta.setDisplayName(Utils.getTierItemName(2));
         tierTwo.setItemMeta(tierTwoMeta);
 
         ItemStack tierThree = new ItemStack(Utils.getTierItemMaterial(3));
         ItemMeta tierThreeMeta = tierThree.getItemMeta();
-        List<String> threeLore = new ArrayList<>();
-        threeLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(3));
-        threeLore.add(ChatColor.GREEN + "Price: $" + Utils.getTierItemPrice(3));
-        tierThreeMeta.setLore(threeLore);
+        tierThreeMeta.setLore(Utils.getTierItemLore(Utils.getTierItemBorder(3), Utils.getTierItemPrice(3), targetWorld));
         tierThreeMeta.setDisplayName(Utils.getTierItemName(3));
         tierThree.setItemMeta(tierThreeMeta);
 
         ItemStack tierFour = new ItemStack(Utils.getTierItemMaterial(4));
         ItemMeta tierFourMeta = tierFour.getItemMeta();
-        List<String> fourLore = new ArrayList<>();
-        fourLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(4));
-        fourLore.add(ChatColor.GREEN + "Price: $" + Utils.getTierItemPrice(4));
-        tierFourMeta.setLore(fourLore);
+        tierFourMeta.setLore(Utils.getTierItemLore(Utils.getTierItemBorder(4), Utils.getTierItemPrice(4), targetWorld));
         tierFourMeta.setDisplayName(Utils.getTierItemName(4));
         tierFour.setItemMeta(tierFourMeta);
 
         ItemStack tierFive = new ItemStack(Utils.getTierItemMaterial(5));
         ItemMeta tierFiveMeta = tierFive.getItemMeta();
-        List<String> fiveLore = new ArrayList<>();
-        fiveLore.add(ChatColor.GREEN + "Border: " + Utils.getTierItemBorder(5));
-        fiveLore.add(ChatColor.GREEN + "Price: $" + Utils.getTierItemPrice(5));
-        tierFiveMeta.setLore(fiveLore);
+        tierFiveMeta.setLore(Utils.getTierItemLore(Utils.getTierItemBorder(5), Utils.getTierItemPrice(5), targetWorld));
         tierFiveMeta.setDisplayName(Utils.getTierItemName(5));
         tierFive.setItemMeta(tierFiveMeta);
 

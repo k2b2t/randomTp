@@ -521,6 +521,18 @@ public class Utils {
         }
     }
 
+    public static List<String> getTierItemLore(int border, double price, World world){
+        List<String> configList = plugin.getConfig().getStringList("Rtp-settings.TierGUI.item-lore");
+        
+        List<String> lore = new ArrayList<>();
+
+        lore.add(ChatColor.translateAlternateColorCodes('&', configList.get(0).replace("%price%", String.valueOf(price)).replace("%border%", String.valueOf(border)).replace("%world%", world.getName())));
+        lore.add(ChatColor.translateAlternateColorCodes('&', configList.get(1).replace("%price%", String.valueOf(price)).replace("%border%", String.valueOf(border)).replace("%world%", world.getName())));
+        lore.add(ChatColor.translateAlternateColorCodes('&', configList.get(2).replace("%price%", String.valueOf(price)).replace("%border%", String.valueOf(border)).replace("%world%", world.getName())));
+
+        return lore;
+    }
+
 
     public enum RTPTier {
         ONE, TWO, THREE, FOUR, FIVE

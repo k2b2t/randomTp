@@ -93,35 +93,45 @@ Rtp-settings:
     enabled: true
     #Title of the Tier GUI
     title: "§aSelect RTP Tier"
+    #Lore (the text under) under each one of the Tiers
+    #Up to three lines, supports color codes
+    #Placeholders:
+    # %price% - The tier price
+    # %border% - The tier border
+    # %world% - The world name
+    item-lore:
+      - "&aBorder: %border%"
+      - "&aPrice: $%price%"
+      - "&aWorld: %world%"
     one:
       enabled: true
       border: 1000
       price: 100
-      title: "§cTier One"
+      title: "§7Coal Tier"
       material: COAL_BLOCK
     two:
       enabled: true
       border: 3000
       price: 300
-      title: "§cTier Two"
+      title: "§fIron Tier"
       material: IRON_BLOCK
     three:
       enabled: true
       border: 5000
       price: 500
-      title: "§cTier Three"
+      title: "§6Gold Tier"
       material: GOLD_BLOCK
     four:
       enabled: true
       border: 7500
       price: 750
-      title: "§cTier Four"
+      title: "§bDiamond Tier"
       material: DIAMOND_BLOCK
     five:
       enabled: true
       border: 10000
       price: 1000
-      title: "§cTier Five"
+      title: "§cNetherite Tier"
       material: NETHERITE_BLOCK
 
 
