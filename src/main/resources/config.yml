@@ -94,7 +94,7 @@ Rtp-settings:
     #Title of the Tier GUI
     title: "§aSelect RTP Tier"
     #Lore (the text under) under each one of the Tiers
-    #Up to three lines, supports color codes
+    #Up to THREE lines, supports color codes with the '&' sign
     #Placeholders:
     # %price% - The tier price
     # %border% - The tier border
