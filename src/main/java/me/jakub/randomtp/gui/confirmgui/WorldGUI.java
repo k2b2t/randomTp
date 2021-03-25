@@ -14,7 +14,7 @@ public class WorldGUI {
     boolean twoEnabled = Utils.getWorldGUIItemEnabled(2);
     boolean threeEnabled = Utils.getWorldGUIItemEnabled(3);
 
-    public Inventory createWorldInventory() {
+    public Inventory createWorldInventory(boolean openTierGUI) {
         Inventory inventory = Bukkit.createInventory(null, 27, Utils.getWorldGUITitle());
 
         ItemStack background = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
@@ -42,8 +42,8 @@ public class WorldGUI {
         return inventory;
     }
 
-    public void openWorldGUI(Player player) {
-        player.openInventory(createWorldInventory());
+    public void openWorldGUI(Player player, boolean openTierGUI) {
+        player.openInventory(createWorldInventory(openTierGUI));
     }
 
     private void initItems(Inventory inv, ItemStack background, ItemStack worldOne, ItemStack worldTwo, ItemStack worldThree) {

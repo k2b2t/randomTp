@@ -9,7 +9,12 @@ public class VaultHook {
 
     static Economy economy = Randomtp.getEconomy();
 
-    public static boolean takeMoney(Player player, double amount) {
+    public static boolean takeMoney(Player player, double amount, Utils.RTPTier tier) {
+
+        if (tier != null){
+            amount = Utils.getTierItemPrice(Utils.getIndexByRTPTier(tier));
+        }
+
         if (player.hasPermission("randomTp.price.bypass")) {
             return true;
         }

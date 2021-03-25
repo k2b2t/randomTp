@@ -88,6 +88,51 @@ Rtp-settings:
         world-name: world
         title: "§aRTP to world: world"
         material: GRASS_BLOCK
+  TierGUI:
+    #This needs the world GUI to be turned **ON**
+    enabled: true
+    #Title of the Tier GUI
+    title: "§aSelect RTP Tier"
+    #Lore (the text under) under each one of the Tiers
+    #Up to THREE lines, supports color codes with the '&' sign
+    #Placeholders:
+    # %price% - The tier price
+    # %border% - The tier border
+    # %world% - The world name
+    item-lore:
+      - "&aBorder: %border%"
+      - "&aPrice: $%price%"
+      - "&aWorld: %world%"
+    one:
+      enabled: true
+      border: 1000
+      price: 100
+      title: "§7Coal Tier"
+      material: COAL_BLOCK
+    two:
+      enabled: true
+      border: 3000
+      price: 300
+      title: "§fIron Tier"
+      material: IRON_BLOCK
+    three:
+      enabled: true
+      border: 5000
+      price: 500
+      title: "§6Gold Tier"
+      material: GOLD_BLOCK
+    four:
+      enabled: true
+      border: 7500
+      price: 750
+      title: "§bDiamond Tier"
+      material: DIAMOND_BLOCK
+    five:
+      enabled: true
+      border: 10000
+      price: 1000
+      title: "§cNetherite Tier"
+      material: NETHERITE_BLOCK
 
 
 #RTP Settings for specific worlds
@@ -108,6 +153,9 @@ Worlds:
     disabled: false
     #border - Border in this world
     border: 1000
+    #This will disable players executing this command to RTP out of this world
+    #Note: People with the permission randomTp.rtp.others *CAN* still RTP other people
+    disable-command: false
 #  pvp:
 #    disabled: true
 #    border: 10
@@ -130,6 +178,7 @@ update-checker: true
 #Vault settings
 Vault:
   enabled: false
+  #Default price
   rtp-price: 100
 
 
