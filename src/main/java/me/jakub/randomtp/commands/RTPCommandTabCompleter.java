@@ -1,5 +1,6 @@
 package me.jakub.randomtp.commands;
 
+import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
@@ -34,12 +35,15 @@ public class RTPCommandTabCompleter implements TabCompleter {
                 }
                 return worlds;
             } else if (args.length == 3) {
-                List<String> biomes = new ArrayList<>();
+                List<String> list = new ArrayList<>();
                 for (Biome biome : Biome.values()) {
-                    biomes.add(biome.name().toLowerCase(Locale.ROOT));
+                    list.add(biome.name().toLowerCase(Locale.ROOT));
+                }
+                for (Utils.RTPTier tier : Utils.RTPTier.values()){
+                    list.add(tier.name());
                 }
 
-                return biomes;
+                return list;
             }
 
         }

@@ -281,3 +281,5 @@ Messages:
   wrong-biome-name: "&cCouldn't find that biome!"
   #Wrong world name was used when /rtp'ing
   wrong-world-name: "&cCouldn't find that world!"
+  #Wrong tier or biome name was used when /rtp'ing
+  wrong-tier-or-biome-name: "&cWrong Tier or biome name"

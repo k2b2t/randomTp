@@ -201,6 +201,10 @@ public class Utils {
         }
     }
 
+    public static String getWrongTierOrBiomeNameMessage(){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.wrong-tier-or-biome-name"));
+    }
+
     public static World getWorldGUIItemWorld(int index) {
         switch (index) {
             case 1:

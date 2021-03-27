@@ -30,7 +30,7 @@ public class RTPluginCommand implements CommandExecutor {
                 player.sendMessage("§6You are running §bRandomTP§6 Version: §b" + Randomtp.VERSION);
                 player.sendMessage("§6For help type the command §b/rtplugin help");
             } else if (args[0].equalsIgnoreCase("help")) {
-                for (String msg : Utils.getHelpMessages()){
+                for (String msg : Utils.getHelpMessages()) {
                     player.sendMessage(msg); //Print out help messages
                 }
             } else if (args[0].equalsIgnoreCase("setborder")) {
@@ -81,13 +81,12 @@ public class RTPluginCommand implements CommandExecutor {
                 Log.log(Log.LogLevel.PLAIN, "§6You are running §bRandomTP§6 Version: §b" + Randomtp.VERSION);
                 Log.log(Log.LogLevel.PLAIN, "§6For help type the command §brtplugin help");
             } else if (args[0].equalsIgnoreCase("help")) {
-                for (String msg1 : Utils.getHelpMessages()){
+                for (String msg1 : Utils.getHelpMessages()) {
                     Log.log(Log.LogLevel.PLAIN, msg1);
                 }
             } else if (args[0].equalsIgnoreCase("reload")) {
                 Utils.reloadConfig();
-            }
-            else {
+            } else {
                 Log.log(Log.LogLevel.DEFAULT, "That command either does not exist or is player only");
             }
         }

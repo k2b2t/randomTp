@@ -7,6 +7,7 @@ import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,6 +15,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -89,6 +91,7 @@ public class RTPCommand implements CommandExecutor {
                                         return true;
                                     } else {
                                         teleportUtils.rtpPlayer(target, player, true, true, false, null, true, true, true, world, true, null);
+                                        player.sendMessage(Utils.getTpMessageSender(target));
                                         return true;
                                     }
                                 case 3:
@@ -96,9 +99,22 @@ public class RTPCommand implements CommandExecutor {
                                     if (world1 == null) {
                                         player.sendMessage(Utils.getWrongWorldMessage());
                                         return true;
-                                    } else {
-                                        teleportUtils.rtpPlayer(target, player, true, true, false, args[2], true, true, true, world1, true, null);
                                     }
+                                    try {
+                                        Biome b = Biome.valueOf(args[2].toUpperCase(Locale.ROOT));
+                                        teleportUtils.rtpPlayer(target, player, true, true, false, b.toString(), true, true, true, world1, true, null);
+                                        player.sendMessage(Utils.getTpMessageSender(target));
+                                    }catch (Exception e){
+                                        try {
+                                            Utils.RTPTier tier = Utils.RTPTier.valueOf(args[2].toUpperCase(Locale.ROOT));
+                                            teleportUtils.rtpPlayer(target, player, true, true, false, null, true, true, true, world1, true, tier);
+                                            player.sendMessage(Utils.getTpMessageSender(target));
+                                        }catch (Exception ex){
+                                            player.sendMessage(Utils.getWrongTierOrBiomeNameMessage());
+                                            return true;
+                                        }
+                                    }
+
                                     return true;
                                 default:
                                     teleportUtils.rtpPlayer(target, player, true, true, false, null, false, true, true, null, true, null);
@@ -157,7 +173,7 @@ public class RTPCommand implements CommandExecutor {
                     if (target != null) {
 
                         if (args.length == 1) {
-                            teleportUtils.rtpPlayer(target, null,  true, true, false, null, false, true, true, null, true, null);
+                            teleportUtils.rtpPlayer(target, null, true, true, false, null, false, true, true, null, true, null);
                             Log.log(Log.LogLevel.SUCCESS, "Teleporting player " + target.getName() + " to a random location");
                             return true;
                         } else if (args.length == 2) {
@@ -175,18 +191,32 @@ public class RTPCommand implements CommandExecutor {
                                 Log.log(Log.LogLevel.ERROR, "Couldn't find that world");
                                 return true;
                             }
-                            
-                            teleportUtils.rtpPlayer(target, null, true, true, false, args[2], false, true, true, world, true, null);
-                            Log.log(Log.LogLevel.SUCCESS, "Teleporting player " + target.getName() + " to a random location in world " + world.getName() + " in biome " + args[2]);
+                            try {
+                                //Right Tier name
+                                Biome b = Biome.valueOf(args[2].toUpperCase(Locale.ROOT));
+                                teleportUtils.rtpPlayer(target, null, true, true, false, b.toString(), false, true, true, world, true, null);
+                            } catch (Exception e) {
+                                //Wrong biome name
+                                try {
+                                    //Right Tier name
+                                    Utils.RTPTier tier = Utils.RTPTier.valueOf(args[2].toUpperCase(Locale.ROOT));
+                                    teleportUtils.rtpPlayer(target, null, true, true, false, null, false, true, true, world, true, tier);
+                                } catch (Exception ex) {
+                                    //Wrong Tier name
+                                    Log.log(Log.LogLevel.ERROR, "Wrong biome or Tier name");
+                                    return true;
+                                }
+                            }
+                            Log.log(Log.LogLevel.SUCCESS, "Teleporting player " + target.getName() + " to a random location in world " + world.getName());
                             return true;
                         } else {
-                            Log.log(Log.LogLevel.ERROR, "Usage: rtp <player> [world] [biome]");
+                            Log.log(Log.LogLevel.ERROR, "Usage: rtp <player> [world] [biome|tier]");
                         }
                     } else {
                         Log.log(Log.LogLevel.ERROR, "Couldn't find that player");
                     }
                 } else {
-                    Log.log(Log.LogLevel.ERROR, "Usage: rtp <player> [world] [biome]");
+                    Log.log(Log.LogLevel.ERROR, "Usage: rtp <player> [world] [biome|tier]");
                 }
             }
         }
