@@ -22,6 +22,12 @@ public class RTPluginCommandTabCompleter implements TabCompleter {
                 strings.add("reload");
 
                 return strings;
+            }else if (args.length == 2 && args[0].equalsIgnoreCase("help")){
+                List<String> strings1 = new ArrayList<>();
+                strings1.add("commands");
+                strings1.add("permissions");
+
+                return strings1;
             }
         }
 

@@ -30,8 +30,20 @@ public class RTPluginCommand implements CommandExecutor {
                 player.sendMessage("§6You are running §bRandomTP§6 Version: §b" + Randomtp.VERSION);
                 player.sendMessage("§6For help type the command §b/rtplugin help");
             } else if (args[0].equalsIgnoreCase("help")) {
-                for (String msg : Utils.getHelpMessages()) {
-                    player.sendMessage(msg); //Print out help messages
+                if (args.length == 2) {
+                    if (args[1].equalsIgnoreCase("commands")) {
+                        for (String msg : Utils.getHelpMessages(1)) {
+                            player.sendMessage(msg);
+                        }
+                    } else if (args[1].equalsIgnoreCase("permissions")) {
+                        for (String msg : Utils.getHelpMessages(2)) {
+                            player.sendMessage(msg);
+                        }
+                    } else {
+                        player.sendMessage("§cUsage: /rtplugin help <commands|permissions>");
+                    }
+                } else {
+                    player.sendMessage("§cUsage: /rtplugin help <commands|permissions>");
                 }
             } else if (args[0].equalsIgnoreCase("setborder")) {
 
@@ -81,8 +93,20 @@ public class RTPluginCommand implements CommandExecutor {
                 Log.log(Log.LogLevel.PLAIN, "§6You are running §bRandomTP§6 Version: §b" + Randomtp.VERSION);
                 Log.log(Log.LogLevel.PLAIN, "§6For help type the command §brtplugin help");
             } else if (args[0].equalsIgnoreCase("help")) {
-                for (String msg1 : Utils.getHelpMessages()) {
-                    Log.log(Log.LogLevel.PLAIN, msg1);
+                if (args.length == 2) {
+                    if (args[1].equalsIgnoreCase("commands")) {
+                        for (String msg : Utils.getHelpMessages(1)) {
+                            Log.log(Log.LogLevel.PLAIN, msg);
+                        }
+                    } else if (args[1].equalsIgnoreCase("permissions")) {
+                        for (String msg : Utils.getHelpMessages(2)) {
+                            Log.log(Log.LogLevel.PLAIN, msg);
+                        }
+                    } else {
+                        Log.log(Log.LogLevel.ERROR, "Usage: /rtplugin help <commands|permissions>");
+                    }
+                } else {
+                    Log.log(Log.LogLevel.ERROR, "Usage: /rtplugin help <commands|permissions>");
                 }
             } else if (args[0].equalsIgnoreCase("reload")) {
                 Utils.reloadConfig();

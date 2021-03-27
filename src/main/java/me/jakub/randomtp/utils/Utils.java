@@ -358,35 +358,46 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.wrong-biome-name"));
     }
 
-    public static List<String> getHelpMessages() {
-        List<String> messages = new ArrayList<>();
+    public static List<String> getHelpMessages(int index) {
+        switch (index){
+            case 1:
+                List<String> commands = new ArrayList<>();
 
-        messages.add("§6Version: §c" + Randomtp.VERSION);
-        messages.add("§3§lCommands:");
-        messages.add("§6/rtp - Teleports you to a random location within the border set in the config");
-        messages.add("§6/rtp [player] [biome] - /rtp other players");
-        messages.add("§6/rtp @everyone [biome] - /rtp everyone on the server");
-        messages.add("§6/wild - /rtp alias");
-        messages.add("§6/rtplugin help - Shows you this message");
-        messages.add("§6/rtplugin setborder - Allows you to set the border");
-        messages.add("§6/rtplugin reload - Reloads the config");
-        messages.add("§3§lPermissions:");
-        messages.add("§6randomTp.rtp - Allows you to use /rtp");
-        messages.add("§6randomTp.rtp.others - Allows you to /rtp other players");
-        messages.add("§6randomTp.rtp.everyone - Allows you to /rtp @everyone");
-        messages.add("§6randomTp.rtp.onDeath - RTP on death");
-        messages.add("§6randomTp.setborder - Allows you to set the rtp border");
-        messages.add("§6randomTp.reload - Allows you to reload the plugin");
-        messages.add("§6randomTp.cooldown.bypass - Allows you to bypass the cooldown");
-        messages.add("§6randomTp.price.bypass - Bypass rtp price");
-        messages.add("§6randomTp.sign.create - Create RTP signs");
-        messages.add("§6randomTp.sign.use - Use RTP signs");
-        messages.add("§6randomTp.sign.break - Break RTP signs");
-        messages.add("§6randomTp.countdown.bypass - Bypass countdown");
-        messages.add("§3§lConfig:");
-        messages.add("§6Border size: §b" + plugin.getConfig().getInt("border"));
+                commands.add("§6Version: §c" + Randomtp.VERSION);
+                commands.add("§3§lCommands:");
+                commands.add("§6/rtp - Teleports you to a random location within the border set in the config");
+                commands.add("§6/rtp [player] [world] [biome|tier] - /rtp other players");
+                commands.add("§6/rtp @everyone [world] [biome] - /rtp everyone on the server");
+                commands.add("§6/wild - /rtp alias");
+                commands.add("§6/rtplugin help <commands|permissions> - Shows you this message");
+                commands.add("§6/rtplugin setborder - Allows you to set the border");
+                commands.add("§6/rtplugin reload - Reloads the config");
 
-        return messages;
+                return commands;
+            case 2:
+                List<String> permisions = new ArrayList<>();
+
+                permisions.add("§6Version: §c" + Randomtp.VERSION);
+                permisions.add("§3§lPermissions:");
+                permisions.add("§6randomTp.rtp - Allows you to use /rtp");
+                permisions.add("§6randomTp.rtp.others - Allows you to /rtp other players");
+                permisions.add("§6randomTp.rtp.everyone - Allows you to /rtp @everyone");
+                permisions.add("§6randomTp.rtp.onDeath - RTP on death");
+                permisions.add("§6randomTp.setborder - Allows you to set the rtp border");
+                permisions.add("§6randomTp.reload - Allows you to reload the plugin");
+                permisions.add("§6randomTp.cooldown.bypass - Allows you to bypass the cooldown");
+                permisions.add("§6randomTp.price.bypass - Bypass rtp price");
+                permisions.add("§6randomTp.sign.create - Create RTP signs");
+                permisions.add("§6randomTp.sign.use - Use RTP signs");
+                permisions.add("§6randomTp.sign.break - Break RTP signs");
+                permisions.add("§6randomTp.countdown.bypass - Bypass countdown");
+
+                return permisions;
+            default:
+                return null;
+
+        }
+
     }
 
     public static String getTierGUITitle() {
