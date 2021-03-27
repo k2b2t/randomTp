@@ -116,7 +116,7 @@ public class RTPCommand implements CommandExecutor {
             } else {
                 if (player.hasPermission("randomTp.rtp")) {
 
-                    if (Utils.isWorldCommandDisabled(player.getWorld().getName())){
+                    if (Utils.isWorldCommandDisabled(player.getWorld().getName())) {
                         player.sendMessage(Utils.getWorldDisabledMessage());
                         return true;
                     }
@@ -156,18 +156,37 @@ public class RTPCommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
 
-                        if (args.length == 2) {
-                            teleportUtils.rtpPlayer(target, null, true, true, false, args[1], false, true, true, null, true, null);
-                            Log.log(Log.LogLevel.SUCCESS, "Teleporting " + target.getName() + " to a random location in biome " + args[1]);
+                        if (args.length == 1) {
+                            teleportUtils.rtpPlayer(target, null,  true, true, false, null, false, true, true, null, true, null);
+                            Log.log(Log.LogLevel.SUCCESS, "Teleporting player " + target.getName() + " to a random location");
                             return true;
+                        } else if (args.length == 2) {
+                            World world = Utils.getWorldFromString(args[1]);
+                            if (world == null) {
+                                Log.log(Log.LogLevel.ERROR, "Couldn't find that world");
+                                return true;
+                            }
+                            teleportUtils.rtpPlayer(target, null, true, true, false, null, false, true, true, world, true, null);
+                            Log.log(Log.LogLevel.SUCCESS, "Teleporting player " + target.getName() + " to a random location in world " + world.getName());
+                            return true;
+                        } else if (args.length == 3) {
+                            World world = Utils.getWorldFromString(args[1]);
+                            if (world == null) {
+                                Log.log(Log.LogLevel.ERROR, "Couldn't find that world");
+                                return true;
+                            }
+                            
+                            teleportUtils.rtpPlayer(target, null, true, true, false, args[2], false, true, true, world, true, null);
+                            Log.log(Log.LogLevel.SUCCESS, "Teleporting player " + target.getName() + " to a random location in world " + world.getName() + " in biome " + args[2]);
+                            return true;
+                        } else {
+                            Log.log(Log.LogLevel.ERROR, "Usage: rtp <player> [world] [biome]");
                         }
-                        teleportUtils.rtpPlayer(target, null, true, true, false, null, false, true, true, null, true, null);
-                        Log.log(Log.LogLevel.SUCCESS, "Teleporting " + target.getName() + " to a random location");
                     } else {
                         Log.log(Log.LogLevel.ERROR, "Couldn't find that player");
                     }
                 } else {
-                    Log.log(Log.LogLevel.ERROR, "Usage: rtp <player> [biome]");
+                    Log.log(Log.LogLevel.ERROR, "Usage: rtp <player> [world] [biome]");
                 }
             }
         }

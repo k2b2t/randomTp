@@ -282,6 +282,8 @@ public class TeleportUtils {
         }
         location.add(0.5, 0, 0.5); //Set the location to the center of the block
         location.getWorld().getChunkAt(location.getBlock()).load(true);
+        location.setPitch(player.getLocation().getPitch());
+        location.setYaw(player.getLocation().getYaw());
         player.teleport(location);
         afterTp(player);
 
