@@ -89,7 +89,7 @@ Rtp-settings:
         title: "§aRTP to world: world"
         material: GRASS_BLOCK
   TierGUI:
-    #This needs the world GUI to be turned **ON**
+    #This *no longer* needs the world GUI to be turned on :)
     enabled: true
     #Title of the Tier GUI
     title: "§aSelect RTP Tier"

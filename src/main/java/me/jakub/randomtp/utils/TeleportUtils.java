@@ -3,6 +3,7 @@ package me.jakub.randomtp.utils;
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.commands.RTPCommand;
 import me.jakub.randomtp.gui.confirmgui.ConfirmGUI;
+import me.jakub.randomtp.gui.confirmgui.TierGUI;
 import me.jakub.randomtp.gui.confirmgui.WorldGUI;
 import me.jakub.randomtp.hooks.VaultHook;
 import org.bukkit.*;
@@ -327,9 +328,11 @@ public class TeleportUtils {
      * @param guiChecked      True if you don't want to use the confirm GUI
      * @param worldChecked    False to show the world GUI
      * @param world           World to RTP to (overrides everything else)
+     * @param tierGUIChecked  True if you don't want the Tier GUI to appear
+     * @param forceTier       Tier that will override the border
      */
     public void rtpPlayer(Player target, Player sender, boolean bypassCountdown, boolean bypassPrice, boolean startCooldown, String biomeString, boolean biomeOutput, boolean guiChecked, boolean worldChecked, World world, boolean tierGUIChecked, Utils.RTPTier forceTier) {
-        if (!guiChecked && Utils.isConfirmGUIEnabled() && !Utils.getWorldGUIEnabled()) {
+        if (!guiChecked && Utils.isConfirmGUIEnabled() && !Utils.getWorldGUIEnabled() && !Utils.getTierGUIEnabled()) {
             ConfirmGUI confirmGUI = new ConfirmGUI();
             confirmGUI.openConfirmGUI(target);
             return;
@@ -344,6 +347,13 @@ public class TeleportUtils {
         if (world == null) {
             world = Utils.getForceDefaultWorldEnabled() ? Utils.forcedWorld(target) : target.getWorld();
         }
+
+        if (!tierGUIChecked && forceTier == null && !Utils.getWorldGUIEnabled() && Utils.getTierGUIEnabled()) {
+            TierGUI tierGUI = new TierGUI();
+            tierGUI.openTierGUI(target, world);
+            return;
+        }
+
         Biome biome = null;
         if (Utils.isWorldDisabled(world.getName())) {
             target.sendMessage(Utils.getWorldDisabledMessage());
