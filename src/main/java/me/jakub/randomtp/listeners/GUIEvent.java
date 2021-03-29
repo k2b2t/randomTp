@@ -1,8 +1,7 @@
 package me.jakub.randomtp.listeners;
 
 import me.jakub.randomtp.Randomtp;
-import me.jakub.randomtp.gui.confirmgui.TierGUI;
-import me.jakub.randomtp.utils.Log;
+import me.jakub.randomtp.gui.TierGUI;
 import me.jakub.randomtp.utils.TeleportUtils;
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Bukkit;

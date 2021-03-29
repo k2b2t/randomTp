@@ -2,15 +2,14 @@ package me.jakub.randomtp.utils;
 
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.commands.RTPCommand;
-import me.jakub.randomtp.gui.confirmgui.ConfirmGUI;
-import me.jakub.randomtp.gui.confirmgui.TierGUI;
-import me.jakub.randomtp.gui.confirmgui.WorldGUI;
+import me.jakub.randomtp.gui.ConfirmGUI;
+import me.jakub.randomtp.gui.TierGUI;
+import me.jakub.randomtp.gui.WorldGUI;
 import me.jakub.randomtp.hooks.VaultHook;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
 import java.util.Locale;

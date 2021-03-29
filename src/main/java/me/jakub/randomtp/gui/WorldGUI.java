@@ -1,4 +1,4 @@
-package me.jakub.randomtp.gui.confirmgui;
+package me.jakub.randomtp.gui;
 
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Bukkit;
