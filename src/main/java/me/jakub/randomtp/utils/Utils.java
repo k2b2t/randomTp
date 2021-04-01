@@ -96,6 +96,10 @@ public class Utils {
         return plugin.getConfig().getBoolean("Force-default-world.enabled");
     }
 
+    public static boolean getDisableRTPInClaimedAreas(){
+        return plugin.getConfig().getBoolean("Griefprevention.disable-rtp-in-claimed-areas");
+    }
+
     public static World forcedWorld(Player player) {
         try {
             World world = Bukkit.getWorld(plugin.getConfig().getString("Force-default-world.world-name"));
