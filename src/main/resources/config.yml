@@ -181,6 +181,11 @@ Vault:
   #Default price
   rtp-price: 100
 
+#Griefprevention settings
+Griefprevention:
+  enabled: false
+  disable-rtp-in-claimed-areas: true
+
 
 #Biome blacklist settings
 Biome-blacklist:

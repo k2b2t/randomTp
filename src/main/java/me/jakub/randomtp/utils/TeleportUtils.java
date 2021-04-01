@@ -5,6 +5,7 @@ import me.jakub.randomtp.commands.RTPCommand;
 import me.jakub.randomtp.gui.ConfirmGUI;
 import me.jakub.randomtp.gui.TierGUI;
 import me.jakub.randomtp.gui.WorldGUI;
+import me.jakub.randomtp.hooks.GPHook;
 import me.jakub.randomtp.hooks.VaultHook;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
@@ -162,6 +163,9 @@ public class TeleportUtils {
 
     public boolean isLocationSafe(Location location, Biome biome) {
         //Checking if the generated random location is safe
+
+        if(GPHook.isClaimedAt(location)) return false;
+
         int x = location.getBlockX();
         int y = location.getBlockY();
         int z = location.getBlockZ();
