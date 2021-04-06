@@ -1,12 +1,13 @@
 package me.jakub.randomtp.hooks;
 
+import br.net.fabiozumbi12.RedProtect.Bukkit.API.RedProtectAPI;
+import br.net.fabiozumbi12.RedProtect.Bukkit.RedProtect;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
-import lombok.Getter;
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.utils.Log;
 import me.ryanhamshire.GriefPrevention.Claim;
@@ -30,14 +31,18 @@ public class ClaimHookManager {
     private static boolean townyHooked = false;
     private static TownyAPI towny = null;
 
+    private static boolean redProtectHooked = false;
+    private static RedProtectAPI redProtect = null;
+
     public void initHooks() {
         gpHooked = hookGp();
         wgHooked = hookWg();
         townyHooked = hookTowny();
+        redProtectHooked = hookRedProtect();
     }
 
     public boolean isClaimedAt(Location location) {
-        return isGpClaimed(location) || isWgClaimed(location) || isTownyClaimed(location);
+        return isGpClaimed(location) || isWgClaimed(location) || isTownyClaimed(location) || isRedProtectClaimed(location);
     }
 
 
@@ -77,6 +82,18 @@ public class ClaimHookManager {
         }
     }
 
+    private boolean hookRedProtect() {
+        if (!(plugin.getConfig().getBoolean("Claim-protection.Redprotect"))) return false;
+        if (plugin.getServer().getPluginManager().getPlugin("RedProtect") != null){
+            Log.log(Log.LogLevel.SUCCESS, "Successfully hooked into RedProtect");
+            redProtect = RedProtect.get().getAPI();
+            return true;
+        }else{
+            Log.log(Log.LogLevel.ERROR, "Couldn't hook into RedProtect, check if you have it installed");
+            return false;
+        }
+    }
+
 
     private boolean isGpClaimed(Location location) {
         if (!(gpHooked && griefPrevention != null && plugin.getConfig().getBoolean("Claim-protection.Griefprevention")))
@@ -105,6 +122,12 @@ public class ClaimHookManager {
         if (!(townyHooked && towny != null && plugin.getConfig().getBoolean("Claim-protection.Towny")))
             return false;
         return !towny.isWilderness(location.getBlock());
+    }
+
+    private boolean isRedProtectClaimed(Location location){
+        if (!(redProtectHooked && redProtect != null && plugin.getConfig().getBoolean("Claim-protection.Redprotect")))
+            return false;
+        return redProtect.getRegion(location) != null;
     }
 
 

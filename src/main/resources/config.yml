@@ -34,6 +34,10 @@ Claim-protection:
   #Plugin: Towny v0.96.7.0
   #Link: https://www.spigotmc.org/resources/towny-advanced.72694/
   Towny: false
+  #MC: Tested PaperMC 1.16.5
+  #Plugin: RedProtect v7.7.2
+  #Link: https://www.spigotmc.org/resources/redprotect-anti-grief-server-protection-region-management-1-7-1-16.15841/
+  Redprotect: false
 
 
 #Cooldown for the /rtp command
