@@ -20,6 +20,11 @@ Force-default-world:
   world-name: world
 
 
+#Check for claimed areas before teleporting with these plugins
+Claim-protection:
+  Griefprevention: false
+
+
 #Cooldown for the /rtp command
 #Set to 0 for no cooldown
 Cooldown:
@@ -181,10 +186,6 @@ Vault:
   #Default price
   rtp-price: 100
 
-#Griefprevention settings
-Griefprevention:
-  enabled: false
-  disable-rtp-in-claimed-areas: true
 
 
 #Biome blacklist settings
