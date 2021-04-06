@@ -8,7 +8,6 @@ import me.jakub.randomtp.hooks.ClaimHookManager;
 import me.jakub.randomtp.listeners.*;
 import me.jakub.randomtp.metrics.MetricsLite;
 import me.jakub.randomtp.utils.*;
-import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -17,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Randomtp extends JavaPlugin {
 
-    public static final String VERSION = "2.17";
+    public static final String VERSION = "2.18";
 
     private static Economy econ = null;
 
@@ -48,6 +47,7 @@ public final class Randomtp extends JavaPlugin {
         new MetricsLite(this, 10130);
         new PlayerUtils(this);
         ClaimHookManager claimHookManager = new ClaimHookManager(this);
+        ConfigUpdateChecker configUpdateChecker = new ConfigUpdateChecker(this);
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
@@ -68,6 +68,9 @@ public final class Randomtp extends JavaPlugin {
         claimHookManager.initHooks(); //Initialize all the claim hooks
 
         Log.log(Log.LogLevel.SUCCESS, "Finished loading!");
+
+        configUpdateChecker.checkConfigVersion();
+
         if (utils.getUpdateCheckerEnabled()) {
             Log.log(Log.LogLevel.INFO, "Checking for updates..");
         }
