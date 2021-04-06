@@ -21,6 +21,7 @@ Force-default-world:
 
 
 #Check for claimed areas before teleporting with these plugins
+#When modifying these values you will need to restart the server (not just /rtplugin reload)!
 Claim-protection:
   #MC: Tested Spigot 1.16.3 & PaperMC 1.16.5
   #Plugin: Griefprevention v16.17.1
@@ -38,6 +39,11 @@ Claim-protection:
   #Plugin: RedProtect v7.7.2
   #Link: https://www.spigotmc.org/resources/redprotect-anti-grief-server-protection-region-management-1-7-1-16.15841/
   Redprotect: false
+  #!! When using ProtectionStones you need to have the Worldguard Claim-protection ENABLED !!
+  #MC: Tested PaperMC 1.16.5
+  #Plugin: ProtectionStones v2.8.1
+  #Link: https://www.spigotmc.org/resources/protectionstones-updated-for-1-13-1-16-wg7.61797/
+  Protectionstones: false
 
 
 #Cooldown for the /rtp command
