@@ -23,9 +23,6 @@ public final class Randomtp extends JavaPlugin {
 
     public static boolean vaultHooked = false;
 
-    //public static boolean gpHooked = false;
-
-    //private static GriefPrevention griefPrevention = null;
 
 
     @Override
@@ -68,8 +65,7 @@ public final class Randomtp extends JavaPlugin {
         } else vaultHooked = false;
 
 
-        claimHookManager.initHooks();
-        //gpHooked = claimHookManager.isGpHooked();
+        claimHookManager.initHooks(); //Initialize all the claim hooks
 
         Log.log(Log.LogLevel.SUCCESS, "Finished loading!");
         if (utils.getUpdateCheckerEnabled()) {
