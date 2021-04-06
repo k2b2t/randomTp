@@ -20,6 +20,32 @@ Force-default-world:
   world-name: world
 
 
+#Check for claimed areas before teleporting with these plugins
+#When modifying these values you will need to restart the server (not just /rtplugin reload)!
+Claim-protection:
+  #MC: Tested Spigot 1.16.3 & PaperMC 1.16.5
+  #Plugin: Griefprevention v16.17.1
+  #Link: https://www.spigotmc.org/resources/griefprevention.1884/
+  Griefprevention: false
+  #MC: Tested PaperMC 1.16.5
+  #Plugin: WorldGuard v7.2.4 & WorldEdit v7.2.4
+  #Link: https://dev.bukkit.org/projects/worldguard
+  Worldguard: false
+  #MC: Tested PaperMC 1.16.5
+  #Plugin: Towny v0.96.7.0
+  #Link: https://www.spigotmc.org/resources/towny-advanced.72694/
+  Towny: false
+  #MC: Tested PaperMC 1.16.5
+  #Plugin: RedProtect v7.7.2
+  #Link: https://www.spigotmc.org/resources/redprotect-anti-grief-server-protection-region-management-1-7-1-16.15841/
+  Redprotect: false
+  #!! When using ProtectionStones you need to have the Worldguard Claim-protection ENABLED !!
+  #MC: Tested PaperMC 1.16.5
+  #Plugin: ProtectionStones v2.8.1
+  #Link: https://www.spigotmc.org/resources/protectionstones-updated-for-1-13-1-16-wg7.61797/
+  Protectionstones: false
+
+
 #Cooldown for the /rtp command
 #Set to 0 for no cooldown
 Cooldown:
@@ -181,10 +207,6 @@ Vault:
   #Default price
   rtp-price: 100
 
-#Griefprevention settings
-Griefprevention:
-  enabled: false
-  disable-rtp-in-claimed-areas: true
 
 
 #Biome blacklist settings
@@ -288,3 +310,11 @@ Messages:
   wrong-world-name: "&cCouldn't find that world!"
   #Wrong tier or biome name was used when /rtp'ing
   wrong-tier-or-biome-name: "&cWrong Tier or biome name"
+
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!!!!!!!!!!!!!!!!! don't touch pls :) !!!!!!!!!!!!!!!!!!!
+config-version: 2.18
+#! don't change this if you don't know what you're doing !
+config-version-checker: true
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

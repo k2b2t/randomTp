@@ -4,7 +4,7 @@ main: me.jakub.randomtp.Randomtp
 author: Kubajsa
 api-version: 1.13
 description: Highly customizable 1.13-1.16 RTP plugin
-softdepend: [Vault, GriefPrevention]
+softdepend: [Vault, GriefPrevention, WorldGuard, Towny, RedProtect, ProtectionStones]
 commands:
   rtp:
     description: Teleports the player to a random location

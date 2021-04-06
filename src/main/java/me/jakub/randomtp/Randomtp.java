@@ -4,10 +4,10 @@ import me.jakub.randomtp.commands.RTPCommand;
 import me.jakub.randomtp.commands.RTPCommandTabCompleter;
 import me.jakub.randomtp.commands.RTPluginCommand;
 import me.jakub.randomtp.commands.RTPluginCommandTabCompleter;
+import me.jakub.randomtp.hooks.ClaimHookManager;
 import me.jakub.randomtp.listeners.*;
 import me.jakub.randomtp.metrics.MetricsLite;
 import me.jakub.randomtp.utils.*;
-import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -16,15 +16,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Randomtp extends JavaPlugin {
 
-    public static final String VERSION = "2.17";
+    public static final String VERSION = "2.18";
 
     private static Economy econ = null;
 
     public static boolean vaultHooked = false;
 
-    public static boolean gpHooked = false;
-
-    private static GriefPrevention griefPrevention = null;
 
 
     @Override
@@ -49,6 +46,8 @@ public final class Randomtp extends JavaPlugin {
         Utils utils = new Utils(this);
         new MetricsLite(this, 10130);
         new PlayerUtils(this);
+        ClaimHookManager claimHookManager = new ClaimHookManager(this);
+        ConfigUpdateChecker configUpdateChecker = new ConfigUpdateChecker(this);
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
@@ -66,20 +65,12 @@ public final class Randomtp extends JavaPlugin {
         } else vaultHooked = false;
 
 
-        if (this.getConfig().getBoolean("Griefprevention.enabled")) {
-            if (getServer().getPluginManager().getPlugin("GriefPrevention") != null) {
-                Log.log(Log.LogLevel.SUCCESS, "Successfully hooked into GriefPrevention");
-                gpHooked = true;
-                griefPrevention = GriefPrevention.instance;
-            } else {
-                Log.log(Log.LogLevel.ERROR, "Couldn't hook into GriefPrevention, check if you have it installed");
-                gpHooked = false;
-            }
-        } else {
-            gpHooked = false;
-        }
+        claimHookManager.initHooks(); //Initialize all the claim hooks
 
         Log.log(Log.LogLevel.SUCCESS, "Finished loading!");
+
+        configUpdateChecker.checkConfigVersion();
+
         if (utils.getUpdateCheckerEnabled()) {
             Log.log(Log.LogLevel.INFO, "Checking for updates..");
         }
@@ -116,9 +107,5 @@ public final class Randomtp extends JavaPlugin {
         } else {
             return null;
         }
-    }
-
-    public static GriefPrevention getGriefPrevention(){
-        return griefPrevention;
     }
 }
