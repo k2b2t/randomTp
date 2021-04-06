@@ -1,5 +1,6 @@
 package me.jakub.randomtp.hooks;
 
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
@@ -26,13 +27,17 @@ public class ClaimHookManager {
     private static boolean wgHooked = false;
     private static WorldGuard worldGuard = null;
 
+    private static boolean townyHooked = false;
+    private static TownyAPI towny = null;
+
     public void initHooks() {
         gpHooked = hookGp();
         wgHooked = hookWg();
+        townyHooked = hookTowny();
     }
 
     public boolean isClaimedAt(Location location) {
-        return isGpClaimed(location) || isWgClaimed(location);
+        return isGpClaimed(location) || isWgClaimed(location) || isTownyClaimed(location);
     }
 
 
@@ -60,6 +65,18 @@ public class ClaimHookManager {
         }
     }
 
+    private boolean hookTowny() {
+        if (!(plugin.getConfig().getBoolean("Claim-protection.Towny"))) return false;
+        if (plugin.getServer().getPluginManager().getPlugin("Towny") != null) {
+            Log.log(Log.LogLevel.SUCCESS, "Successfully hooked into Towny");
+            towny = TownyAPI.getInstance();
+            return true;
+        } else {
+            Log.log(Log.LogLevel.ERROR, "Couldn't hook into Towny, check if you have it installed");
+            return false;
+        }
+    }
+
 
     private boolean isGpClaimed(Location location) {
         if (!(gpHooked && griefPrevention != null && plugin.getConfig().getBoolean("Claim-protection.Griefprevention")))
@@ -82,6 +99,12 @@ public class ClaimHookManager {
             e.printStackTrace();
         }
         return !result;
+    }
+
+    private boolean isTownyClaimed(Location location) {
+        if (!(townyHooked && towny != null && plugin.getConfig().getBoolean("Claim-protection.Towny")))
+            return false;
+        return !towny.isWilderness(location.getBlock());
     }
 
 

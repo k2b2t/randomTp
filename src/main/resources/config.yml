@@ -22,14 +22,18 @@ Force-default-world:
 
 #Check for claimed areas before teleporting with these plugins
 Claim-protection:
-  #Tested Spigot 1.16.3 & PaperMC 1.16.5
-  #Griefprevention v16.17.1
-  #https://www.spigotmc.org/resources/griefprevention.1884/
+  #MC: Tested Spigot 1.16.3 & PaperMC 1.16.5
+  #Plugin: Griefprevention v16.17.1
+  #Link: https://www.spigotmc.org/resources/griefprevention.1884/
   Griefprevention: false
-  #Tested PaperMC 1.16.5
-  #WorldGuard v7.2.4 & WorldEdit v7.2.4
-  #https://dev.bukkit.org/projects/worldguard
+  #MC: Tested PaperMC 1.16.5
+  #Plugin: WorldGuard v7.2.4 & WorldEdit v7.2.4
+  #Link: https://dev.bukkit.org/projects/worldguard
   Worldguard: false
+  #MC: Tested PaperMC 1.16.5
+  #Plugin: Towny v0.96.7.0
+  #Link: https://www.spigotmc.org/resources/towny-advanced.72694/
+  Towny: false
 
 
 #Cooldown for the /rtp command
