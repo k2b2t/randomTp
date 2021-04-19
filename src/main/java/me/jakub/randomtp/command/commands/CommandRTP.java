@@ -1,10 +1,7 @@
 package me.jakub.randomtp.command.commands;
 
 import me.jakub.randomtp.Randomtp;
-import me.jakub.randomtp.command.CommandExecutionException;
-import me.jakub.randomtp.command.InvalidUsageException;
-import me.jakub.randomtp.command.NoPermissionException;
-import me.jakub.randomtp.command.RandomTPCommand;
+import me.jakub.randomtp.command.*;
 import me.jakub.randomtp.command.tabcomplete.RTPCommandTabCompleter;
 import me.jakub.randomtp.utils.Cooldown;
 import me.jakub.randomtp.utils.Log;
@@ -18,6 +15,8 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static me.jakub.randomtp.command.Permissions.*;
 
 public class CommandRTP extends RandomTPCommand {
 
@@ -83,9 +82,9 @@ public class CommandRTP extends RandomTPCommand {
 
 
     private void runPlayerSelf() throws NoPermissionException {
-        if (!player.hasPermission("randomTp.rtp"))
+        if (!player.hasPermission(RTP_SELF.get()))
             throw new NoPermissionException();
-        if (!(player.hasPermission("randomTp.cooldown.bypass"))) {
+        if (!(player.hasPermission(BYPASS_COOLDOWN.get()))) {
 
             if (cooldowns.containsKey(player.getName())) {
                 // player is inside hashmap
@@ -113,7 +112,7 @@ public class CommandRTP extends RandomTPCommand {
 
     private void runPlayerOther() throws CommandExecutionException {
         if (args[0].equalsIgnoreCase("@everyone")) {
-            if (!player.hasPermission("randomTp.rtp.everyone"))
+            if (!player.hasPermission(RTP_EVERYONE.get()))
                 throw new NoPermissionException();
             player.sendMessage(Utils.getTpEveryoneMessage());
             for (Player target : Bukkit.getOnlinePlayers()) {
@@ -123,14 +122,14 @@ public class CommandRTP extends RandomTPCommand {
         }
 
         if (args[0].equalsIgnoreCase("test")) {
-            if (!player.hasPermission("randomTp.rtp.test"))
+            if (!player.hasPermission(RTP_TEST.get()))
                 throw new NoPermissionException();
             player.sendMessage(teleportUtils.testRTP(player));
             return;
         }
 
         //Player
-        if (!player.hasPermission("randomTp.rtp.others"))
+        if (!player.hasPermission(RTP_OTHERS.get()))
             throw new NoPermissionException();
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null)
@@ -141,7 +140,7 @@ public class CommandRTP extends RandomTPCommand {
 
     private void runPlayerOtherWorld() throws CommandExecutionException {
         if (args[0].equalsIgnoreCase("@everyone")) {
-            if (!player.hasPermission("randomTp.rtp.everyone"))
+            if (!player.hasPermission(RTP_EVERYONE.get()))
                 throw new NoPermissionException();
             player.sendMessage(Utils.getTpEveryoneMessage());
             for (Player target : Bukkit.getOnlinePlayers()) {
@@ -152,7 +151,7 @@ public class CommandRTP extends RandomTPCommand {
             }
             return;
         }
-        if (!player.hasPermission("randomTp.rtp.others"))
+        if (!player.hasPermission(RTP_OTHERS.get()))
             throw new NoPermissionException();
         //Player
         Player target = Bukkit.getServer().getPlayer(args[0]);
@@ -167,7 +166,7 @@ public class CommandRTP extends RandomTPCommand {
 
     private void runPlayerOtherTier() throws CommandExecutionException {
         if (args[0].equalsIgnoreCase("@everyone")) {
-            if (!player.hasPermission("randomTp.rtp.everyone"))
+            if (!player.hasPermission(RTP_EVERYONE.get()))
                 throw new NoPermissionException();
             player.sendMessage(Utils.getTpEveryoneMessage());
             World world = Utils.getWorldFromString(args[1]);
@@ -189,7 +188,7 @@ public class CommandRTP extends RandomTPCommand {
             }
             return;
         }
-        if (!player.hasPermission("randomTp.rtp.others"))
+        if (!player.hasPermission(RTP_OTHERS.get()))
             throw new NoPermissionException();
         //Player
         Player target = Bukkit.getPlayer(args[0]);

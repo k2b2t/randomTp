@@ -11,6 +11,8 @@ import me.jakub.randomtp.utils.Utils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static me.jakub.randomtp.command.Permissions.*;
+
 public class CommandRTPlugin extends RandomTPCommand {
     private Randomtp plugin;
 
@@ -59,7 +61,7 @@ public class CommandRTPlugin extends RandomTPCommand {
         player.sendMessage("§6For help type the command §b/rtplugin help");
     }
 
-    //TODO CHECK FOR PERMS
+
     private void runPlayerOneArg() throws CommandExecutionException {
         switch (args[0].toLowerCase()) {
             case "help":
@@ -67,7 +69,7 @@ public class CommandRTPlugin extends RandomTPCommand {
             case "setborder":
                 throw new InvalidUsageException("(/rtplugin setborder <number>)");
             case "reload":
-                if (!player.hasPermission("randomTp.reload"))
+                if (!player.hasPermission(MNG_RELOAD.get()))
                     throw new NoPermissionException();
                 Utils.reloadConfig(player);
                 break;
@@ -82,7 +84,7 @@ public class CommandRTPlugin extends RandomTPCommand {
                 runPlayerHelp();
                 break;
             case "setborder":
-                if (!player.hasPermission("randomTp.setborder"))
+                if (!player.hasPermission(MNG_SETBORDER.get()))
                     throw new NoPermissionException();
                 runPlayerSetBorder();
                 break;

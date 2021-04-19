@@ -9,6 +9,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
+import static me.jakub.randomtp.command.Permissions.*;
+
 public class DeathEvent implements Listener {
 
     static Randomtp plugin;
@@ -22,13 +24,8 @@ public class DeathEvent implements Listener {
     @EventHandler
     public void onDeath(PlayerRespawnEvent e) {
         Player player = e.getPlayer();
-        if (Utils.getRtpOnDeath() && player.hasPermission("randomTp.rtp.onDeath")) {
-            Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-                @Override
-                public void run() {
-                    teleportUtils.rtpPlayer(player, null, true, true, false, null, false, true, true, null, true, null);
-                }
-            }, 15);
+        if (Utils.getRtpOnDeath() && player.hasPermission(RTP_ON_DEATH.get())) {
+            Bukkit.getScheduler().runTaskLater(plugin, () -> teleportUtils.rtpPlayer(player, null, true, true, false, null, false, true, true, null, true, null), 15);
         }
     }
 }

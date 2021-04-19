@@ -23,12 +23,7 @@ public class JoinEvent implements Listener {
         Player player = e.getPlayer();
         if (!player.hasPlayedBefore()) {
             if (plugin.getConfig().getBoolean("rtp-on-first-join")) {
-                Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        teleportUtils.rtpPlayer(player, null,  true, true, false, null, false, true, true, null, true, null);
-                    }
-                }, 15);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> teleportUtils.rtpPlayer(player, null,  true, true, false, null, false, true, true, null, true, null), 15);
             }
         }
     }
