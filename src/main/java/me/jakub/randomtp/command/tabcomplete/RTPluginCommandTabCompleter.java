@@ -1,4 +1,4 @@
-package me.jakub.randomtp.commands;
+package me.jakub.randomtp.command.tabcomplete;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

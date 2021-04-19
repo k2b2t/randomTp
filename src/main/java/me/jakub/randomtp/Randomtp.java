@@ -1,17 +1,19 @@
 package me.jakub.randomtp;
 
-import me.jakub.randomtp.commands.RTPCommand;
-import me.jakub.randomtp.commands.RTPCommandTabCompleter;
-import me.jakub.randomtp.commands.RTPluginCommand;
-import me.jakub.randomtp.commands.RTPluginCommandTabCompleter;
+import me.jakub.randomtp.command.CoreCommandExecutor;
+import me.jakub.randomtp.command.commands.CommandRTP;
+import me.jakub.randomtp.command.commands.CommandRTPlugin;
 import me.jakub.randomtp.hooks.ClaimHookManager;
 import me.jakub.randomtp.listeners.*;
 import me.jakub.randomtp.metrics.MetricsLite;
 import me.jakub.randomtp.utils.*;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Objects;
 
 
 public final class Randomtp extends JavaPlugin {
@@ -22,7 +24,12 @@ public final class Randomtp extends JavaPlugin {
 
     public static boolean vaultHooked = false;
 
-
+    public final TeleportUtils teleportUtils = new TeleportUtils(this);
+    public final Utils utils = new Utils(this);
+    public final MetricsLite metricsLite = new MetricsLite(this, 10130);
+    public final PlayerUtils playerUtils = new PlayerUtils(this);
+    public final ClaimHookManager claimHookManager = new ClaimHookManager(this);
+    public final ConfigUpdateChecker configUpdateChecker = new ConfigUpdateChecker(this);
 
     @Override
     public void onEnable() {
@@ -37,17 +44,13 @@ public final class Randomtp extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DeathEvent(this), this);
         getServer().getPluginManager().registerEvents(new GUIEvent(this), this);
 
-        getCommand("rtp").setExecutor(new RTPCommand(this));
+        /*getCommand("rtp").setExecutor(new RTPCommand(this));
         getCommand("rtp").setTabCompleter(new RTPCommandTabCompleter());
         getCommand("rtplugin").setExecutor(new RTPluginCommand(this));
-        getCommand("rtplugin").setTabCompleter(new RTPluginCommandTabCompleter());
+        getCommand("rtplugin").setTabCompleter(new RTPluginCommandTabCompleter());*/
+        registerCommands();
 
-        new TeleportUtils(this);
-        Utils utils = new Utils(this);
-        new MetricsLite(this, 10130);
-        new PlayerUtils(this);
-        ClaimHookManager claimHookManager = new ClaimHookManager(this);
-        ConfigUpdateChecker configUpdateChecker = new ConfigUpdateChecker(this);
+
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
@@ -87,6 +90,20 @@ public final class Randomtp extends JavaPlugin {
             });
         }
 
+    }
+
+    private void registerCommands() {
+        CommandExecutor executor = new CoreCommandExecutor(
+                new CommandRTP(this),
+                new CommandRTPlugin(this)
+        );
+
+        getDescription()
+                .getCommands()
+                .keySet()
+                .stream().map(this::getCommand)
+                .filter(Objects::nonNull)
+                .forEach(c -> c.setExecutor(executor));
     }
 
     private boolean setupEconomy() {
