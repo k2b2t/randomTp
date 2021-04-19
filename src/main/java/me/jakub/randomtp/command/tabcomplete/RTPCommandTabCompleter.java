@@ -1,4 +1,4 @@
-package me.jakub.randomtp.commands;
+package me.jakub.randomtp.command.tabcomplete;
 
 import me.jakub.randomtp.utils.Utils;
 import org.bukkit.Bukkit;
@@ -25,6 +25,7 @@ public class RTPCommandTabCompleter implements TabCompleter {
                 strings.add(players[i].getName());
             }
             strings.add("@everyone");
+            strings.add("test");
 
             if (args.length == 1) {
                 return strings;

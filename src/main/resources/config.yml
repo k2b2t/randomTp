@@ -310,11 +310,13 @@ Messages:
   wrong-world-name: "&cCouldn't find that world!"
   #Wrong tier or biome name was used when /rtp'ing
   wrong-tier-or-biome-name: "&cWrong Tier or biome name"
+  #When player executes /rtp and is in countdown
+  in-countdown-message: "&cPlease wait before using this command"
 
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!! don't touch pls :) !!!!!!!!!!!!!!!!!!!
-config-version: 2.18
+config-version: 2.19
 #! don't change this if you don't know what you're doing !
 config-version-checker: true
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

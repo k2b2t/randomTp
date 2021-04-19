@@ -12,6 +12,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import static me.jakub.randomtp.command.Permissions.*;
+
 public class SignEvents implements Listener {
 
 
@@ -29,7 +31,7 @@ public class SignEvents implements Listener {
         Sign sign = (Sign) e.getBlock().getState();
         if (Utils.getEnabledSigns()) {
             if (e.getLine(0).equalsIgnoreCase("[RandomTP]") || e.getLine(0).equalsIgnoreCase("[RTP]")) {
-                if (player.hasPermission("randomTp.sign.create")) {
+                if (player.hasPermission(SIGN_CREATE.get())) {
                     e.setCancelled(true);
                     sign.setLine(0, Utils.getSignLine(0));
                     sign.setLine(1, Utils.getSignLine(1));
@@ -57,7 +59,7 @@ public class SignEvents implements Listener {
                             sign.getLine(2).equalsIgnoreCase(Utils.getSignLine(2)) &&
                             sign.getLine(3).equalsIgnoreCase(Utils.getSignLine(3))) {
                         Player player = e.getPlayer();
-                        if (player.hasPermission("randomTp.sign.use")) {
+                        if (player.hasPermission(SIGN_USE.get())) {
                             teleportUtils.rtpPlayer(player, null, true, true, false, null, false, true, true, null, true, null);
                         } else {
                             player.sendMessage(Utils.getNoPermission());
@@ -78,7 +80,7 @@ public class SignEvents implements Listener {
                         sign.getLine(2).equalsIgnoreCase(Utils.getSignLine(2)) &&
                         sign.getLine(3).equalsIgnoreCase(Utils.getSignLine(3))) {
                     Player player = e.getPlayer();
-                    if (player.hasPermission("randomTp.sign.break")) {
+                    if (player.hasPermission(SIGN_DESTROY.get())) {
                         if (player.isSneaking()) {
                             player.sendMessage(Utils.getSignRemoveMessage());
                         } else {

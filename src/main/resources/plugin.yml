@@ -9,7 +9,7 @@ commands:
   rtp:
     description: Teleports the player to a random location
     aliases: wild
-    usage: /<command> [player|@everyone] [world] [tier|biome]
+    usage: /<command> [player|@everyone|test] [world] [tier|biome]
   rtplugin:
     description: Main RandomTP plugin command
     usage: /<command> <help|setborder|reload> [number|commands|permissions]
@@ -40,3 +40,5 @@ permissions:
     description: Create RTP signs
   randomTp.sign.break:
     description: Break RTP signs
+  randomTp.rtp.test:
+    description: Test RTP without actually teleporting

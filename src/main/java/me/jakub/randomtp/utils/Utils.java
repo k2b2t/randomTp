@@ -24,6 +24,26 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.no-permission"));
     }
 
+    public static String inCountdownMessage() {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.in-countdown-message"));
+    }
+
+    public static Biome getBiomeFromString(String s) {
+        try {
+            return Biome.valueOf(s.toUpperCase());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static RTPTier getTierFromString(String s) {
+        try {
+            return RTPTier.valueOf(s.toUpperCase());
+        }catch (Exception e){
+            return null;
+        }
+    }
+
     public static String getTpEveryoneMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.tp-everyone-message"));
     }
@@ -202,7 +222,7 @@ public class Utils {
         }
     }
 
-    public static String getWrongTierOrBiomeNameMessage(){
+    public static String getWrongTierOrBiomeNameMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.wrong-tier-or-biome-name"));
     }
 
@@ -360,13 +380,14 @@ public class Utils {
     }
 
     public static List<String> getHelpMessages(int index) {
-        switch (index){
+        switch (index) {
             case 1:
                 List<String> commands = new ArrayList<>();
 
                 commands.add("§6Version: §c" + Randomtp.VERSION);
                 commands.add("§3§lCommands:");
                 commands.add("§6/rtp - Teleports you to a random location within the border set in the config");
+                commands.add("§6/rtp [test] - Generates a location without teleporting");
                 commands.add("§6/rtp [player] [world] [biome|tier] - /rtp other players");
                 commands.add("§6/rtp @everyone [world] [biome] - /rtp everyone on the server");
                 commands.add("§6/wild - /rtp alias");
@@ -384,6 +405,7 @@ public class Utils {
                 permisions.add("§6randomTp.rtp.others - Allows you to /rtp other players");
                 permisions.add("§6randomTp.rtp.everyone - Allows you to /rtp @everyone");
                 permisions.add("§6randomTp.rtp.onDeath - RTP on death");
+                permisions.add("§6randomTp.rtp.test - Use /rtp test");
                 permisions.add("§6randomTp.setborder - Allows you to set the rtp border");
                 permisions.add("§6randomTp.reload - Allows you to reload the plugin");
                 permisions.add("§6randomTp.cooldown.bypass - Allows you to bypass the cooldown");
@@ -520,8 +542,8 @@ public class Utils {
     }
 
 
-    public static int getIndexByRTPTier(RTPTier tier){
-        switch (tier){
+    public static int getIndexByRTPTier(RTPTier tier) {
+        switch (tier) {
             case ONE:
                 return 1;
             case TWO:
@@ -537,9 +559,9 @@ public class Utils {
         }
     }
 
-    public static List<String> getTierItemLore(int border, double price, World world){
+    public static List<String> getTierItemLore(int border, double price, World world) {
         List<String> configList = plugin.getConfig().getStringList("Rtp-settings.TierGUI.item-lore");
-        
+
         List<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.translateAlternateColorCodes('&', configList.get(0).replace("%price%", String.valueOf(price)).replace("%border%", String.valueOf(border)).replace("%world%", world.getName())));

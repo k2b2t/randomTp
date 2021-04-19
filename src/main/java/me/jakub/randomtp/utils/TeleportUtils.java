@@ -1,7 +1,7 @@
 package me.jakub.randomtp.utils;
 
 import me.jakub.randomtp.Randomtp;
-import me.jakub.randomtp.commands.RTPCommand;
+import me.jakub.randomtp.command.commands.CommandRTP;
 import me.jakub.randomtp.gui.ConfirmGUI;
 import me.jakub.randomtp.gui.TierGUI;
 import me.jakub.randomtp.gui.WorldGUI;
@@ -263,7 +263,7 @@ public class TeleportUtils {
                             if (willTp.contains(player)) {
                                 tp(player, location, bypassPrice, tier);
                                 if (startCooldown) {
-                                    RTPCommand.cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("Cooldown.seconds") * 1000));
+                                    CommandRTP.cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("Cooldown.seconds") * 1000));
                                 }
                             }
                             willTp.remove(player);
@@ -382,6 +382,32 @@ public class TeleportUtils {
             Location loc = startGenerateLocation(target, biome, world, forceTier);
             startTp(target, loc, bypassCountdown, bypassPrice, startCooldown, biome, world, forceTier);
         }
+    }
+
+    public String testRTP(Player player) {
+        long timestampStart = System.currentTimeMillis();
+        Location loc = startGenerateLocation(player, null, player.getWorld(), null);
+        long timestampEnd = System.currentTimeMillis();
+        long duration = timestampEnd - timestampStart;
+        StringBuilder sb = new StringBuilder();
+        sb.append("§6Location generated in §c" + duration + "ms" + "\n")
+                .append("§6X: §c" + loc.getBlockX() + "\n")
+                .append("§6Y: §c" + loc.getBlockY() + "\n")
+                .append("§6Z: §c" + loc.getBlockZ());
+        return sb.toString();
+    }
+
+    public String testRTP() {
+        long timestampStart = System.currentTimeMillis();
+        Location loc = startGenerateLocation(null, null, Bukkit.getWorlds().get(0), null);
+        long timestampEnd = System.currentTimeMillis();
+        long duration = timestampEnd - timestampStart;
+        StringBuilder sb = new StringBuilder();
+        sb.append("§6Location generated in §c" + duration + "ms" + "\n")
+                .append("§6X: §c" + loc.getBlockX() + "\n")
+                .append("§6Y: §c" + loc.getBlockY() + "\n")
+                .append("§6Z: §c" + loc.getBlockZ());
+        return sb.toString();
     }
 
 }
