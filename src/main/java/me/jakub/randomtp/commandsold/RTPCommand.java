@@ -1,4 +1,4 @@
-package me.jakub.randomtp.commands;
+package me.jakub.randomtp.commandsold;
 
 import me.jakub.randomtp.Randomtp;
 import me.jakub.randomtp.utils.Cooldown;

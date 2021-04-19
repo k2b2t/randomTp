@@ -387,6 +387,7 @@ public class Utils {
                 commands.add("§6Version: §c" + Randomtp.VERSION);
                 commands.add("§3§lCommands:");
                 commands.add("§6/rtp - Teleports you to a random location within the border set in the config");
+                commands.add("§6/rtp [test] - Generates a location without teleporting");
                 commands.add("§6/rtp [player] [world] [biome|tier] - /rtp other players");
                 commands.add("§6/rtp @everyone [world] [biome] - /rtp everyone on the server");
                 commands.add("§6/wild - /rtp alias");
@@ -404,6 +405,7 @@ public class Utils {
                 permisions.add("§6randomTp.rtp.others - Allows you to /rtp other players");
                 permisions.add("§6randomTp.rtp.everyone - Allows you to /rtp @everyone");
                 permisions.add("§6randomTp.rtp.onDeath - RTP on death");
+                permisions.add("§6randomTp.rtp.test - Use /rtp test");
                 permisions.add("§6randomTp.setborder - Allows you to set the rtp border");
                 permisions.add("§6randomTp.reload - Allows you to reload the plugin");
                 permisions.add("§6randomTp.cooldown.bypass - Allows you to bypass the cooldown");

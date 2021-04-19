@@ -23,7 +23,7 @@ public class CommandRTP extends RandomTPCommand {
 
     /*
      *
-     * /rtp [player|@everyone] [world] [tier|biome]
+     * /rtp [player|@everyone|test] [world] [tier|biome]
      * /rtplugin <help|setborder|reload> [number|commands|permissions]
      * */
 
@@ -121,6 +121,14 @@ public class CommandRTP extends RandomTPCommand {
             }
             return;
         }
+
+        if (args[0].equalsIgnoreCase("test")) {
+            if (!player.hasPermission("randomTp.rtp.test"))
+                throw new NoPermissionException();
+            player.sendMessage(teleportUtils.testRTP(player));
+            return;
+        }
+
         //Player
         if (!player.hasPermission("randomTp.rtp.others"))
             throw new NoPermissionException();
@@ -228,6 +236,11 @@ public class CommandRTP extends RandomTPCommand {
     }
 
     private void runConsoleOther() throws CommandExecutionException {
+        if (args[0].equalsIgnoreCase("test")){
+            sender.sendMessage(teleportUtils.testRTP());
+            return;
+        }
+
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null)
             throw new CommandExecutionException("§cCouldn't find that player");

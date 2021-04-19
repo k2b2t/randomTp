@@ -25,6 +25,7 @@ public class RTPCommandTabCompleter implements TabCompleter {
                 strings.add(players[i].getName());
             }
             strings.add("@everyone");
+            strings.add("test");
 
             if (args.length == 1) {
                 return strings;

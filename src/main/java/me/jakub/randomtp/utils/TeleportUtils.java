@@ -384,4 +384,30 @@ public class TeleportUtils {
         }
     }
 
+    public String testRTP(Player player) {
+        long timestampStart = System.currentTimeMillis();
+        Location loc = startGenerateLocation(player, null, player.getWorld(), null);
+        long timestampEnd = System.currentTimeMillis();
+        long duration = timestampEnd - timestampStart;
+        StringBuilder sb = new StringBuilder();
+        sb.append("§6Location generated in §c" + duration + "ms" + "\n")
+                .append("§6X: §c" + loc.getBlockX() + "\n")
+                .append("§6Y: §c" + loc.getBlockY() + "\n")
+                .append("§6Z: §c" + loc.getBlockZ());
+        return sb.toString();
+    }
+
+    public String testRTP() {
+        long timestampStart = System.currentTimeMillis();
+        Location loc = startGenerateLocation(null, null, Bukkit.getWorlds().get(0), null);
+        long timestampEnd = System.currentTimeMillis();
+        long duration = timestampEnd - timestampStart;
+        StringBuilder sb = new StringBuilder();
+        sb.append("§6Location generated in §c" + duration + "ms" + "\n")
+                .append("§6X: §c" + loc.getBlockX() + "\n")
+                .append("§6Y: §c" + loc.getBlockY() + "\n")
+                .append("§6Z: §c" + loc.getBlockZ());
+        return sb.toString();
+    }
+
 }
