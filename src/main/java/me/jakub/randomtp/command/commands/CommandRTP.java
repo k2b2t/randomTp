@@ -94,10 +94,12 @@ public class CommandRTP extends RandomTPCommand {
                     long timeLeft = (cooldowns.get(player.getName()) - System.currentTimeMillis()) / 1000;
                     try {
                         String formatted = Cooldown.getStr(timeLeft, Cooldown.FormatType.valueOf(plugin.getConfig().getString("Cooldown.msg-format-type")));
-                        throw new CommandExecutionException(Utils.getCooldownMessage(formatted));
+                        player.sendMessage(Utils.getCooldownMessage(formatted));
                     } catch (Exception e) {
                         Log.log(Log.LogLevel.ERROR, "Wrong message cooldown type was used in the config, use either SECONDS, MINUTES, HOURS or AUTO");
+                        return;
                     }
+                    return;
                 }
             }
             //END Cooldown

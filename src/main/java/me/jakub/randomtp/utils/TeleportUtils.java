@@ -1,7 +1,7 @@
 package me.jakub.randomtp.utils;
 
 import me.jakub.randomtp.Randomtp;
-import me.jakub.randomtp.commands.RTPCommand;
+import me.jakub.randomtp.command.commands.CommandRTP;
 import me.jakub.randomtp.gui.ConfirmGUI;
 import me.jakub.randomtp.gui.TierGUI;
 import me.jakub.randomtp.gui.WorldGUI;
@@ -263,7 +263,7 @@ public class TeleportUtils {
                             if (willTp.contains(player)) {
                                 tp(player, location, bypassPrice, tier);
                                 if (startCooldown) {
-                                    RTPCommand.cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("Cooldown.seconds") * 1000));
+                                    CommandRTP.cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("Cooldown.seconds") * 1000));
                                 }
                             }
                             willTp.remove(player);
