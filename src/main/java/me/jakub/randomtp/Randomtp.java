@@ -44,13 +44,7 @@ public final class Randomtp extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DeathEvent(this), this);
         getServer().getPluginManager().registerEvents(new GUIEvent(this), this);
 
-        /*getCommand("rtp").setExecutor(new RTPCommand(this));
-        getCommand("rtp").setTabCompleter(new RTPCommandTabCompleter());
-        getCommand("rtplugin").setExecutor(new RTPluginCommand(this));
-        getCommand("rtplugin").setTabCompleter(new RTPluginCommandTabCompleter());*/
         registerCommands();
-
-
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
