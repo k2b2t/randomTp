@@ -1,5 +1,6 @@
 package me.jakub.randomtp;
 
+import me.jakub.randomtp.api.RandomtpAPI;
 import me.jakub.randomtp.command.CoreCommandExecutor;
 import me.jakub.randomtp.command.commands.CommandRTP;
 import me.jakub.randomtp.command.commands.CommandRTPlugin;
@@ -24,15 +25,20 @@ public final class Randomtp extends JavaPlugin {
 
     public static boolean vaultHooked = false;
 
-    public final TeleportUtils teleportUtils = new TeleportUtils(this);
-    public final Utils utils = new Utils(this);
-    public final MetricsLite metricsLite = new MetricsLite(this, 10130);
-    public final PlayerUtils playerUtils = new PlayerUtils(this);
-    public final ClaimHookManager claimHookManager = new ClaimHookManager(this);
-    public final ConfigUpdateChecker configUpdateChecker = new ConfigUpdateChecker(this);
+    private final TeleportUtils teleportUtils = new TeleportUtils(this);
+    private final Utils utils = new Utils(this);
+    private final MetricsLite metricsLite = new MetricsLite(this, 10130);
+    private final PlayerUtils playerUtils = new PlayerUtils(this);
+    private final ClaimHookManager claimHookManager = new ClaimHookManager(this);
+    private final ConfigUpdateChecker configUpdateChecker = new ConfigUpdateChecker(this);
+    private static Randomtp plugin;
+    private RandomtpAPI api;
 
     @Override
     public void onEnable() {
+        plugin = this;
+        api = new RandomtpAPI(plugin);
+
 
         Log.log(Log.LogLevel.INFO, "Enabling RandomTP v" + VERSION);
         Log.log(Log.LogLevel.INFO, "Author: Kubajsa");
@@ -118,5 +124,13 @@ public final class Randomtp extends JavaPlugin {
         } else {
             return null;
         }
+    }
+
+    public static Randomtp get() {
+        return plugin;
+    }
+
+    public RandomtpAPI getAPI() {
+        return api;
     }
 }

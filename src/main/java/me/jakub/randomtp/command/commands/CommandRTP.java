@@ -35,7 +35,7 @@ public class CommandRTP extends RandomTPCommand {
     public CommandRTP(Randomtp plugin) {
         super(plugin, "rtp");
         this.plugin = plugin;
-        this.teleportUtils = new TeleportUtils(plugin); //TODO This produced NullPointerException once
+        this.teleportUtils = new TeleportUtils(plugin);
         setTabCompleter(new RTPCommandTabCompleter());
     }
 
