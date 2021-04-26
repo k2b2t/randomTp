@@ -384,6 +384,19 @@ public class TeleportUtils {
         }
     }
 
+    public void rtpPlayerAPI(Player target, boolean confirmGUI, boolean worldGUI, boolean tierGUI) {
+        if (confirmGUI) {
+            ConfirmGUI confirmGUI1 = new ConfirmGUI();
+            confirmGUI1.openConfirmGUI(target);
+        } else if (worldGUI) {
+            WorldGUI worldGUI1 = new WorldGUI();
+            worldGUI1.openWorldGUI(target, false);
+        } else if (tierGUI) {
+            TierGUI tierGUI1 = new TierGUI();
+            tierGUI1.openTierGUI(target, target.getWorld());
+        }
+    }
+
     public String testRTP(Player player) {
         long timestampStart = System.currentTimeMillis();
         Location loc = startGenerateLocation(player, null, player.getWorld(), null);
