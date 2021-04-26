@@ -316,7 +316,7 @@ Messages:
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!! don't touch pls :) !!!!!!!!!!!!!!!!!!!
-config-version: 2.19.1
+config-version: 2.19.2
 #! don't change this if you don't know what you're doing !
 config-version-checker: true
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
