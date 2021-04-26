@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public final class Randomtp extends JavaPlugin {
 
-    public static final String VERSION = "2.19";
+    public static final String VERSION = "2.19.1";
 
     private static Economy econ = null;
 

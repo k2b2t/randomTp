@@ -25,7 +25,7 @@ public class GUIEvent implements Listener {
     public void guiEvent(InventoryClickEvent e) {
 
         if (e.getCurrentItem() == null) return; //Prevent nullpointerexception when clicking empty slots
-        if (e.getView().getTitle().equalsIgnoreCase(Utils.getConfirmGUITitle()) && Utils.isConfirmGUIEnabled()) {
+        if (e.getView().getTitle().equalsIgnoreCase(Utils.getConfirmGUITitle())) {
             Player player = (Player) e.getView().getPlayer();
             e.setCancelled(true);//Cancel event if the player is in confirm GUI
 
@@ -40,7 +40,7 @@ public class GUIEvent implements Listener {
                 player.updateInventory();
                 return;
             }
-        } else if (e.getView().getTitle().equalsIgnoreCase(Utils.getWorldGUITitle()) && Utils.getWorldGUIEnabled()) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(Utils.getWorldGUITitle())) {
             Player player = (Player) e.getView().getPlayer();
             e.setCancelled(true);
             TierGUI tierGUI = new TierGUI();
@@ -73,7 +73,7 @@ public class GUIEvent implements Listener {
                 }
             }
 
-        } else if (e.getView().getTitle().equalsIgnoreCase(Utils.getTierGUITitle()) && Utils.getTierGUIEnabled()) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(Utils.getTierGUITitle())) {
             Player player = (Player) e.getView().getPlayer();
             World world = Bukkit.getWorld(e.getView().getTopInventory().getItem(4).getItemMeta().getDisplayName());
             e.setCancelled(true);
