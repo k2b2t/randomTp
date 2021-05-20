@@ -274,6 +274,9 @@ public class TeleportUtils {
         } else {
             //Has countdown bypass perm or countdown is disabled
             tp(player, location, bypassPrice, tier);
+            if (startCooldown) {
+                CommandRTP.cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("Cooldown.seconds") * 1000));
+            }
         }
 
     }
