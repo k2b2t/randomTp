@@ -238,7 +238,7 @@ public class TeleportUtils {
 
         if (!player.hasPermission("randomTp.countdown.bypass") && countdownEnabled) {
             if (bypassCountdown) {
-                tp(player, location, bypassPrice, tier);
+                tp(player, location, bypassPrice, tier, startCooldown);
             } else {
                 count = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
                     int baseCount = Utils.getCountdown();
@@ -261,10 +261,7 @@ public class TeleportUtils {
                             startCount = baseCount;
                             hasCountdown.remove(player);
                             if (willTp.contains(player)) {
-                                tp(player, location, bypassPrice, tier);
-                                if (startCooldown) {
-                                    CommandRTP.cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("Cooldown.seconds") * 1000));
-                                }
+                                tp(player, location, bypassPrice, tier, startCooldown);
                             }
                             willTp.remove(player);
                         }
@@ -273,15 +270,12 @@ public class TeleportUtils {
             }
         } else {
             //Has countdown bypass perm or countdown is disabled
-            tp(player, location, bypassPrice, tier);
-            if (startCooldown) {
-                CommandRTP.cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("Cooldown.seconds") * 1000));
-            }
+            tp(player, location, bypassPrice, tier, startCooldown);
         }
 
     }
 
-    public void tp(Player player, Location location, boolean bypassPrice, Utils.RTPTier tier) {
+    public void tp(Player player, Location location, boolean bypassPrice, Utils.RTPTier tier, boolean startCooldown) {
 
         if (Randomtp.vaultHooked && !bypassPrice) {
             if (!VaultHook.takeMoney(player, Utils.getAmount(), tier)) {
@@ -294,6 +288,10 @@ public class TeleportUtils {
         location.setYaw(player.getLocation().getYaw());
         player.teleport(location);
         afterTp(player);
+
+        if (startCooldown) {
+            CommandRTP.cooldowns.put(player.getName(), System.currentTimeMillis() + (plugin.getConfig().getInt("Cooldown.seconds") * 1000));
+        }
 
     }
 
