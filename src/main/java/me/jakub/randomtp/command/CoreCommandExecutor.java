@@ -34,7 +34,9 @@ public class CoreCommandExecutor implements CommandExecutor {
                 command.execute(sender, label, args);
             } catch (InvalidUsageException e) {
                 String reason = e.getReason().orElse("");
-                sender.sendMessage("§cInvalid usage. " + reason + "\n" + "§c" + executed.getUsage().replace("<command>", command.getInternalName()));
+                sender.sendMessage("§cInvalid usage. " + reason);
+                sender.sendMessage("§c" + executed.getUsage().replace("<command>", command.getInternalName()));
+                //sender.sendMessage("§cInvalid usage. " + reason + "\n" + "§c" + executed.getUsage().replace("<command>", command.getInternalName()));
             } catch (NoPermissionException e) {
                 sender.sendMessage(getPermissionMessage(executed));
             } catch (CommandExecutionException e) {
