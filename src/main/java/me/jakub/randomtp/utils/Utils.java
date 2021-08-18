@@ -112,6 +112,10 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.teleportation-cancelled-message"));
     }
 
+    public static int getMaxYLevel() {
+        return plugin.getConfig().getInt("Rtp-settings.max-height");
+    }
+
     public static boolean getForceDefaultWorldEnabled() {
         return plugin.getConfig().getBoolean("Force-default-world.enabled");
     }

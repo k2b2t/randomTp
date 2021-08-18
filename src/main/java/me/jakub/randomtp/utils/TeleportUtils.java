@@ -193,6 +193,8 @@ public class TeleportUtils {
             }
         }
 
+        if (location.getBlockY() > Utils.getMaxYLevel()) return false;
+
         if (location.getWorld().getEnvironment() == World.Environment.NORMAL) {
             return !(bad_blocks.contains(above.getType()))
                     && !(bad_blocks.contains(block.getType()))

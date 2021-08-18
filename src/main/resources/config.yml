@@ -73,6 +73,8 @@ Countdown:
   countdown-message: true
 
 Rtp-settings:
+  #Maximum Y level players will be teleported to
+  max-height: 256
   #Max attempts to generate location
   max-attempts: 30
   Confirm-gui:
@@ -316,7 +318,7 @@ Messages:
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!! don't touch pls :) !!!!!!!!!!!!!!!!!!!
-config-version: 2.19.3
+config-version: 2.19.4
 #! don't change this if you don't know what you're doing !
 config-version-checker: true
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
