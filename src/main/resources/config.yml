@@ -134,30 +134,35 @@ Rtp-settings:
     one:
       enabled: true
       border: 1000
+      min-radius: 0
       price: 100
       title: "§7Coal Tier"
       material: COAL_BLOCK
     two:
       enabled: true
       border: 3000
+      min-radius: 1000
       price: 300
       title: "§fIron Tier"
       material: IRON_BLOCK
     three:
       enabled: true
       border: 5000
+      min-radius: 3000
       price: 500
       title: "§6Gold Tier"
       material: GOLD_BLOCK
     four:
       enabled: true
       border: 7500
+      min-radius: 5000
       price: 750
       title: "§bDiamond Tier"
       material: DIAMOND_BLOCK
     five:
       enabled: true
       border: 10000
+      min-radius: 7500
       price: 1000
       title: "§cNetherite Tier"
       material: NETHERITE_BLOCK
