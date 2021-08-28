@@ -134,7 +134,7 @@ public class TeleportUtils {
         int attempts = 0;
         while (attempts < maxAttempts) {
             Location loc = generateLocation(player, world, tier);
-            if (!isLocationSafe(loc, biome)) {
+            if (!isLocationSafe(loc, biome, tier)) {
                 attempts++;
             } else {
                 attempts = 0;
@@ -153,7 +153,7 @@ public class TeleportUtils {
      * @return Returns true if location is safe, otherwise returns false
      */
     public boolean checkGeneratedLocation(Location loc, Biome biome) {
-        if (loc != null && isLocationSafe(loc, biome)) {
+        if (loc != null && isLocationSafe(loc, biome, null)) {
             return true;
         } else {
             return false;
@@ -161,7 +161,12 @@ public class TeleportUtils {
     }
 
 
-    public boolean isLocationSafe(Location location, Biome biome) {
+    public boolean isLocationSafe(Location location, Biome biome, Utils.RTPTier tier) {
+
+        if(tier != null) {
+            if(location.getBlockX() < Utils.getMinTierRadius(tier.getInt()) || location.getBlockZ() < Utils.getMinTierRadius(tier.getInt())) return false;
+        }
+
         //Checking if the generated random location is safe
         ClaimHookManager claimHookManager = new ClaimHookManager(plugin);
 

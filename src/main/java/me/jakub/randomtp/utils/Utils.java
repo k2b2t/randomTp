@@ -213,6 +213,23 @@ public class Utils {
         }
     }
 
+    public static int getMinTierRadius(int index) {
+        switch (index) {
+            case 1:
+                return plugin.getConfig().getInt("Rtp-settings.TierGUI.one.min-radius");
+            case 2:
+                return plugin.getConfig().getInt("Rtp-settings.TierGUI.two.min-radius");
+            case 3:
+                return plugin.getConfig().getInt("Rtp-settings.TierGUI.three.min-radius");
+            case 4:
+                return plugin.getConfig().getInt("Rtp-settings.TierGUI.four.min-radius");
+            case 5:
+                return plugin.getConfig().getInt("Rtp-settings.TierGUI.five.min-radius");
+            default:
+                return 0;
+        }
+    }
+
     public static String getWorldGUIItemName(int index) {
         switch (index) {
             case 1:
@@ -577,6 +594,14 @@ public class Utils {
 
 
     public enum RTPTier {
-        ONE, TWO, THREE, FOUR, FIVE
+        ONE(1), TWO(2), THREE(3), FOUR(4), FIVE(5);
+        private final int tier;
+
+        RTPTier(int tier) {
+            this.tier = tier;
+        }
+        public int getInt() {
+            return tier;
+        }
     }
 }
