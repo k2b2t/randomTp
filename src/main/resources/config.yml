@@ -323,7 +323,7 @@ Messages:
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!! don't touch pls :) !!!!!!!!!!!!!!!!!!!
-config-version: 2.19.4
+config-version: 2.19.6
 #! don't change this if you don't know what you're doing !
 config-version-checker: true
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
