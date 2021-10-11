@@ -10,6 +10,12 @@ assignees: ''
 **Version of the plugin**
 To see the version of the plugin do the command "/rtplugin"
 
+**Minecraft version and software**
+For example: 1.16.4 And Spigot
+
+**List of all your plugins**
+Get this list by executing `/pl`
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
