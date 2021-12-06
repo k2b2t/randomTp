@@ -50,10 +50,14 @@ public class TeleportUtils {
         int x = 0;
         int y = 0;
         int z = 0;
-
-        int var1 = random.nextInt(Utils.getBorderForWorld(world.getName(), tier)); //X coordinate
-        int var2 = random.nextInt(Utils.getBorderForWorld(world.getName(), tier)); //Z coordinate
-
+        int var1,var2;
+        if(tier!=null){
+            var1 = random.ints(Utils.getMinTierRadius(tier.getInt()),Utils.getBorderForWorld(world.getName(), tier)).findAny().getAsInt(); //X coordinate
+            var2 = random.ints(Utils.getMinTierRadius(tier.getInt()),Utils.getBorderForWorld(world.getName(), tier)).findAny().getAsInt(); //Z coordinate
+        }else {
+            var1 = random.nextInt(Utils.getBorderForWorld(world.getName(), tier)); //X coordinate
+            var2 = random.nextInt(Utils.getBorderForWorld(world.getName(), tier)); //Z coordinate
+        }
 
         int var3 = random.nextInt(2); //basically a random boolean
         if (var3 == 1) {
