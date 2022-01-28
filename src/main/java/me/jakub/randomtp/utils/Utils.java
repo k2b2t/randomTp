@@ -380,6 +380,10 @@ public class Utils {
         return plugin.getConfig().getBoolean("rtp-on-death");
     }
 
+    public static boolean getBypassBedSpawn() {
+        return plugin.getConfig().getBoolean("bypass-bed-spawn");
+    }
+
     public boolean getUpdateCheckerEnabled() {
         return plugin.getConfig().getBoolean("update-checker");
     }

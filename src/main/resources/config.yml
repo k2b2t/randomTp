@@ -202,7 +202,7 @@ rtp-on-first-join: false
 
 #If players that have the permission randomTp.rtp.onDeath should be rtp'd on death
 rtp-on-death: false
-
+bypass-bed-spawn: false
 
 #If the plugin should check for updates on startup, this is recommended to be enabled
 update-checker: true

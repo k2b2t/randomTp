@@ -25,6 +25,7 @@ public class DeathEvent implements Listener {
     public void onDeath(PlayerRespawnEvent e) {
         Player player = e.getPlayer();
         if (Utils.getRtpOnDeath() && player.hasPermission(RTP_ON_DEATH.get())) {
+            if (!Utils.getBypassBedSpawn() && player.getBedSpawnLocation() != null) return;
             Bukkit.getScheduler().runTaskLater(plugin, () -> teleportUtils.rtpPlayer(player, null, true, true, false, null, false, true, true, null, true, null), 15);
         }
     }
